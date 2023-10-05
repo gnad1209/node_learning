@@ -1,0 +1,38 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "front_end/src/index.js",
+  "scripts": {
+    "beautiful": "prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js,json,scss}",
+    "start": "nodemon --inspect src/index.js ",
+    "watch": "node-sass --watch src/resources/scss/ -o src/public/css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "morgan": "^1.10.0",
+    "node-sass": "^9.0.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "mongoose": "^7.5.3",
+    "slug": "^8.2.3"
+  }
+}

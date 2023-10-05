@@ -1,0 +1,75 @@
+﻿@model List<DAWEB.Models.DatHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <style>
+        a {
+            color: #fff
+        }
+
+            a:hover {
+                color: #000;
+            }
+    </style>
+</head>
+<body>
+    <div style="">
+        <div style="position: absolute; width: 1130px; right: 10px">
+
+            <h2>Quản lý đơn hàng</h2>
+            <div>
+
+
+                <table class="table">
+                    <thead class="thead-dark" style="background-color: #000000d9;color: aliceblue;">
+                    <th style="text-align:center">#</th>
+                    <th style="text-align:center">Tên khách hàng</th>
+                    <th style="text-align:center">SDT</th>
+                    <th style="text-align:center">Tên Sản phẩm</th>
+                    <th style="text-align:center">Số lượng</th>
+                    <th style="text-align:center">Giá</th>
+                    <th style="text-align:center">Thời gian đặt</th>
+                    <th style="text-align:center">Địa chỉ</th>
+                    <th style="text-align:center">Thành tiền</th>
+                    <th style="text-align:center">Trang Thái</th>
+                    <th style="text-align:center">Cập nhật đơn hàng </th>
+                    @*<th style="text-align:center">Xem sản phẩm </th>*@
+
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align:center">@item.Id</td>
+                            <td style="text-align:center">@item.KhachHang.TenKH</td>
+                            <td style="text-align:center">@item.KhachHang.SDT</td>
+                            <td style="text-align:center">@item.SanPham.Name</td>
+                            <td style="text-align:center">@item.SoLuong</td>
+                            <td style="text-align:center">@item.SanPham.Gia</td>
+                            <td style="text-align:center">@string.Format("{0:dd/MM/yyy}", item.ThoiGianDat)</td>
+                            <td style="text-align:center">@item.DiaChi</td>
+                            <td style="text-align:center">@item.ThanhTien</td>
+                            <td style="text-align:center">@item.TrangThai.Name</td>
+                            <td>
+                                <div style="width: 90px; height: 40px; background-color: #6ebfc2; align-items: center; display: flex; justify-content: center; margin: auto;border-radius:10px">
+                                    @Html.ActionLink("Update ", "Edit", new { ID = item.Id })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

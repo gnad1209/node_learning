@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/app.css">
+    <link type="text/css" rel="stylesheet" href="/css/TrangChu.css"  >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    {{!-- <link rel="stylesheet" href="css/GioiThieu.css"  type="text/css"> --}}
+    {{!-- <link rel="stylesheet" href="css/Cart.css"  type="text/css"> --}}
+    {{!-- <link rel="stylesheet" href="css/index.css"  type="text/css"> --}}
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="app">
+        {{> header}}
+
+                {{{body}}}
+            <hr />
+
+        {{> footer}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/TrangChu.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $(Window).scroll(function () {
+                if ($(this).scrollTop() && window.pageYOffset > 101) {
+                    $('header').addClass('sticky');
+                }
+                else {
+                    $('header').removeClass('sticky');
+                }
+            })
+        });
+        $(document).ready(function () {
+            const $ = document.querySelector.bind(document);
+            const $$ = document.querySelectorAll.bind(document);
+
+            const tabs = $$(".tab-item");
+            const panes = $$(".tab-pane");
+            const tabActive = $(".tab-item.active");
+            const line = $(".tabs .line");
+
+
+            function row(line, tabActive) {
+                line.style.left = tabActive.offsetLeft + "px";
+                line.style.width = tabActive.offsetWidth + "px";
+            }
+
+            row(line, tabActive);
+            tabs.forEach((tabs, index) => {
+                const pane = panes[index];
+
+                tabs.onclick = function () {
+                    $(".tab-item.active").classList.remove("active");
+                    $(".tab-pane.active").classList.remove("active");
+
+                    line.style.left = this.offsetLeft + "px";
+                    line.style.width = this.offsetWidth + "px";
+
+                    this.classList.add("active");
+                    pane.classList.add("active");
+                };
+            });
+        });
+
+        function showmenu() {
+            menu({
+                TrangChu: 'TRANG CHỦ ',
+                GioiThieu: ' GIỚI THIỆU ',
+                SanPham: 'SẢN PHẨM',
+                Blog: 'BLOG',
+                LienHe: 'LIÊN HỆ',
+            });
+        }
+        //  } function ShowCart() {
+    </script>
+</body>
+ 
+</html>

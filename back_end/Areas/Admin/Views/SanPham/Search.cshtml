@@ -1,0 +1,95 @@
+﻿
+@model List<DAWEB.Models.SanPham>
+
+@{
+    Layout = null;
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search</title>
+    <style>
+        a {
+            color: #fff
+        }
+        a:hover{
+            color:#000;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div style="position: absolute; width: 1130px; right: 10px">
+            <h2>Danh sách sản phẩm</h2>
+            <div>
+                <div style="width: 130px; height: 40px; background-color: #6ebfc2; align-items: center; display: flex; justify-content: center;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ">
+                    <a style="font-family:'Agency FB';color:#fff;font-size:30px">
+                        @Html.ActionLink("Thêm Mới", "Create")
+                    </a>
+                </div>
+
+                @using (Html.BeginForm("Search", "SanPham", FormMethod.Get))
+                {
+                    @*<label>Lọc theo danh mục: </label>
+                <div>
+                    @Html.DropDownList("category", "-- Tất cả --")
+                </div>*@
+                    <label>Lọc theo tên: </label>
+                    <div style="width:200px; height:40px;display:flex;justify-content:space-between;align-items:center">
+                        @Html.TextBox("Search")
+
+                        <input type="submit" value="Lọc" />
+                    </div>
+                }
+            </div>
+
+            <table class="table">
+                <thead class="thead-dark" style="background-color: #000000d9;color: aliceblue;">
+                <th style="text-align:center">#</th>
+                <th style="text-align:center">Tên Sản Phẩm</th>
+                <th style="text-align:center">Danh mục hình ảnh</th>
+                <th style="text-align:center">Mô tả sản phẩm</th>
+                <th style="text-align:center">Giá</th>
+                <th style="text-align:center">Sửa</th>
+                <th style="text-align:center">Xem sản phẩm </th>
+                <th style="text-align:center">Xóa </th>
+
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align:center">@item.Id</td>
+                        <td style="text-align:center">@item.Name</td>
+                        <td style="text-align:center">
+                            @{ string img_path = "/images/" + @item.images; }
+                            <img src="@img_path" width="100" height="100" />
+
+                        </td>
+                        <td style="text-align: center; word-wrap: break-word; ">@item.Mota</td>
+                        <td style="text-align:center">@string.Format("{0:#,0}", item.Gia)₫</td>
+                        <td style="text-align:center">
+                            <div style="width: 90px; height: 40px; background-color: #6ebfc2; align-items: center; display: flex; justify-content: center; margin: auto; border-radius: 10px">
+                                @Html.ActionLink("Sửa", "Edit", new { ID = item.Id })
+                            </div>
+                        </td>
+                        <td style="text-align:center">
+                            <div style="width: 100px; height: 40px; background-color: #aad442; align-items: center; display: flex; justify-content: center; margin: auto; border-radius: 10px">
+                                @Html.ActionLink("Xem", "show", new { ID = item.Id })
+                            </div>
+                        </td>
+                        <td>
+                            <div style="width: 80px; height: 40px; background-color: #c63d3d; align-items: center; display: flex; justify-content: center; margin: auto; border-radius: 10px">
+                                @Html.ActionLink("Xóa", "Delete", new { ID = item.Id })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</body>
+</html>

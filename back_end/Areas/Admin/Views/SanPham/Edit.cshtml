@@ -1,0 +1,122 @@
+﻿@model DAWEB.Models.SanPham
+
+@{
+    Layout = null;
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>edit</title>
+    <style>
+        div {
+            margin-bottom: 10px;
+        }
+        .IP {
+            background-color: #6ebfc2;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="position: absolute; width: 1130px; right: 10px">
+
+        @using (Html.BeginForm("Edit", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Sản phẩm</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Tên</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Loại</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("IdSP", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdSP, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Giá</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Mô tả sản phẩm</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Mota, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Ảnh</label>
+                <div class="col-md-10">
+                    @{ string img_path = "/images/" + Model.images; }
+                    <img src="@img_path" style="width: 100px" />
+                    <input type="file" name="fileImg" />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Lưu" class="btn btn-default IP" />
+                </div>
+            </div>
+        </div>
+        }
+
+        <div style="width: 100px; height: 30px; background-color: black; border-radius: 6px; border: 1px solid #000; display: flex; justify-content: center; align-items: center">
+            @Html.ActionLink("Quay lại", "Index", null, new { @style = "color: white; font-weight: 600" })
+        </div>
+
+    </div>
+
+        @*<div>
+            <div style="position: absolute; width: 1130px; right: 10px">
+                <h2>Sửa thông tin Danh Mục</h2>
+                @using (Html.BeginForm("Edit", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div>
+                        @Html.LabelFor(m => m.Name) :
+                        @Html.TextBoxFor(m => m.Name)
+                    </div>
+                    <div>
+                        <label>Choose file:</label>
+                        <input type="file" name="fileImg" />
+                        @Html.ViewBag.images
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Gia) :
+                        @Html.TextBoxFor(m => m.Gia)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.giamgia) :
+                        @Html.TextBoxFor(m => m.giamgia)
+                    </div>
+                    <div>
+                        <input type="submit" value="sửa" />
+                    </div>
+                }
+            </div>
+            </div>*@
+</body>
+</html>

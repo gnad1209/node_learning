@@ -1,0 +1,48 @@
+﻿@model DAWEB.Models.DanhMucSanPham
+
+@{
+    Layout = null;
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+    <style>
+        div {
+            margin-bottom: 10px;
+        }
+
+        .IP {
+            background-color: #6ebfc2;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div style="position: absolute; width: 1130px; right: 10px">
+            <h2> Thêm mới</h2>
+            @using (Html.BeginForm())
+            {
+                <div>
+                    <h5>Tên loại Sản Phẩm</h5>
+                    @Html.TextBoxFor(m => m.Name)
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Thêm" class="btn btn-default IP" />
+                    </div>
+                </div>
+            }
+            <div style="width: 100px; height: 30px; background-color: black; border-radius: 6px; border: 1px solid #000; display: flex; justify-content: center; align-items: center">
+                @Html.ActionLink("Quay lại", "DanhMucSanPham", null, new { @style = "color: white; font-weight: 600" })
+            </div>
+        </div>
+    </div>
+</body>
+</html>

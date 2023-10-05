@@ -1,0 +1,189 @@
+﻿@model DAWEB.Models.Cart
+
+@{
+    ViewBag.Title = "ShowToCart";
+    Layout = "~/Views/Shared/TrangChu.cshtml";
+}
+
+<div style="height: 98px;width: 100%;background-color: #353535;"></div>
+<div id="cart_frame" class="Cart_frame">
+    <div class="Cart_product">
+        @if (Model != null)
+        {
+            <table class="table" style=" border-bottom: 1px solid silver;margin:auto">
+                <thead class="thead-dark" style="border-bottom: 1px solid color:">
+                <th style="text-align:center"></th>
+                <th style="text-align:center">Sản Phẩm</th>
+                <th style="text-align:center"></th>
+                <th style="text-align:center">Giá</th>
+                <th style="text-align:center">Số Lượng</th>
+                <th style="text-align:center">Tổng</th>
+
+
+                </thead>
+                @foreach (var item in Model.Items)
+                {
+                    double total = Convert.ToDouble(item._shopping_Product.Gia.Value * item._shopping_Quantity);
+                    <tr>
+                        <td>
+                            <div style="margin-right: 10px;">
+                                <a href="/Cart/RemoveCart/@item._shopping_Product.Id"><i class="fa-solid fa-circle-xmark"></i></a>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <img src="~/images/@Url.Content(item._shopping_Product.images)" alt="sanpham" style="width:70px ;height:70px ;">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="width:200px">
+                                <h3 style="font-size: 30px; font-weight: 100; font-family: Roboto, sans-serif; color: #334862; margin-left: 20px; ">@Html.DisplayFor(model => item._shopping_Product.Name) </h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="width:140px">
+                                <h3 style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; text-align: center; ">  @string.Format("{0:#,0}", item._shopping_Product.Gia)₫ </h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="width:150px">
+                                @using (Html.BeginForm("update", "Cart"))
+                                {
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <div>
+                                            <input type="hidden" value="@item._shopping_Product.Id" name="Id" />
+                                            <input style="width:20px" type="number" id="tentacles" name="quantity" min="1" value="@item._shopping_Quantity">
+                                        </div>
+                                        <div>
+                                            <input type="submit" value="update" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div style="width:150px">
+                                <h3 style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; text-align: center; ">
+                                    @string.Format("{0:#,0}", total)₫
+                                </h3>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </table>
+            <tr>
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 85%; margin: auto; padding: 20px;">
+                    <div style="display:flex;justify-content:space-between;width:365px">
+                <td>
+                    <a href="/TrangChu/Index"
+                       style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;">
+                        <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiếp tục xem sản phẩm</h4>
+                    </a>
+                </td>
+                <td>
+                    <a onclick="ShowCart()"
+                       style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;cursor:pointer">
+                        <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiến hành đặt hàng</h4>
+                    </a>
+                </td>
+                    </div>
+                <td colspan="6">
+                    <div style="display: flex;align-items: center;text-align: center;">
+                        <h3 style="font-size: 20px; font-weight: 700; color: #a8741a">Tổng tiền:</h3>
+                        <p style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px">@string.Format("{0:#,0}", Model.Total())₫</p>
+                    </div>
+                </td>
+</div>
+        </tr>
+    }
+
+    </div>
+<div id="test" class="testcart">
+    <p style="text-align:center;font-size:18px;font-weight:600">THÔNG TIN KHÁCH HÀNG</p>
+    <tr>
+        <td colspan="6">
+            @using (Html.BeginForm("CheckOut", "cart"))
+            {
+                <div style="width: 90%; height: 300px; display:flex;justify-content:center;align-items:center ;margin:auto ; ">
+                    <table>
+                        <tr style="height: 50px;">
+                            <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold;">Tên khác hàng</td>
+                            <td> <input type="text" name="TenKH" /> </td>
+                        </tr>
+                        <tr style="height: 50px;">
+                            <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold;">Địa chỉ</td>
+                            <td> <input type="text" name="Address" /> </td>
+                        </tr>
+                        <tr style="height:50px;">
+                            <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold;  ">Số điện thoại</td>
+                            <td> <input type="number" name="SDT" /> </td>
+                        </tr>
+                        <tr style="height: 50px;">
+                            <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; ">Email</td>
+                            <td> <input type="text" name="Email" /> </td>
+                        </tr>
+                        <tr style="height: 50px;">
+                            <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; ">Giới tính</td>
+                            <td> <input type="text" name="gioitinh" /> </td>
+                        </tr>
+                    </table>
+                </div>
+        <tr>
+            <td>
+                <p style="width: 130px; height: 40px;margin-left:773px;margin-top:0px">
+                    <input style="width: 130px; height: 40px; background-color: #fff; cursor: pointer; align-items: center; display: flex; justify-content: center; font-size: 17px; font-weight: bold; color: #a8741a; box-shadow: none; border-color: #a8741a "
+                           type="submit" value="Đặt Hàng" />
+                </p>
+            </td>
+        </tr>
+
+    }
+            </tr>
+        </div>
+
+
+    @*<div class="Cart_client">
+        <tr>
+            <td colspan="6">
+                @using (Html.BeginForm("CheckOut", "cart"))
+                {
+                    <div style="width: 90%; height: 300px; display:flex;justify-content:center;align-items:center ;margin:auto ;border-radius: 25px; box-shadow: 2px 2px 2px 2px #666966; ">
+                        <table>
+                            <tr style="height:55px;">
+                                <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold;">Tên khác hàng</td>
+                                <td> <input type="text" name="TenKH" /> </td>
+                            </tr>
+                            <tr style="height:55px;">
+                                <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold;">Địa chỉ</td>
+                                <td> <input type="text" name="Address" /> </td>
+                            </tr>
+                            <tr style="height:55px;">
+                                <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold;  ">Số điện thoại</td>
+                                <td> <input type="number" name="SDT" /> </td>
+                            </tr>
+                            <tr style="height:55px;">
+                                <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; ">Email</td>
+                                <td> <input type="text" name="Email" /> </td>
+                            </tr>
+                            <tr style="height:55px;">
+                                <td style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; ">Giới tính</td>
+                                <td> <input type="text" name="gioitinh" /> </td>
+                            </tr>
+                        </table>
+                    </div>
+            <tr>
+                         <td>
+                                <p style="width: 130px; height: 40px;margin-left:396px">
+                                     <input style="width: 130px; height: 40px; background-color: #fff; cursor: pointer; align-items: center; display: flex; justify-content: center; font-size: 17px; font-weight: bold; color: #a8741a; box-shadow: none; border-color: #a8741a "
+                                        type="submit" value="Đặt Hàng" />
+                                </p>
+                        </td>
+                    </tr>
+
+        }
+                </tr>
+                </td>
+
+            </div>*@
+    </div>

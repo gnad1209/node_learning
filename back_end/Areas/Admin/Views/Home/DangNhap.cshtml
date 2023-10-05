@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Login</title>
+
+    <link href="~/Assets/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Assets/Admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="~/Assets/Admin/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="~/Assets/Admin/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="~/Assets/Admin/css/animate.css" rel="stylesheet">
+    <link href="~/Assets/Admin/css/style.css" rel="stylesheet">
+    <style>
+        /*body {
+            padding: 0px;
+            margin: 0px;
+            background: url(/images/backgroundlogo1.jpg) no-repeat center center fixed;
+            background-size: cover;
+        }*/
+    </style>
+</head>
+
+<body>
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <img src="~/images/213636 (1).png" alt="logo" style="width:140px" height="200px">
+                @*<h1 style=" color: #ff00005c    ; font-size: 100px; font-weight: 800; letter-spacing: -10px; margin-bottom: 0px; margin-left: -280px;">PK Điện Thoại</h1>*@
+
+            </div>
+            <h3>DAWEB Watch</h3>
+            <p>Login in. To see it in action.</p>
+            <form class="m-t" role="form" action="~/Admin/Home/DangNhap" method="post">
+                <div class="form-group">
+                    <input name="username" class="form-control" placeholder="Username" required="">
+                </div>
+                <div class="form-group">
+                    <input name="password" type="password" class="form-control" placeholder="Password" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">
+                    Login
+                </button>
+
+                <a href="#"><small>Forgot password?</small></a>
+                <p class="text-muted text-center"><small>Do not have an account?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="~/Admin/Home/Add">Create an account</a>
+
+            </form>
+            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
