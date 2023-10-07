@@ -7,7 +7,8 @@ body {
   width: 100%;
   height: 56px;
   border-bottom: 0.1px solid white;
-  background-color: #353535; }
+  background-color: #353535;
+  margin-bottom: 120px; }
 
 .header_top {
   width: 85%;
