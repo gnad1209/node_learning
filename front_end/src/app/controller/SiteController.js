@@ -1,5 +1,6 @@
 const { json } = require("express");
-const Course = require("../models/Courses");
+const SanPhams = require("../models/SanPhams");
+const Courses = require("../models/Courses");
 const {mutipleMongooseToObject} = require('../../ulti/mongoose')
 
 class siteController {
@@ -11,12 +12,13 @@ class siteController {
         // }  catch (err) {
         //     res.status(400).json({error: err});
         // }
-        Course.find({})
-            .then(courses =>{
-                res.render('Home/Index',{ courses: mutipleMongooseToObject(courses) })
+        SanPhams.find({})
+            .then(sanphams =>{
+                // res.json(sanphams)
+                res.render('Home/Index',{ sanphams: mutipleMongooseToObject(sanphams) })
                 // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
             })
-            .catch(next)
+            .catch(next)  
     }
 
     search(req, res) {
