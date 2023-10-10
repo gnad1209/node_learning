@@ -103,104 +103,22 @@
     <!-- Tab content -->
     <div class="tab-content">
         <div class="tab-pane active">
+            {{> frames_box_1}}
             <div class="frames">
-                {{#each SanPham}}
-                    {{!-- {{if (this.TB == 1)}} --}}
-                    {
-                        <div class="frames_box">
-                            <div class="box_img">
-                                <a href="/">
-                                    <img src="/images/{{this.images}}" alt="logo" class="frames_box_img">
-                                </a>
-                            </div>
-                            <div class="frames_text">
-                                <p>{{@this.Name}} </p>
-                            </div>
-                            <div class="frames_text_price">
-                                <p>{{@this.Gia}}₫</p>
-                            </div>
-                            <div style="margin-top: 30px; text-align: center;">
-                                <a  href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
-                            </div>
-                        </div>
-                    }
-                {{/each}}
+            {{> frames_box_1}}
+            </div> 
+            <div class="frames">
+            {{> frames_box_1}}
             </div>
-            <div class="frames">
-                @foreach (var item in Model)
-                {
-                    if (item.TB == 2)
-                    {
-                        <div class="frames_box">
-                            <div class="box_img">
-                                <a href="@Url.Action("Detail", "TrangChu", new {id = item.Id})">
-                                    <img src="/images/@item.images" alt="logo" class="frames_box_img">
-                                </a>
-                            </div>
-                            <div class="frames_text">
-                                <p>@item.Name </p>
-                            </div>
-                            <div class="frames_text_price">
-                                <p>@string.Format("{0:#,0}", item.Gia)₫</p>
-                            </div>
-                            <div style="margin-top: 30px; text-align: center;">
-                                <a  href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
-                            </div>
-                        </div>
-                    }
-                }
+        </div>
+        <div class="tab-pane">
+             <div class="frames">
+               {{> frames_box_1}}
             </div>
         </div>
         <div class="tab-pane">
             <div class="frames">
-                @foreach (var item in Model)
-                {
-                    if (item.TB == 2)
-                    {
-                        <div class="frames_box">
-                            <div class="box_img">
-                                <a href="@Url.Action("Detail", "TrangChu", new {id = item.Id})">
-                                    <img src="/images/@item.images" alt="logo" class="frames_box_img">
-                                </a>
-                            </div>
-                            <div class="frames_text">
-                                <p>@item.Name </p>
-                            </div>
-                            <div class="frames_text_price">
-                                <p>@string.Format("{0:#,0}", item.Gia)₫</p>
-                            </div>
-                            <div style="margin-top: 30px; text-align: center;">
-                                <a  href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-        </div>
-        <div class="tab-pane">
-            <div class="frames">
-                @foreach (var item in Model)
-                {
-                    if (item.TB == 1)
-                    {
-                        <div class="frames_box">
-                            <div class="box_img">
-                                <a href="@Url.Action("Detail", "TrangChu", new {id = item.Id})">
-                                    <img src="/images/@item.images" alt="logo" class="frames_box_img">
-                                </a>
-                            </div>
-                            <div class="frames_text">
-                                <p>@item.Name </p>
-                            </div>
-                            <div class="frames_text_price">
-                                <p>@string.Format("{0:#,0}", item.Gia)₫</p>
-                            </div>
-                            <div style="margin-top: 30px; text-align: center;">
-                                <a  href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
-                            </div>
-                        </div>
-                    }
-                }
+               {{> frames_box_1}}
             </div>
         </div>
     </div>
@@ -236,53 +154,10 @@
 
             <div class="slideSP first1">
 
-                @foreach (var item in Model)
-                {
-                    if (item.TB == 2)
-                    {
-                        <div class="frames_box">
-                            <div class="box_img">
-                                <a href="@Url.Action("Detail", "TrangChu", new {id = item.Id})">
-                                    <img src="/images/@item.images" alt="logo" class="frames_box_img">
-                                </a>
-                            </div>
-                            <div class="frames_text">
-                                <p>@item.Name </p>
-                            </div>
-                            <div class="frames_text_price">
-                                <p>@string.Format("{0:#,0}", item.Gia)₫</p>
-                            </div>
-                            <div style="margin-top: 30px; text-align: center;">
-                                <a  href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
-                            </div>
-                        </div>
-                    }
-                }
-
+                {{> frames_box_1}}
             </div>
             <div class="slideSP " style="justify-content: space-between;">
-                    @foreach(var item in Model)
-            {
-                        if(item.TB == 1)
-                {
-                <div class="frames_box">
-                    <div class="box_img">
-                        <a href="@Url.Action("Detail", "TrangChu", new {id = item.Id})">
-                            <img src="/images/@item.images" alt="logo" class="frames_box_img">
-                        </a>
-                    </div>
-                    <div class="frames_text">
-                        <p>@item.Name </p>
-                    </div>
-                    <div class="frames_text_price">
-                        <p>@string.Format("{0:#,0}", item.Gia)₫</p>
-                    </div>
-                    <div style="margin-top: 30px; text-align: center;">
-                        <a  href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
-                    </div>
-                </div>
-                }
-            }
+                    {{> frames_box_1}}
             </div>
         </div>
         <div class="navigationSP-auto">
@@ -338,3 +213,7 @@
         </div>
     </div>
 </div>
+<script>
+
+        
+</script>
