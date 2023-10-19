@@ -21,9 +21,9 @@ function menu({
                 <div class="menu_main">
                     <div class="menu_narbar">
                         <ul>
-                            <li><a class="text_narbar" href="/TrangChu/index">${TrangChu}</a></li>
-                            <li><a class="text_narbar" href="/TrangChu/GioiThieu">${GioiThieu}</a></li>
-                            <li><a class="text_narbar" href="/TrangChu/SanPham">${SanPham}</a></li>
+                            <li><a class="text_narbar" href="/">${TrangChu}</a></li>
+                            <li><a class="text_narbar" href="/recommend">${GioiThieu}</a></li>
+                            <li><a class="text_narbar" href="/products">${SanPham}</a></li>
                             <li><a class="text_narbar" href="#">${Blog}</a></li>
                             <li><a class="text_narbar" href="#">${LienHe}</a></li>
                         </ul>
@@ -42,6 +42,7 @@ ShowCart = function () {
     cart_frame.classList.add("Cart_frame1");
     cart.classList.add("testcart1");
 };
+
 //function Cart({ }) {
 //    const main = document.getElementById("menu");
 //    if (main) {

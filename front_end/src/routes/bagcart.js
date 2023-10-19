@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const bagcartController = require('../app/controller/BacCartController');
+const bagcartController = require('../app/controller/BagCartController');
 
 router.get('/:slug', bagcartController.show);
 router.get('/', bagcartController.index);

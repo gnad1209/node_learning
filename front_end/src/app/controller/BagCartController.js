@@ -1,5 +1,5 @@
 const { json } = require("express");
-const Course = require("../models/Courses");
+const SanPhams = require("../models/SanPhams");
 const {mutipleMongooseToObject, mongooseToObject} = require('../../ulti/mongoose')
 
 class bagcartController {
@@ -9,9 +9,10 @@ class bagcartController {
     }
     
     show(req, res,next) {
-        Course.findOne({slug: req.params.slug})
-            .then(course =>{
-                res.render("courses/show",{course: mongooseToObject(course)})
+        SanPhams.findOne({slug: req.params.slug})
+            .then(sanpham =>{
+                // res.redirect('/')
+                res.render("Cart/ShowToCart",{sanpham: mongooseToObject(sanpham)})
             })
             .catch(next)
     }

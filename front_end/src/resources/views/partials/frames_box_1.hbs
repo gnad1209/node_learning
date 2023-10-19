@@ -1,19 +1,18 @@
             {{#each sanphams}}
                         <div class="frames_box ">
                             <div class="box_img">
-                                <a href="/">
+                                <a href="detail/{{this.slug}}">
                                     <img src="/images/{{this.images}}" alt="logo" class="frames_box_img">
                                 </a>
                             </div>
                             <div class="frames_text">
-                                <p>{{this.Name}}</p>
+                                <p>{{this.name}}</p>
                             </div>
                             <div class="frames_text_price">
-                                <p>{{this.Gia}}₫</p>
+                                <p>{{this.gia}}₫</p>
                             </div>
                             <div style="margin-top: 30px; text-align: center;">
                                 <a  href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
                             </div>
                         </div>
                 {{/each}}
-            </div>

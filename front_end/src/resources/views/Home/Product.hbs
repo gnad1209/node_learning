@@ -1,30 +1,23 @@
-﻿
-<div style="height: 98px;width: 100%;background-color: #353535;">
+﻿<div style="height: 98px;width: 100%;background-color: #353535;">
 
 </div>
 <div class="body">
     <div class="body_main">
         <div class="body_top">
             <div class="top-contentleft" style="width:80%">
-                <a class="top-contentleft_text" href="/Trangchu/index">TRANG CHỦ</a>
+                <a class="top-contentleft_text" href="/">TRANG CHỦ</a>
                 <p> &nbsp; / &nbsp;&nbsp; </p>
-                <a class="top-contentleft_text" href="/Trangchu/SanPham1" style="color: black;"><b>CỬA HÀNG</b></a>
+                <a class="top-contentleft_text" href="/products" style="color: black;"><b>CỬA HÀNG</b></a>
             </div>
             <div class="top-contentright">
                 <div>
-                    @using (Html.BeginForm("SanPham", "TrangChu", FormMethod.Get))
-                    {
-                        @*<label>Lọc theo danh mục: </label>
-                        <div>
-                            @Html.DropDownList("IdSP", "-- Tất cả --")
-                        </div>*@
-                        <div style="display:flex;justify-content:space-between;align-items:center">
-                        <label>Tìm kiếm sản phẩm: </label>
-                            @Html.TextBox("Search")
+                        <form method="get" action="">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                            <label>Tìm kiếm sản phẩm: </label>
+                                @Html.TextBox("Search")
                             <input type="submit" value="Tìm kiếm" />
                         </div>
-
-                    }
+                        </form>
                 </div>
             </div>
         </div>
@@ -32,25 +25,24 @@
     <div class="body_main_bt">
         <div class="right_item">
             <div class="item_SP">
-                @foreach (var item in Model)
-                {
+                {{#each sanphams}}
                     <div class="frames_box">
                         <div class="box_img">
-                            <a href="@Url.Action("Detail", "TrangChu", new {id = item.Id})">
-                                <img src="~/images/@item.images" alt="logo" class="frames_box_img">
+                            <a href="detail/{{this.slug}}">
+                                <img src="/images/{{this.images}}" alt="logo" class="frames_box_img">
                             </a>
                         </div>
                         <div class="frames_text" style="color:black">
-                            <p>@item.Name </p>
+                            <p>{{this.name}}</p>
                         </div>
                         <div class="frames_text_price">
-                            <p>@string.Format("{0:#,0}", item.Gia)₫</p>
+                            <p>{{this.gia}}₫</p>
                         </div>
                         <div style="margin-top: 30px; text-align: center;">
                             <a href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
                         </div>
                     </div>
-                }
+                {{/each}}
             </div>
         </div>
     </div>

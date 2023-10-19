@@ -4,29 +4,29 @@
     <div class="Box_main">
         <div class="Box_main_left">
             <div class="left_top">
-                <img class="SP_img" src="~/images/@Model.images" alt="">
+                <img class="SP_img" src="/images/{{sanphams.images}}" alt="">
 
             </div>
         </div>
         <div class="Box_main_right">
             <div class="right_title">
-                <a class="top-contentleft_text" href="Trangchu.html">TRANG CHỦ</a>
+                <a class="top-contentleft_text" href="/">TRANG CHỦ</a>
                 <p> &nbsp; / &nbsp;&nbsp; </p>
                 <a class="top-contentleft_text" href="Sanpham.html" style="color: black;"><b>CỬA HÀNG</b></a>
             </div>
             <div>
                 <h1 style="color:crimson">
-                    @Model.Name
+                    {{sanphams.name}}
                 </h1>
             </div>
             <div>
                 <h2>
-                    @string.Format("{0:#,0}", Model.Gia)₫
+                    {{sanphams.gia}}₫
                 </h2>
             </div>
             <div>
                 <h2 style="margin-bottom:0px ;">
-                    Mô tả:  @Model.Mota
+                    Mô tả:  {{sanphams.mota}}
                 </h2>
             </div>
             <div style="display: flex;justify-content: space-between;align-items: center; width: 120px;height: 50px;">
@@ -50,13 +50,15 @@
                 <p> </p>
             </div>
             <div style="display: flex;justify-content: space-between;align-items:center; width: 300px;height: 50px;">
-                @*<div>
+                {{!-- *<div>
                         <input type="number" id="tentacles" name="tentacles" min="1" max="100" value="1">
-                    </div>*@
+                    </div>* --}}
                 <div>
+                    <form method="get" action="/Detail/showcart">
                     <a 
-                       href="/Cart/AddToCart/@Model.Id"
+                       href="showtocart/{{sanphams.slug}}"
                        class="detail">Thêm vào giỏ</a>
+                    </form>
                 </div>
             </div>
         </div>

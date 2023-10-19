@@ -6,10 +6,10 @@ mongoose.plugin(slug)
 
 const SanPham = new Schema({
     name: { type: String, maxLenght: 255, require: true},
-    Gia: { type: String, maxLenght: 255, require: true},
+    gia: { type: String, maxLenght: 255, require: true},
     IdSanPham: { type: String, maxLenght: 255, require: true},
-    Mota: { type: String, maxLenght: 255, require: true},
-    TB: { type: String, maxLenght: 255, require: true},
+    mota: { type: String, maxLenght: 255, require: true},
+    Tb: { type: String, maxLenght: 255, require: true},
     images: { type: String, maxLenght: 255, },
     slug: { type: String,slug:'Name',unique: true}
 },{
