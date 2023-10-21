@@ -9,7 +9,7 @@ const productsRouter = require('./products');
 function route(app) {
     app.use('/news', newsRouter);
     app.use('/courses', coursesRouter);
-    app.use('/bagcart', bagcartRouter);
+    app.use('/showtocart', bagcartRouter);
     app.use('/detail', detailRouter);
     app.use('/recommend', recommendRouter);
     app.use('/products', productsRouter);
