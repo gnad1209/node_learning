@@ -1,11 +1,4 @@
-﻿@model List<DAWEB.Models.SanPham>
-
-@{
-    Layout = null;
-    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
-}
-
-<!DOCTYPE html>
+﻿{{!-- <!DOCTYPE html>
 
 <html>
 <head>
@@ -94,4 +87,56 @@
     </div>
 </body>
 </html>
-
+ --}}
+ <style>
+    body{
+        z-index: 1;
+    }
+    a{
+        text-decoration: none;
+        color: #000;
+    }
+    .button{
+        align-items: center;
+         display: flex; 
+         justify-content: center; 
+         margin: auto;
+         border-radius:10px;
+         height: 40px;
+    }
+ </style>
+<table class="table" style="margin-left: 14%; width: 86%;">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">name</th>
+      <th scope="col">gia</th>
+      <th scope="col">thoi gian tao</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each sanpham}}
+    <tr>
+        <th scope="row">{{sum @index 1}}</th>
+            <td>{{this.name}}</td>
+            <td>{{this.gia}}</td>
+            <td style="width: 12%;">{{this.createdAt}}</td>
+            <td style="text-align:center;width: 8%;">
+                <div class="button" style="background-color: #6ebfc2; ">
+                    <a href="">Edit</a> 
+                </div>
+             </td>
+            <td style="text-align:center; width: 8%;">
+                <div class="button" style="background-color: #aad442;">
+                    <a href="">Detail</a>
+                </div>
+            </td>
+            <td style="text-align:center; width: 8%;">
+                <div class="button" style="background-color: #c63d3d;">
+                    <a href="">Xóa</a>
+                </div>
+            </td>                 
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

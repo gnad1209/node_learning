@@ -1,11 +1,4 @@
-﻿@model DAWEB.Models.SanPham
-
-@{
-    Layout = null;
-    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -13,43 +6,21 @@
     <title>Index</title>
 </head>
 <body>
-    <div style="position: absolute; width: 1130px; right: 10px">
-
-        <div style="display:flex;justify-content:space-between;margin-top:50px;margin-bottom:50px">
-            <div style="display:flex;justify-content:center;height:100%;width:30%">
-                <img alt="@Model.images" src="~/images/@Model.images" width="350" height="350" />
-            </div>
-            <div style="width:65%">
-                <div style="display: flex; margin: 0; font-size: 35px; width: 1400px; align-items: center; margin-bottom: 20px;">
-                    <label class="control-label col-md-2" style="padding-right: 0px; padding-left: 0px; margin-bottom: 0px;">Tên sản phẩm:</label>
-                    <div class="col-md-10" style="font-size:30px">
-                        @Html.DisplayFor(m => m.Name)
-                    </div>
-                </div>
-                <div style="display: flex; margin: 0; font-size: 22px; width: 1000px; align-items: center; margin-bottom: 20px;">
-                    <label class="control-label col-md-2" style="padding-right: 0px; padding-left: 0px; margin-bottom: 0px;">Loại sản phẩm:</label>
-                    <div class="col-md-10" style="font-size:18px">
-                        @Html.DisplayFor(m => m.DanhMucSanPham.Name)
-                    </div>
-                </div>
-                <div style="display: flex; margin: 0; font-size: 22px; width: 1100px; align-items: center; margin-bottom: 20px;">
-                    <label class="control-label col-md-2" style="padding-right: 0px; padding-left: 0px; margin-bottom: 0px;">Mô tả Sản Phẩm:</label>
-                    <div class="col-md-10" style="font-size:18px">
-                        @Html.DisplayFor(m => m.Mota)
-                    </div>
-                </div>
-                <div style="display: flex; margin: 0; font-size: 22px; width: 1000px; align-items: center; margin-bottom: 20px; ">
-                    <label class="control-label col-md-2" style="padding-right: 0px; padding-left: 0px; margin-bottom: 0px;">Giá Sản Phẩm:</label>
-                    <div class="col-md-10" style="font-size:18px">
-                        @string.Format("{0:#,0}", @Model.Gia)₫
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div style="width: 100px; height: 30px; background-color: black; border-radius: 6px; border: 1px solid #000; display: flex; justify-content: center; align-items: center">
+    <div style="margin-left: 13%; width: 87%;">
+        <ul class="list-group col-sm-6 col-lg-4">
+            <li class="list-group-item"><a href="/sanphams/{{sanpham.slug}}">
+                <img src="{{sanpham.image}}" class="card-img-top" alt="{{sanpham.name}}">
+                </a></li>
+            <li class="list-group-item"><a href="/sanphams/{{sanpham.slug}}">
+                        <h5 class="card-title">{{sanpham.name}}</h5>
+                    </a></li>
+            <li class="list-group-item"><p class="card-text">{{sanpham.mota}}</p></li>
+            <li class="list-group-item">{{sanpham.gia}}</li>
+            <li class="list-group-item">{{sanpham.createdAt}}</li>
+        </ul>
+        {{!-- <div style="width: 100px; height: 30px; background-color: black; border-radius: 6px; border: 1px solid #000; display: flex; justify-content: center; align-items: center">
             @Html.ActionLink("Quay lại", "Index", null, new { @style = "color: white; font-weight: 600" })
-        </div>
+        </div> --}}
     </div>
 </body>
 </html>

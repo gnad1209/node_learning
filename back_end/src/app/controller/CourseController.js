@@ -8,10 +8,10 @@ class courseController {
     }
     
     show(req, res,next) {
-        Course.findOne({slug: req.params.slug})
+        Courses.findOne({slug: req.params.slug})
             .then(course =>
-                res.json(course)
-                // res.render("courses/show",{course: mongooseToObject(course)})
+                // res.json(course)
+                res.render("courses/show",{course: mongooseToObject(course)})
             )
             .catch(next)
     }

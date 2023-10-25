@@ -199,3 +199,38 @@
 //         }
 //     }
 // }
+
+const { json } = require("express");
+const SanPhams = require("../models/SanPhams");
+const {mutipleMongooseToObject, mongooseToObject} = require('../../ulti/mongoose')
+
+class sanphamsController {
+    index(req,res){
+        res.send('abc')
+    }
+    
+    show(req, res,next) {
+        SanPhams.findOne({slug: req.params.slug})
+            .then(sanpham =>
+                // res.json(course)
+                res.render("SanPham/show",{sanpham: mongooseToObject(sanpham)})
+            )
+            .catch(next)
+    }
+
+    create(req, res,next) {
+            res.render('SanPham/Create')
+    }
+
+    store(req, res,next) {
+        const sanpham = new SanPhams(req.body)
+        sanpham.save()
+            .then(() => res.redirect('/'))
+            .catch(error=>{
+
+            })
+}
+    
+}
+
+module.exports = new sanphamsController();
