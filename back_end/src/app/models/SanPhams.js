@@ -1,25 +1,21 @@
 const mongoose = require('mongoose')
+const shortid = require('shortid')
 const slug = require('mongoose-slug-generator');
 const Schema = mongoose.Schema
 
 mongoose.plugin(slug)
 
-const SanPham = new Schema({
+const SanPhams = new Schema({
     name: { type: String, maxLenght: 255, require: true},
-    Gia: { type: String, maxLenght: 255, require: true},
-    IdSanPham: { type: String, maxLenght: 255, require: true},
-    Mota: { type: String, maxLenght: 255, require: true},
-    TB: { type: String, maxLenght: 255, require: true},
+    gia: { type: String, require: true},
+    IdSanPham: { type: String },
+    mota: { type: String, maxLenght: 255},
+    TB: { type: String },
     images: { type: String, maxLenght: 255, },
-    slug: { type: String,slug:'Name',unique: true}
+    shortid: { type: String,unique: true,default: shortid.generate,},
+    slug: { type: String,slug:['name','shortid'],}
 },{
     timestamps: true
 })
 
-// function separator(Gia) {
-//     var str = Gia.toString().split(".");
-//     str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//     return str.join(".");
-// }
-
-module.exports = mongoose.model('SanPham', SanPham)
+module.exports = mongoose.model('SanPhams', SanPhams)

@@ -5,10 +5,10 @@ const {mutipleMongooseToObject} = require('../../ulti/mongoose')
 
 class siteController {
     index(req, res,next) {
-        SanPhams.find({})
-            .then(sanphams =>{
-                res.render('Home/Index',{ sanphams: mutipleMongooseToObject(sanphams) })
-                // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+        Courses.find({})
+            .then(courses =>{
+                // res.render('Home/Index',{ sanphams: mutipleMongooseToObject(sanphams) })
+                res.render('demo',{ courses: mutipleMongooseToObject(courses) })
             })
             .catch(next)  
     }

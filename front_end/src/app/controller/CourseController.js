@@ -8,7 +8,7 @@ class courseController {
     }
     
     show(req, res,next) {
-        Course.findOne({slug: req.params.slug})
+        Courses.findOne({slug: req.params.slug})
             .then(course =>
                 res.json(course)
                 // res.render("courses/show",{course: mongooseToObject(course)})
@@ -21,7 +21,8 @@ class courseController {
     }
 
     store(req, res,next) {
-        const course = new Course(req.body)
+        const formData = req.body
+        const course = new Courses(formData)
         course.save()
             .then(() => res.redirect('/'))
             .catch(error=>{

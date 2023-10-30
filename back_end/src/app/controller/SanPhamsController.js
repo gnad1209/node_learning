@@ -202,6 +202,7 @@
 
 const { json } = require("express");
 const SanPhams = require("../models/SanPhams");
+const DanhMucSanPhams = require("../models/DanhMucSanPhams");
 const {mutipleMongooseToObject, mongooseToObject} = require('../../ulti/mongoose')
 
 class sanphamsController {
@@ -219,11 +220,19 @@ class sanphamsController {
     }
 
     create(req, res,next) {
+        // DanhMucSanPhams.find({})
+        //     .then(danhmucsanphams =>{
+        //         res.render('SanPham/Create',{ danhmucsanphams: mutipleMongooseToObject(danhmucsanphams) })
+        //         // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+        //     })
+        //     .catch(next)  
             res.render('SanPham/Create')
     }
 
     store(req, res,next) {
-        const sanpham = new SanPhams(req.body)
+        // res.json(req.body)
+        const formData = req.body
+        const sanpham = new SanPhams(formData)
         sanpham.save()
             .then(() => res.redirect('/'))
             .catch(error=>{
