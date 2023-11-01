@@ -29,6 +29,26 @@
             </div>
 
             <div class="form-group">
+                <label class="control-label col-md-2">Loại</label>
+                <div class="col-md-10 form-group">
+                    <div class="dropdown" style="z-index: 2;">
+                <button id="button" class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Chọn loại
+                </button>
+                <ul class="dropdown-menu" style="width: 100%; text-align: center;" aria-labelledby="dropdownMenuButton1">
+                   {{#each danhmucsanphams}}
+                    <li class="btn form-control" onclick="myFunction()" id="{{this.idsanpham}}">{{this.name}}</li>
+                   {{/each}}
+                </ul>
+                </div>
+                <div style="">
+                    <input id="ten_sp" class="form-control" type="text"  value="" readonly>
+                    <input id="id_sp" type="text" style="display: none" value=""  name="id_sp">
+                </div>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="gia" class="control-label col-md-2">Giá</label>
                 <div class="col-md-10">
                     <input class="form-control" type="number" id="gia" name="gia">
@@ -41,18 +61,13 @@
                 </div>
             </div>
 
-            {{!-- <div class="form-group">
-                <label for="fileImg" class="control-label col-md-2">Ảnh</label>
-                <div class="col-md-10">
-                    <input class="form-control" type="file" name="fileImg" id="fileImg" />
-                </div>
-            </div> --}}
+            {{>images}}
 
-            <div class="form-group">
+            {{!-- <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <button type="submit" class="btn btn-default IP" > Thêm</button>
                 </div>
-            </div>
+            </div> --}}
              <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <a class="btn btn-danger" href="/">Quay lại</a>
@@ -61,38 +76,26 @@
         </div>
         </form>
     </div>
-    
+    {{!-- window.onload = function() {
+        const p = document.createElement('p')
+        p.innerHTML = "{{this.name}}"
+        const parent_list = document.getElementById('list_product')
+        parent_list.appendChild(p)
+    } --}}
 </body>
 </html>
 <script type="text/javascript">
-    function myFunction1(){
-            document.getElementById("id").innerHTML= "<a class='dropdown-item' href='#''>{{this.name}}</a>";
-            
-    }
+    
+    
     
    function myFunction(){
-        let e = document.getElementById("id");
-        let a = document.getElementById("id1");
-        let giaTri = e.textContent;
-        a.value = giaTri
+        var getId = event.target.id
+        var e = document.getElementById(getId);
+        var ten_sp = document.getElementById("ten_sp");
+        var id_sp = document.getElementById("id_sp");
+        var giaTri = e.textContent;
+        ten_sp.value = giaTri
+        id_sp.value = getId
    }
 </script>
 
-{{!-- <div class="form-group">
-                <label class="control-label col-md-2">Loại</label>
-                <div class="col-md-10 form-group">
-                    <div class="dropdown" style="z-index: 2;">
-                <button id="button" onclick="myFunction1()"  class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Chọn loại
-                </button>
-                <ul class="dropdown-menu" style="width: 100%; text-align: center;" aria-labelledby="dropdownMenuButton1">
-                   {{#each danhmucsanphams}}
-                    <li onclick="myFunction()" ><div id="id">{{this.name}}</div></li>
-                   {{/each}}
-                </ul>
-                </div>
-                <div style="">
-                    <input id="id1" class="form-control" type="text" value="" readonly>
-                </div>
-                </div>
-            </div> --}}

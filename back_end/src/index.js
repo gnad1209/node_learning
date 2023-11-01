@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require("multer");
 const path = require('path');
 const morgan = require('morgan');
 var port = 9000;
@@ -35,6 +36,7 @@ app.engine(
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
+
 
 route(app);
 

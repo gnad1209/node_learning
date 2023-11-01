@@ -202,6 +202,8 @@
 
 const { json } = require("express");
 const SanPhams = require("../models/SanPhams");
+const path = require('path');
+const fs = require("fs");
 const DanhMucSanPhams = require("../models/DanhMucSanPhams");
 const {mutipleMongooseToObject, mongooseToObject} = require('../../ulti/mongoose')
 
@@ -220,26 +222,51 @@ class sanphamsController {
     }
 
     create(req, res,next) {
-        // DanhMucSanPhams.find({})
-        //     .then(danhmucsanphams =>{
-        //         res.render('SanPham/Create',{ danhmucsanphams: mutipleMongooseToObject(danhmucsanphams) })
-        //         // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
-        //     })
-        //     .catch(next)  
-            res.render('SanPham/Create')
+        DanhMucSanPhams.find({})
+            .then(danhmucsanphams =>{
+                res.render('SanPham/Create',{ danhmucsanphams: mutipleMongooseToObject(danhmucsanphams) })
+                // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+            })
+            .catch(next)  
+    }
+
+    click(req,res,next){
+        DanhMucSanPhams.find({})
+        .then(danhmucsanphams =>{
+            res.json(danhmucsanphams)
+            // res.render('SanPham/Create',{ danhmucsanphams: mutipleMongooseToObject(danhmucsanphams) })
+            // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+        })
+        .catch(next)  
     }
 
     store(req, res,next) {
-        // res.json(req.body)
         const formData = req.body
+        //res.json(req.body)
         const sanpham = new SanPhams(formData)
         sanpham.save()
             .then(() => res.redirect('/'))
             .catch(error=>{
 
             })
-}
-    
+    }
+
+    uploadPhoto(req,res,next){
+        const obj = {
+            images: {
+              data: fs.readFileSync(
+                path.join(__dirname + "public/images/" + req.file.filename)
+              ),
+              contentType: "image/png",
+            },
+          };
+          const newImage = new SanPhams({
+            image: obj.images,
+          });
+          newImage.save((err) => {
+            err ? console.log(err) : res.redirect("store");
+          });
+    }
 }
 
 module.exports = new sanphamsController();
