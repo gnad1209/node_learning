@@ -7,6 +7,7 @@ const handlebars = require('express-handlebars');
 const app = express();
 const route = require('./routes/');
 const { execPath } = require('process');
+const methodOverride = require('method-override')
 const db = require('./config/db')
 
 //conect db
@@ -19,7 +20,7 @@ app.use(
     }),
 );
 app.use(express.json());
-
+app.use(methodOverride('_method'))
 //http logger
 // app.use(morgan("combined"))
 

@@ -1,142 +1,80 @@
-﻿{{!-- <!DOCTYPE html>
+﻿<!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <table class="table" style="margin-left: 14%; width: 86%;">
+        <thead>
+            <tr>
+            <th scope="col">Stt</th>
+            <th scope="col">name</th>
+            <th scope="col">gia</th>
+            <th scope="col">thoi gian tao</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each sanpham}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.gia}}</td>
+                    <td style="width: 12%;">{{this.createdAt}}</td>
+                    <td style="text-align:center;width: 8%;">
+                            <a class="btn btn-outline-primary" href="sanphams/{{this._id}}/edit">Edit</a> 
+                    </td>
+                    <td style="text-align:center; width: 8%;">
+                            <a class="btn btn-outline-success" href="sanphams/show/{{this.slug}}">Detail</a>
+                    </td>
+                    <td style="text-align:center; width: 8%;">
+                        <button type="button" class="btn btn-outline-danger" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-sanpham-modal">Xóa</button>
+                    </td>                 
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
 
-    <style>
-        a {
-            color: #fff
-        }
-            a:hover {
-                color: #000;
-            }
-    </style>
-</head>
-<body>
-    <div style="">
-        <div style="position: absolute; width: 1130px; right: 10px">
 
-            <h2>Danh Mục Các Sản Phẩm</h2>
-            <div>
-                <div style="width: 130px; height: 40px; background-color: #6ebfc2; align-items: center; display: flex; justify-content: center;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ">
-                    @Html.ActionLink("Thêm Mới", "Create")
-                </div>
-                @using (Html.BeginForm("Search", "SanPham", FormMethod.Get))
-                {
-                    @*<label>Lọc theo danh mục: </label>
-                        <div>
-                            @Html.DropDownList("category", "-- Tất cả --")
-                        </div>*@
-                    <label>Lọc theo tên: </label>
-                    <div style="width:200px; height:40px;display:flex;justify-content:space-between;align-items:center">
-                        @Html.TextBox("Search")
-                        @*@Html.Label("Theo danh muc: ") @Html.DropDownList("DanhMucSanPham", "Tất cả sản phẩm")*@
-                        <input type="submit" value="Lọc" />
-                    </div>
-                }
-
-            <table class="table">
-                <thead class="thead-dark" style="background-color: #000000d9;color: aliceblue;">
-                <th style="text-align:center">#</th>
-                <th style="text-align:center">Tên Sản Phẩm</th>
-                <th style="text-align:center">Loại mặt hàng</th>
-                <th style="text-align:center">Danh mục hình ảnh</th>
-                <th style="text-align:center">Mô tả sản phẩm</th>
-                <th style="text-align:center">Giá</th>
-                <th style="text-align:center">Sửa</th>
-                <th style="text-align:center">Xem sản phẩm </th>
-                <th style="text-align:center">Xóa </th>
-
-                </thead>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td style="text-align:center">@item.Id</td>
-                        <td style="text-align:center">@item.Name</td>
-                        <td style="text-align:center">@item.DanhMucSanPham.Name</td>
-                        <td style="text-align:center">
-                            @{ string img_path = "/images/" + @item.images; }
-                            <img src="@img_path" width="100" height="100" />
-
-                        </td>
-                        <td style="text-align: center; word-wrap: break-word; ">@item.Mota</td>
-
-                        <td style="text-align:center">@string.Format("{0:#,0}", item.Gia)₫</td>
-                        <td style="text-align:center">
-                            <div style="width: 90px; height: 40px; background-color: #6ebfc2; align-items: center; display: flex; justify-content: center; margin: auto;border-radius:10px">
-                                @Html.ActionLink("Sửa", "Edit", new { ID = item.Id })
-                            </div>
-                        </td>
-                        <td style="text-align:center">
-                            <div style="width: 100px; height: 40px; background-color: #aad442; align-items: center; display: flex; justify-content: center; margin: auto; border-radius: 10px ">
-                                @Html.ActionLink("Xem", "show", new { ID = item.Id })
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 80px; height: 40px; background-color: #c63d3d; align-items: center; display: flex; justify-content: center; margin: auto; border-radius: 10px">
-                                @Html.ActionLink("Xóa", "Delete", new { ID = item.Id })
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </table>
-            </div>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="delete-sanpham-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="btn-delete-sanpham">Xóa</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+      </div>
     </div>
-</body>
-</html>
- --}}
- <style>
-    body{
-        z-index: 1;
+  </div>
+</div>
+        
+        <form name="delete-sanpham-form" method="POST" action="" enctype="multipart/form-data" >
+
+ </body>
+ </html>
+
+<script>
+    var exampleModal = document.getElementById('delete-sanpham-modal')
+    var sanphamId
+    var deleteForm = document.forms['delete-sanpham-form']
+    var btnDeleteSanpham = document.getElementById('btn-delete-sanpham')
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            sanphamId = button.getAttribute('data-id')
+    })
+    btnDeleteSanpham.onclick = function(){
+        deleteForm.action = '/sanphams/'+sanphamId+'?_method=DELETE'
+        deleteForm.submit()
     }
-    a{
-        text-decoration: none;
-        color: #000;
-    }
-    .button{
-        align-items: center;
-         display: flex; 
-         justify-content: center; 
-         margin: auto;
-         border-radius:10px;
-         height: 40px;
-    }
- </style>
-<table class="table" style="margin-left: 14%; width: 86%;">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">name</th>
-      <th scope="col">gia</th>
-      <th scope="col">thoi gian tao</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each sanpham}}
-    <tr>
-        <th scope="row">{{sum @index 1}}</th>
-            <td>{{this.name}}</td>
-            <td>{{this.gia}}</td>
-            <td style="width: 12%;">{{this.createdAt}}</td>
-            <td style="text-align:center;width: 8%;">
-                <div class="button" style="background-color: #6ebfc2; ">
-                    <a href="">Edit</a> 
-                </div>
-             </td>
-            <td style="text-align:center; width: 8%;">
-                <div class="button" style="background-color: #aad442;">
-                    <a href="sanphams/show/{{this.slug}}">Detail</a>
-                </div>
-            </td>
-            <td style="text-align:center; width: 8%;">
-                <div class="button" style="background-color: #c63d3d;">
-                    <a href="">Xóa</a>
-                </div>
-            </td>                 
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+</script>
+

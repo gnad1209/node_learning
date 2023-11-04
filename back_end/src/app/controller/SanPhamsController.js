@@ -230,19 +230,9 @@ class sanphamsController {
             .catch(next)  
     }
 
-    click(req,res,next){
-        DanhMucSanPhams.find({})
-        .then(danhmucsanphams =>{
-            res.json(danhmucsanphams)
-            // res.render('SanPham/Create',{ danhmucsanphams: mutipleMongooseToObject(danhmucsanphams) })
-            // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
-        })
-        .catch(next)  
-    }
-
     store(req, res,next) {
         const formData = req.body
-        //res.json(req.body)
+        // res.json(req.body)
         const sanpham = new SanPhams(formData)
         sanpham.save()
             .then(() => res.redirect('/'))
@@ -251,22 +241,72 @@ class sanphamsController {
             })
     }
 
-    uploadPhoto(req,res,next){
-        const obj = {
-            images: {
-              data: fs.readFileSync(
-                path.join(__dirname + "public/images/" + req.file.filename)
-              ),
-              contentType: "image/png",
-            },
-          };
-          const newImage = new SanPhams({
-            image: obj.images,
-          });
-          newImage.save((err) => {
-            err ? console.log(err) : res.redirect("store");
-          });
+    async edit(req, res,next) {
+        const danhmucsanphams = await DanhMucSanPhams.find({})
+        const sanpham = await SanPhams.findById(req.params.id)
+        const danhmucsanpham = await DanhMucSanPhams.findOne({id_sp: sanpham.id_sp})
+        res.render('SanPham/Edit', { sanpham: mongooseToObject(sanpham),danhmucsanpham: mongooseToObject(danhmucsanpham), danhmucsanphams: mutipleMongooseToObject(danhmucsanphams)});
     }
+
+    update(req,res,next){
+        SanPhams.updateOne({_id: req.params.id},req.body)
+            .then(() => res.redirect('/'))
+            .catch(next)
+    }
+
+    delete(req,res,next){
+        SanPhams.deleteOne({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }    
+    // store(req, res,next) {
+    //     var img = fs.readFileSync(req.file.path);
+    //     var encode_img = img.toString('base64');
+    //     var final_img = {
+    //         contentType:req.file.mimetype,
+    //         images:new Buffer.from(encode_img,'base64')
+    //     };
+    //     var formData = req.body
+    //     var obj = {
+    //         name: formData.name,
+    //         gia: formData.gia,
+    //         id_sp: formData.id_sp,
+    //         mota: formData.mota,
+    //         images: formData.final_img
+    //     }
+    //     SanPhams.create(obj)
+    //         .then(() =>{
+    //             res.json(req.body.images)
+    //         })
+    //         .catch(error => {
+
+    //         })
+    //         // if(err){
+    //         //     console.log(err);
+    //         // }else{
+    //         //     // console.log(result.img.Buffer);
+    //         //     console.log("Saved To database");
+    //         //     res.contentType(final_img.contentType);
+    //         //     res.send(final_img.images);
+    //         // }
+    // }
+    
+    // uploadPhoto(req,res,next){
+    //     const obj = {
+    //         image: {
+    //           data: fs.readFileSync(
+    //             path.join(__dirname + "public/images/" + req.file.filename)
+    //           ),
+    //         contentType: "image/png",
+    //         },
+    //       };
+    //       const newImage = new SanPhams({
+    //         images: obj.image,
+    //       });
+    //       newImage.save((err) => {
+    //         err ? console.log(err) : res.redirect("store");
+    //       });
+    // }
 }
 
 module.exports = new sanphamsController();

@@ -17,9 +17,9 @@
 <body>
     <div style="margin-left: 14%; width: 86%;">
 
-        <form  method="POST" action="/sanphams/store" >
+        <form  method="POST" action="/sanphams/store" enctype="multipart/form-data" >
             <div class="form-horizontal">
-            <h4>Sản phẩm</h4>
+            <h4>Tạo mới Sản phẩm</h4>
             <hr />
             <div class="form-group">
                 <label for="name" class="control-label col-md-2">Tên</label>
@@ -37,7 +37,7 @@
                 </button>
                 <ul class="dropdown-menu" style="width: 100%; text-align: center;" aria-labelledby="dropdownMenuButton1">
                    {{#each danhmucsanphams}}
-                    <li class="btn form-control" onclick="myFunction()" id="{{this.idsanpham}}">{{this.name}}</li>
+                    <li class="btn form-control" onclick="myFunction()" id="{{this.id_sp}}">{{this.name}}</li>
                    {{/each}}
                 </ul>
                 </div>
@@ -61,20 +61,20 @@
                 </div>
             </div>
 
-            {{>images}}
-
-            {{!-- <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-default IP" > Thêm</button>
-                </div>
-            </div> --}}
-             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <a class="btn btn-danger" href="/">Quay lại</a>
+            <div class="form-group">
+                <label for="fileImg" class="control-label col-md-2">Ảnh</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="file" name="images" id="images" />
                 </div>
             </div>
-        </div>
+            {{!-- {{>images}} --}}
+
+            <div class="form-group col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-default IP" > Thêm</button>
+                    <a class="btn btn-danger" href="/" style="float: right;">Quay lại</a>
+            </div>
         </form>
+        </div>
     </div>
     {{!-- window.onload = function() {
         const p = document.createElement('p')
