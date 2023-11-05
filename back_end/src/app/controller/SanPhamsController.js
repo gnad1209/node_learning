@@ -8,9 +8,6 @@
 // using System.Net;
 // using System.Data;
 
-
-
-
 // namespace DAWEB.Areas.Admin.Controllers
 // {
 //     public class SanPhamController : Controller
@@ -32,7 +29,7 @@
 //         }
 
 //         // POST: Admin/Products/Create
-//         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+//         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
 //         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 //         [HttpPost]
 //         [ValidateAntiForgeryToken]
@@ -68,7 +65,6 @@
 //             return View(SP);
 //         }
 
-
 //         public ActionResult Delete(int ID)
 //         {
 //             // lấy dữ liệu của Category theo Id tương ứng
@@ -82,7 +78,6 @@
 //             db.SaveChanges();
 //             return RedirectToAction("Index");
 //         }
-
 
 //         public ActionResult Edit(int? ID)
 //         {
@@ -101,7 +96,7 @@
 //         }
 
 //         // POST: Admin/Products/Edit/5
-//         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+//         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
 //         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 //         [HttpPost]
 //         [ValidateAntiForgeryToken]
@@ -136,8 +131,6 @@
 //             ViewBag.categoryID = new SelectList(db.SanPham, "id", "name", SP.Id);
 //             return View(SP);
 //         }
-
-
 
 //         //public ActionResult Edit(int ID)
 //         //{
@@ -200,65 +193,77 @@
 //     }
 // }
 
-const { json } = require("express");
-const SanPhams = require("../models/SanPhams");
+const { json } = require('express');
+const SanPhams = require('../models/SanPhams');
 const path = require('path');
-const fs = require("fs");
-const DanhMucSanPhams = require("../models/DanhMucSanPhams");
-const {mutipleMongooseToObject, mongooseToObject} = require('../../ulti/mongoose')
+const fs = require('fs');
+const DanhMucSanPhams = require('../models/DanhMucSanPhams');
+const {
+    mutipleMongooseToObject,
+    mongooseToObject,
+} = require('../../ulti/mongoose');
 
 class sanphamsController {
-    index(req,res){
-        res.send('abc')
-    }
-    
-    show(req, res,next) {
-        SanPhams.findOne({slug: req.params.slug})
-            .then(sanpham =>
-                // res.json(course)
-                res.render("SanPham/show",{sanpham: mongooseToObject(sanpham)})
-            )
-            .catch(next)
+    index(req, res) {
+        res.send('abc');
     }
 
-    create(req, res,next) {
+    show(req, res, next) {
+        SanPhams.findOne({ slug: req.params.slug })
+            .then((sanpham) =>
+                // res.json(course)
+                res.render('SanPham/show', {
+                    sanpham: mongooseToObject(sanpham),
+                }),
+            )
+            .catch(next);
+    }
+
+    create(req, res, next) {
         DanhMucSanPhams.find({})
-            .then(danhmucsanphams =>{
-                res.render('SanPham/Create',{ danhmucsanphams: mutipleMongooseToObject(danhmucsanphams) })
+            .then((danhmucsanphams) => {
+                res.render('SanPham/Create', {
+                    danhmucsanphams: mutipleMongooseToObject(danhmucsanphams),
+                });
                 // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
             })
-            .catch(next)  
+            .catch(next);
     }
 
-    store(req, res,next) {
-        const formData = req.body
+    store(req, res, next) {
+        const formData = req.body;
         // res.json(req.body)
-        const sanpham = new SanPhams(formData)
-        sanpham.save()
+        const sanpham = new SanPhams(formData);
+        sanpham
+            .save()
             .then(() => res.redirect('/'))
-            .catch(error=>{
-
-            })
+            .catch((error) => {});
     }
 
-    async edit(req, res,next) {
-        const danhmucsanphams = await DanhMucSanPhams.find({})
-        const sanpham = await SanPhams.findById(req.params.id)
-        const danhmucsanpham = await DanhMucSanPhams.findOne({id_sp: sanpham.id_sp})
-        res.render('SanPham/Edit', { sanpham: mongooseToObject(sanpham),danhmucsanpham: mongooseToObject(danhmucsanpham), danhmucsanphams: mutipleMongooseToObject(danhmucsanphams)});
+    async edit(req, res, next) {
+        const danhmucsanphams = await DanhMucSanPhams.find({});
+        const sanpham = await SanPhams.findById(req.params.id);
+        const danhmucsanpham = await DanhMucSanPhams.findOne({
+            id_sp: sanpham.id_sp,
+        });
+        res.render('SanPham/Edit', {
+            sanpham: mongooseToObject(sanpham),
+            danhmucsanpham: mongooseToObject(danhmucsanpham),
+            danhmucsanphams: mutipleMongooseToObject(danhmucsanphams),
+        });
     }
 
-    update(req,res,next){
-        SanPhams.updateOne({_id: req.params.id},req.body)
+    update(req, res, next) {
+        SanPhams.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/'))
-            .catch(next)
+            .catch(next);
     }
 
-    delete(req,res,next){
-        SanPhams.deleteOne({_id: req.params.id})
+    delete(req, res, next) {
+        SanPhams.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
-            .catch(next)
-    }    
+            .catch(next);
+    }
     // store(req, res,next) {
     //     var img = fs.readFileSync(req.file.path);
     //     var encode_img = img.toString('base64');
@@ -290,7 +295,7 @@ class sanphamsController {
     //         //     res.send(final_img.images);
     //         // }
     // }
-    
+
     // uploadPhoto(req,res,next){
     //     const obj = {
     //         image: {

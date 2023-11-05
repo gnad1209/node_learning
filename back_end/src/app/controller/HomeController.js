@@ -18,7 +18,6 @@
 //                 return RedirectToAction("DangNhap");
 //             }
 
-
 //                 // lấy ra danh sách các sản phẩm truy vấn dữ liệu từ Category
 //                 List<SanPham> lst = db.SanPham.ToList();
 //                 //var check1 = (from item in db.SanPham orderby item.Gia ascending select item).ToList();

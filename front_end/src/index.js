@@ -6,10 +6,10 @@ const handlebars = require('express-handlebars');
 const app = express();
 const route = require('./routes/');
 const { execPath } = require('process');
-const db = require('./config/db')
+const db = require('./config/db');
 
 //conect db
-db.connect()
+db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
@@ -35,5 +35,5 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 route(app);
 
 app.listen(port, () => {
-    console.log(`app listening at http://localhost:${port}`)
+    console.log(`app listening at http://localhost:${port}`);
 });
