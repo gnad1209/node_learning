@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Add</title>
@@ -8,87 +9,95 @@
         div {
             margin-bottom: 10px;
         }
+
         .IP {
             background-color: #6ebfc2;
             color: #fff;
         }
     </style>
 </head>
+
 <body>
-    <div style="margin-left: 14%; width: 86%;">
+    {{> abc}}
 
-        <form  method="POST" action="/sanphams/store" enctype="multipart/form-data" >
+    <div class="main-header" style="width: 80%;">
+
+        <form method="POST" action="/sanphams/store" enctype="multipart/form-data">
             <div class="form-horizontal">
-            <h4>Tạo mới Sản phẩm</h4>
-            <hr />
-            <div class="form-group">
-                <label for="name" class="control-label col-md-2">Tên</label>
-                <div class="col-md-10">
-                    <input class="form-control" type="text" id="name" name="name">
+                <h4>Tạo mới Sản phẩm</h4>
+                <hr />
+                <div class="form-group">
+                    <label for="name" class="control-label col-md-2">Tên</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" id="name" name="name">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Loại</label>
-                <div class="col-md-10 form-group">
-                    <div class="dropdown" style="z-index: 2;">
-                <button id="button" class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Chọn loại
-                </button>
-                <ul class="dropdown-menu" style="width: 100%; text-align: center;" aria-labelledby="dropdownMenuButton1">
-                   {{#each danhmucsanphams}}
-                    <li class="btn form-control" onclick="myFunction()" id="{{this.id_sp}}">{{this.name}}</li>
-                   {{/each}}
-                </ul>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Loại</label>
+                    <div class="col-md-10 form-group">
+                        <div class="dropdown" style="z-index: 2;">
+                            <button id="button" class="btn btn-secondary dropdown-toggle form-control" type="button"
+                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Chọn loại
+                            </button>
+                            <ul class="dropdown-menu" style="width: 100%; text-align: center;"
+                                aria-labelledby="dropdownMenuButton1">
+                                {{#each danhmucsanphams}}
+                                <li class="btn form-control" onclick="myFunction()" id="{{this.id_sp}}">{{this.name}}
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <div style="">
+                            <input id="ten_sp" class="form-control" type="text" value="" readonly>
+                            <input id="id_sp" type="text" style="display: none" value="" name="id_sp">
+                        </div>
+                    </div>
                 </div>
-                <div style="">
-                    <input id="ten_sp" class="form-control" type="text"  value="" readonly>
-                    <input id="id_sp" type="text" style="display: none" value=""  name="id_sp">
-                </div>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label for="gia" class="control-label col-md-2">Giá</label>
-                <div class="col-md-10">
-                    <input class="form-control" type="number" id="gia" name="gia">
+                <div class="form-group">
+                    <label for="gia" class="control-label col-md-2">Giá</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="number" id="gia" name="gia">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="mota" class="control-label col-md-2">Mô tả Sản Phẩm</label>
-                <div class="col-md-10">
-                    <textarea class="form-control" type="text" id="mota" name="mota" rows="5"></textarea>
+                <div class="form-group">
+                    <label for="mota" class="control-label col-md-2">Mô tả Sản Phẩm</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" type="text" id="mota" name="mota" rows="5"></textarea>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="fileImg" class="control-label col-md-2">Ảnh</label>
-                <div class="col-md-9">
-                    <input class="form-control" type="file" name="images" id="images" />
+                <div class="form-group">
+                    <label for="fileImg" class="control-label col-md-2">Ảnh</label>
+                    <div class="col-md-9">
+                        <input class="form-control" type="file" name="images" id="images" />
+                    </div>
                 </div>
-            </div>
-            {{!-- {{>images}} --}}
+                {{!-- {{>images}} --}}
 
-            <div class="form-group col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-default IP" > Thêm</button>
+                <div class="form-group col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-default IP"> Thêm</button>
                     <a class="btn btn-danger" href="/" style="float: right;">Quay lại</a>
-            </div>
+                </div>
         </form>
-        </div>
+    </div>
     </div>
     {{!-- window.onload = function() {
-        const p = document.createElement('p')
-        p.innerHTML = "{{this.name}}"
-        const parent_list = document.getElementById('list_product')
-        parent_list.appendChild(p)
+    const p = document.createElement('p')
+    p.innerHTML = "{{this.name}}"
+    const parent_list = document.getElementById('list_product')
+    parent_list.appendChild(p)
     } --}}
 </body>
+
 </html>
 <script type="text/javascript">
-    
-    
-    
-   function myFunction(){
+
+
+
+    function myFunction() {
         var getId = event.target.id
         var e = document.getElementById(getId);
         var ten_sp = document.getElementById("ten_sp");
@@ -96,6 +105,5 @@
         var giaTri = e.textContent;
         ten_sp.value = giaTri
         id_sp.value = getId
-   }
+    }
 </script>
-

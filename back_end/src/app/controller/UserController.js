@@ -7,7 +7,7 @@ class siteController {
     index(req, res, next) {
         SanPhams.find({})
             .then((sanphams) => {
-                res.render('Home/Index', {
+                res.render('Home/DangNhap', {
                     sanphams: mutipleMongooseToObject(sanphams),
                 });
                 // res.render('demo', {courses: mutipleMongooseToObject(courses),});

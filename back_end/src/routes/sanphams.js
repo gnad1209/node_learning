@@ -3,14 +3,15 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'src/public/images');
+    destination: function (req, file, res) {
+        res(null, 'src/resources/upload');
     },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now());
+    filename: function (req, file, res) {
+        res(null, file.originalname);
     },
 });
-var upload = multer({ storage: storage, dest: 'src/public/images' });
+// file.fieldname + '-' + Date.now()
+var upload = multer({ storage: storage });
 
 const sanphamsController = require('../app/controller/SanPhamsController');
 

@@ -5,6 +5,7 @@ function menu({
     Blog = '',
     LienHe = '',
 }) {
+    console.log('kajshf');
     const main = document.getElementById('menu');
     if (main) {
         const menu = document.createElement('div');

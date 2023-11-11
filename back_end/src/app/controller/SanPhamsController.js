@@ -230,15 +230,15 @@ class sanphamsController {
             .catch(next);
     }
 
-    store(req, res, next) {
-        const formData = req.body;
-        // res.json(req.body)
-        const sanpham = new SanPhams(formData);
-        sanpham
-            .save()
-            .then(() => res.redirect('/'))
-            .catch((error) => {});
-    }
+    // store(req, res, next) {
+    //     const formData = req.body;
+    //     // res.json(req.body)
+    //     const sanpham = new SanPhams(formData);
+    //     sanpham
+    //         .save()
+    //         .then(() => res.redirect('/'))
+    //         .catch((error) => { });
+    // }
 
     async edit(req, res, next) {
         const danhmucsanphams = await DanhMucSanPhams.find({});
@@ -264,37 +264,34 @@ class sanphamsController {
             .then(() => res.redirect('back'))
             .catch(next);
     }
-    // store(req, res,next) {
-    //     var img = fs.readFileSync(req.file.path);
-    //     var encode_img = img.toString('base64');
-    //     var final_img = {
-    //         contentType:req.file.mimetype,
-    //         images:new Buffer.from(encode_img,'base64')
-    //     };
-    //     var formData = req.body
-    //     var obj = {
-    //         name: formData.name,
-    //         gia: formData.gia,
-    //         id_sp: formData.id_sp,
-    //         mota: formData.mota,
-    //         images: formData.final_img
-    //     }
-    //     SanPhams.create(obj)
-    //         .then(() =>{
-    //             res.json(req.body.images)
-    //         })
-    //         .catch(error => {
 
-    //         })
-    //         // if(err){
-    //         //     console.log(err);
-    //         // }else{
-    //         //     // console.log(result.img.Buffer);
-    //         //     console.log("Saved To database");
-    //         //     res.contentType(final_img.contentType);
-    //         //     res.send(final_img.images);
-    //         // }
-    // }
+    store(req, res, next) {
+        var formData = req.body
+        var obj = {
+            name: formData.name,
+            gia: formData.gia,
+            id_sp: formData.id_sp,
+            mota: formData.mota,
+            images: req.file.filename
+        }
+        console.log(obj.images);
+        SanPhams.create(obj)
+            .then(() => {
+                // res.json(req.body.images)
+                res.send('success')
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        // if(err){
+        //     console.log(err);
+        // }else{
+        //     // console.log(result.img.Buffer);
+        //     console.log("Saved To database");
+        //     res.contentType(final_img.contentType);
+        //     res.send(final_img.images);
+        // }
+    }
 
     // uploadPhoto(req,res,next){
     //     const obj = {

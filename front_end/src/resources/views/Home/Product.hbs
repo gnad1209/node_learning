@@ -1,4 +1,6 @@
-﻿<div style="height: 98px;width: 100%;background-color: #353535;">
+﻿{{> header}}
+
+<div style="height: 98px;width: 100%;background-color: #353535;">
 
 </div>
 <div class="body">
@@ -11,13 +13,13 @@
             </div>
             <div class="top-contentright">
                 <div>
-                        <form method="get" action="">
-                            <div style="display:flex;justify-content:space-between;align-items:center">
+                    <form method="get" action="">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
                             <label>Tìm kiếm sản phẩm: </label>
-                                @Html.TextBox("Search")
+                            <input type="text" placeholder="Nhập đê">
                             <input type="submit" value="Tìm kiếm" />
                         </div>
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -26,22 +28,22 @@
         <div class="right_item">
             <div class="item_SP">
                 {{#each sanphams}}
-                    <div class="frames_box">
-                        <div class="box_img">
-                            <a href="detail/{{this.slug}}">
-                                <img src="/images/{{this.images}}" alt="logo" class="frames_box_img">
-                            </a>
-                        </div>
-                        <div class="frames_text" style="color:black">
-                            <p>{{this.name}}</p>
-                        </div>
-                        <div class="frames_text_price">
-                            <p>{{this.gia}}₫</p>
-                        </div>
-                        <div style="margin-top: 30px; text-align: center;">
-                            <a href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
-                        </div>
+                <div class="frames_box">
+                    <div class="box_img">
+                        <a href="detail/{{this.slug}}">
+                            <img src="/images/{{this.images}}" alt="logo" class="frames_box_img">
+                        </a>
                     </div>
+                    <div class="frames_text" style="color:black">
+                        <p>{{this.name}}</p>
+                    </div>
+                    <div class="frames_text_price">
+                        <p>{{this.gia}}₫</p>
+                    </div>
+                    <div style="margin-top: 30px; text-align: center;">
+                        <a href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
+                    </div>
+                </div>
                 {{/each}}
             </div>
         </div>

@@ -1,27 +1,34 @@
 ﻿<!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
+
 <body>
+    {{> abc}}
+
     <div style="margin-left: 13%; width: 87%;">
         <ul class="list-group col-sm-6 col-lg-4">
             <li class="list-group-item"><a href="/sanphams/{{sanpham.slug}}">
-                <img src="{{sanpham.image}}" class="card-img-top" alt="{{sanpham.name}}">
+                    <img src="{{sanpham.image}}" class="card-img-top" alt="{{sanpham.name}}">
                 </a></li>
             <li class="list-group-item"><a href="/sanphams/{{sanpham.slug}}">
-                        <h5 class="card-title">{{sanpham.name}}</h5>
-                    </a></li>
-            <li class="list-group-item"><p class="card-text">{{sanpham.mota}}</p></li>
+                    <h5 class="card-title">{{sanpham.name}}</h5>
+                </a></li>
+            <li class="list-group-item">
+                <p class="card-text">{{sanpham.mota}}</p>
+            </li>
             <li class="list-group-item">{{sanpham.gia}}</li>
             <li class="list-group-item">{{sanpham.createdAt}}</li>
         </ul>
-        {{!-- <div style="width: 100px; height: 30px; background-color: black; border-radius: 6px; border: 1px solid #000; display: flex; justify-content: center; align-items: center">
+        {{!-- <div
+            style="width: 100px; height: 30px; background-color: black; border-radius: 6px; border: 1px solid #000; display: flex; justify-content: center; align-items: center">
             @Html.ActionLink("Quay lại", "Index", null, new { @style = "color: white; font-weight: 600" })
         </div> --}}
     </div>
 </body>
-</html>
 
+</html>

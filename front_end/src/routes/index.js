@@ -6,6 +6,7 @@ const detailRouter = require('./detail');
 const recommendRouter = require('./recommend');
 const productsRouter = require('./products');
 
+
 function route(app) {
     app.use('/news', newsRouter);
     app.use('/courses', coursesRouter);
