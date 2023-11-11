@@ -8,26 +8,28 @@
 </head>
 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     {{> abc}}
-
-    <div style="margin-left: 13%; width: 87%;">
+    <div class="table main-header" style="width: 80%">
         <ul class="list-group col-sm-6 col-lg-4">
-            <li class="list-group-item"><a href="/sanphams/{{sanpham.slug}}">
-                    <img src="{{sanpham.image}}" class="card-img-top" alt="{{sanpham.name}}">
-                </a></li>
-            <li class="list-group-item"><a href="/sanphams/{{sanpham.slug}}">
-                    <h5 class="card-title">{{sanpham.name}}</h5>
-                </a></li>
             <li class="list-group-item">
-                <p class="card-text">{{sanpham.mota}}</p>
+                <img src="/{{sanpham.images}}" class="card-img-top" alt="{{sanpham.name}}">
             </li>
-            <li class="list-group-item">{{sanpham.gia}}</li>
-            <li class="list-group-item">{{sanpham.createdAt}}</li>
+            <li class="list-group-item">
+                <h5 class="card-title">Tên: {{sanpham.name}}</h5>
+            </li>
+            <li class="list-group-item">
+                <p class="card-text">Mô tả: {{sanpham.mota}}</p>
+            </li>
+            <li class="list-group-item">
+                <p>Giá: {{sanpham.gia}}</p>
+            </li>
+            <li class="list-group-item">
+                <p>Ngày tạo: {{sanpham.createdAt}}</p>
+            </li>
         </ul>
-        {{!-- <div
-            style="width: 100px; height: 30px; background-color: black; border-radius: 6px; border: 1px solid #000; display: flex; justify-content: center; align-items: center">
-            @Html.ActionLink("Quay lại", "Index", null, new { @style = "color: white; font-weight: 600" })
-        </div> --}}
+        <a class="btn btn-outline-primary" href="sanphams/{{this._id}}/edit">Edit</a>
+        <a href="/" class="btn btn-outline-danger">Quay lại</a>
     </div>
 </body>
 

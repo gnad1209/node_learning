@@ -15,6 +15,10 @@ class siteController {
             .catch(next);
     }
 
+    baocao(req, res) {
+        res.render('BaoCao/Index')
+    }
+
     search(req, res) {
         console.log(req.body);
         res.render('search');
