@@ -5,22 +5,25 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Add</title>
-    <style>
-        div {
-            margin-bottom: 10px;
-        }
 
-        .IP {
-            background-color: #6ebfc2;
-            color: #fff;
-        }
-    </style>
 </head>
 
 <body>
-    {{> abc}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function chooseFile(fileInput) {
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader()
 
-    <div style="margin-left: 14%; width: 86%;">
+                reader.onload = function (e) {
+                    $('#images-input').attr('src', e.target.result)
+                }
+                reader.readAsDataURL(fileInput.files[0])
+            }
+        }
+    </script>
+    {{> abc}}
+    <div class="main-header" style="width: 80%;">
 
         <form method="POST" action="/sanphams/{{sanpham._id}}?_method=PUT" enctype="multipart/form-data">
             <div class="form-horizontal">
@@ -71,12 +74,14 @@
                     </div>
                 </div>
 
-                {{!-- <div class="form-group">
+                <div class="form-group">
                     <label for="fileImg" class="control-label col-md-2">Ảnh</label>
                     <div class="col-md-9">
-                        <input class="form-control" type="file" name="images" id="images" value="{{sanpham.images}}" />
+                        <img id="images-input" style="width: 200px;" src="/{{sanpham.images}}" alt="">
+                        <input class="form-control" type="file" name="images" id="images" onchange="chooseFile(this)"
+                            value="" accept="image/gif, image/jpeg, image/png" />
                     </div>
-                </div> --}}
+                </div>
                 {{!-- {{>images}} --}}
 
                 <div class="form-group col-md-offset-2 col-md-10">

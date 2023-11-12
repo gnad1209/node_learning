@@ -1,7 +1,8 @@
 ﻿const { json } = require('express')
 const DanhMucSanPhams = require('../models/DanhMucSanPhams')
 const path = require('path');
-const { mutipleMongooseToObject, mongooseToObject } = require('../../ulti/mongoose')
+const { mutipleMongooseToObject, mongooseToObject } = require('../../ulti/mongoose');
+const { randomInt } = require('crypto');
 
 class danhmucsanphamsController {
     index(req, res, next) {
@@ -28,9 +29,7 @@ class danhmucsanphamsController {
 
     async edit(req, res, next) {
         const danhmucsanphams = await DanhMucSanPhams.find({});
-        const danhmucsanpham = await DanhMucSanPhams.findOne({
-            id_sp: danhmucsanphams.id_sp,
-        });
+        const danhmucsanpham = await DanhMucSanPhams.findById(req.params.id);
         res.render('DanhMucSanPham/Edit', {
             danhmucsanpham: mongooseToObject(danhmucsanpham),
             danhmucsanphams: mutipleMongooseToObject(danhmucsanphams),
@@ -39,7 +38,7 @@ class danhmucsanphamsController {
 
     update(req, res, next) {
         DanhMucSanPhams.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect('/'))
+            .then(() => res.redirect('/danhmucsanphams'))
             .catch(next);
     }
 
@@ -49,23 +48,29 @@ class danhmucsanphamsController {
             .catch(next);
     }
 
-    store(req, res, next) {
-        // var maxId
-        // DanhMucSanPhams.find({})
-        //     .then((danhmucsanpham) => {
-        //         obj = { danhmucsanphams: mutipleMongooseToObject(danhmucsanphams) }
-
-        //         const id_sanpham = obj.map(item => item.id_sp)
-        //         maxId = Math.max(...id_sanpham);
-        //     })
-        //     .catch(next)
-        // req.body.id_sp = maxId + 1
-        const danhmucsanphamm = new DanhMucSanPhams(req.body);
-        danhmucsanphamm
-            .save()
-            // .then(() => res.redirect('/'))
-            .then(() => res.send('sucssec'))
-            .catch((error) => { });
+    async store(req, res, next) {
+        const formData = req.body;
+        var loaiSanPhamNumber;
+        var loaiSanPham = await DanhMucSanPhams.findOne({}, null, { sort: { id_sp: -1 } });
+        loaiSanPhamNumber = parseInt(loaiSanPham.id_sp);
+        formData.id_sp = loaiSanPhamNumber + 1;
+        var loaiSanPhamString = "" + formData.id_sp;
+        formData.id_sp = loaiSanPhamString;
+        // console.log(formData);
+        var obj = {
+            name: formData.name,
+            id_sp: formData.id_sp
+        };
+        // console.log(randomInt(1, 10))
+        DanhMucSanPhams.create(obj)
+            .then(() => {
+                // res.json(req.body.images)
+                // res.send('success')
+                res.redirect('/danhmucsanphams')
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 }
 

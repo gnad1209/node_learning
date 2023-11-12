@@ -8,8 +8,15 @@ const {
 } = require('../../ulti/mongoose');
 
 class sanphamsController {
-    index(req, res) {
-        res.send('abc');
+    index(req, res, next) {
+        SanPhams.find({})
+            .then((sanpham) => {
+                res.render('SanPham/Index', {
+                    sanpham: mutipleMongooseToObject(sanpham),
+                });
+                // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+            })
+            .catch(next);
     }
 
     show(req, res, next) {
@@ -40,6 +47,7 @@ class sanphamsController {
         const danhmucsanpham = await DanhMucSanPhams.findOne({
             id_sp: sanpham.id_sp,
         });
+
         res.render('SanPham/Edit', {
             sanpham: mongooseToObject(sanpham),
             danhmucsanpham: mongooseToObject(danhmucsanpham),
@@ -72,7 +80,8 @@ class sanphamsController {
         SanPhams.create(obj)
             .then(() => {
                 // res.json(req.body.images)
-                res.send('success')
+                // res.send('success')
+                res.redirect('/')
             })
             .catch(error => {
                 console.log(error);

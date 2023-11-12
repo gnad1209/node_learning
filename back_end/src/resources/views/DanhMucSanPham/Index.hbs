@@ -73,7 +73,7 @@
         sanphamId = button.getAttribute('data-id')
     })
     btnDeleteSanpham.onclick = function () {
-        deleteForm.action = '/sanphams/' + sanphamId + '?_method=DELETE'
+        deleteForm.action = '/danhmucsanphams/' + sanphamId + '?_method=DELETE'
         deleteForm.submit()
     }
 </script>
