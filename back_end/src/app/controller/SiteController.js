@@ -1,15 +1,22 @@
 const { json } = require('express');
 const SanPhams = require('../models/SanPhams');
 const Courses = require('../models/Courses');
+const Users = require('../models/Users');
 const { mutipleMongooseToObject } = require('../../ulti/mongoose');
 
 class siteController {
     index(req, res, next) {
         SanPhams.find({})
             .then((sanpham) => {
-                res.render('Home/DangNhap', {
-                    sanpham: mutipleMongooseToObject(sanpham),
-                });
+                const user = Users.find({})
+                if (user)
+                    res.render('SanPham/Index', {
+                        sanpham: mutipleMongooseToObject(sanpham),
+                    });
+                else
+                    res.render('Home/DangNhap', {
+                        sanpham: mutipleMongooseToObject(sanpham),
+                    });
                 // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
             })
             .catch(next);
