@@ -13,6 +13,7 @@
             <th scope="col">Stt</th>
             <th scope="col">name</th>
             <th scope="col">gia</th>
+            <th scope="col">anh</th>
             <th scope="col">thoi gian tao</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <th scope="row">{{sum @index 1}}</th>
                     <td>{{this.name}}</td>
                     <td>{{this.gia}}</td>
+                    <td><img style="width: 100px;" src="data:image/jpeg;base64, {{this.images}}" alt=""></td>
                     <td style="width: 12%;">{{this.createdAt}}</td>
                     <td style="text-align:center;width: 8%;">
                             <a class="btn btn-outline-primary" href="sanphams/{{this._id}}/edit">Edit</a> 

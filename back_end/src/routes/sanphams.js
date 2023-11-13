@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require("multer");
 const path = require('path');
-var storage = multer.diskStorage({
+var storage = multer.memoryStorage({
   destination: function (req, file, cb) {
     cb(null, 'src/public/images')
   },
@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
   }
 })
 var upload = multer({ storage: storage,
-  dest: 'src/public/images'  })
+  dest: 'images'  })
 
 const sanphamsController = require('../app/controller/SanPhamsController');
 
