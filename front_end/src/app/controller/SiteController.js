@@ -15,6 +15,10 @@ class siteController {
             .catch(next);
     }
 
+    recommend(req, res, next) {
+        res.render('Home/Recommend')
+    }
+
     search(req, res) {
         console.log(req.body);
         res.render('search');

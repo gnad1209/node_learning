@@ -12,6 +12,7 @@ const db = require('./config/db');
 db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, '..', '..', 'back_end', 'src', 'resources', 'upload')));
 app.use(
     express.urlencoded({
         extended: true,
