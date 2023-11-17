@@ -1,25 +1,24 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const shortid = require('shortid');
 const slug = require('mongoose-slug-generator');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-mongoose.plugin(slug)
+mongoose.plugin(slug);
 
-const SanPham = new Schema({
-    name: { type: String, maxLenght: 255, require: true},
-    gia: { type: String, maxLenght: 255, require: true},
-    IdSanPham: { type: String, maxLenght: 255, require: true},
-    mota: { type: String, maxLenght: 255, require: true},
-    Tb: { type: String, maxLenght: 255, require: true},
-    images: { type: String, maxLenght: 255, },
-    slug: { type: String,slug:'Name',unique: true}
-},{
-    timestamps: true
-})
+const SanPhams = new Schema(
+    {
+        name: { type: String, maxLenght: 255, require: true },
+        gia: { type: String, require: true },
+        id_sp: { type: String },
+        mota: { type: String, maxLenght: 255 },
+        TB: { type: String },
+        images: { data: Buffer, contentType: String },
+        shortid: { type: String, unique: true, default: shortid.generate },
+        slug: { type: String, slug: ['name', 'shortid'] },
+    },
+    {
+        timestamps: true,
+    },
+);
 
-// function separator(Gia) {
-//     var str = Gia.toString().split(".");
-//     str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//     return str.join(".");
-// }
-
-module.exports = mongoose.model('SanPham', SanPham)
+module.exports = mongoose.model('SanPhams', SanPhams);

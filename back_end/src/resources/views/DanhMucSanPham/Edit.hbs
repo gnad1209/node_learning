@@ -1,49 +1,39 @@
-﻿@model DAWEB.Models.DanhMucSanPham
-
-@{
-    Layout = null;
-    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
-}
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Add</title>
-    <style>
-        div {
-            margin-bottom: 10px;
-        }
-
-        .IP {
-            background-color: #6ebfc2;
-            color: #fff;
-        }
-    </style>
 </head>
+
 <body>
 
-
-    <div style="position: absolute; width: 1130px; right: 10px">
-        <h2>Sửa thông tin Kg</h2>
-        @using (Html.BeginForm("EditbyID", "DanhMucSanPham", new { ID = Model.Id }))
-        {
-            <div>
-                <h5>Tên loại Sản Phẩm</h5>
-                @Html.TextBoxFor(m => m.Name)
-            </div>
+    {{> abc}}
+    <div class="table main-header" style="width: 80%">
+        <h2>Sửa thông tin loại sp</h2>
+        <form action="/danhmucsanphams/{{danhmucsanpham._id}}?_method=PUT" method="post">
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Sửa" class="btn btn-default IP" />
+                <label for="name" class="control-label col-md-2">Tên loại sản phẩm</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" id="name" name="name" value="{{danhmucsanpham.name}}">
                 </div>
             </div>
-        }
-        <div style="width: 100px; height: 30px; background-color: black; border-radius: 6px; border: 1px solid #000; display: flex; justify-content: center; align-items: center">
-            @Html.ActionLink("Quay lại", "DanhMucSanPham", null, new { @style = "color: white; font-weight: 600" })
-        </div>
+            <div style="display: none;" class="form-group">
+                <label for="name" class="control-label col-md-2">id sản phẩm</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="number" id="id_sp" name="id_sp" value="{{danhmucsanpham.id_sp}}">
+                </div>
+            </div>
+            <div class="form-group col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default IP"> Sửa</button>
+                <a class="btn btn-danger" href="/" style="float: right;">Quay lại</a>
+            </div>
+        </form>
+
+
     </div>
 
 </body>
+
 </html>

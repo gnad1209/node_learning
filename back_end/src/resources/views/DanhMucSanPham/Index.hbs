@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DanhMucSanPham</title>
+</head>
+
+<body>
+    {{> abc}}
+    <div class="table main-header" style="width: 80%">
+        <h2>Danh Mục Sản Phẩm</h2>
+
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Id sản phẩm</th>
+
+            </tr>
+            {{#each danhmucsanphams}}
+            <tr>
+                <td>{{sum @index 1}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.id_sp}}</td>
+                <td style="text-align:center;width: 8%;">
+                    <a class="btn btn-outline-primary" href="danhmucsanphams/{{this._id}}/edit">Edit</a>
+                </td>
+                <td style="text-align:center; width: 8%;">
+                    <button type="button" class="btn btn-outline-danger" data-id="{{this._id}}" data-bs-toggle="modal"
+                        data-bs-target="#delete-sanpham-modal">Xóa</button>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+
+
+
+    <div class="modal fade" id="delete-sanpham-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa danh mục sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btn-delete-sanpham">Xóa</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form name="delete-sanpham-form" method="POST" action="" enctype="multipart/form-data">
+</body>
+
+</html>
+
+<script>
+    var exampleModal = document.getElementById('delete-sanpham-modal')
+    var sanphamId
+    var deleteForm = document.forms['delete-sanpham-form']
+    var btnDeleteSanpham = document.getElementById('btn-delete-sanpham')
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        sanphamId = button.getAttribute('data-id')
+    })
+    btnDeleteSanpham.onclick = function () {
+        deleteForm.action = '/danhmucsanphams/' + sanphamId + '?_method=DELETE'
+        deleteForm.submit()
+    }
+</script>

@@ -1,72 +1,77 @@
-﻿// using DAWEB.Models;
-// using System;
-// using System.Data.Entity;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Web;
-// using System.Web.Mvc;
+﻿const { json } = require('express')
+const DanhMucSanPhams = require('../models/DanhMucSanPhams')
+const path = require('path');
+const { mutipleMongooseToObject, mongooseToObject } = require('../../ulti/mongoose');
+const { randomInt } = require('crypto');
 
+class danhmucsanphamsController {
+    index(req, res, next) {
+        DanhMucSanPhams.find()
+            .then((danhmucsanphams) =>
+                // res.json(course)
+                res.render('DanhMucSanPham/Index', {
+                    danhmucsanphams: mutipleMongooseToObject(danhmucsanphams),
+                }),
+            )
+            .catch(next);
+    }
 
-// namespace DAWEB.Areas.Admin.Controllers
-// {
-//     public class DanhMucSanPhamController : Controller
-//     {
-//         WebDataEntities3 db = new WebDataEntities3();
+    create(req, res, next) {
+        DanhMucSanPhams.find({})
+            .then((danhmucsanphams) => {
+                res.render('DanhMucSanPham/Add', {
+                    danhmucsanphams: mutipleMongooseToObject(danhmucsanphams),
+                });
+                // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+            })
+            .catch(next);
+    }
 
-//         // GET: Admin/DanhMucSanPham
-//         public ActionResult DanhMucSanPham()
-//         {
-//             var lst = db.DanhMucSanPham.ToList();
-//             return View(lst);
-//         }
-//         public ActionResult Add()
-//         {
-//             return View();
-//         }
+    async edit(req, res, next) {
+        const danhmucsanphams = await DanhMucSanPhams.find({});
+        const danhmucsanpham = await DanhMucSanPhams.findById(req.params.id);
+        res.render('DanhMucSanPham/Edit', {
+            danhmucsanpham: mongooseToObject(danhmucsanpham),
+            danhmucsanphams: mutipleMongooseToObject(danhmucsanphams),
+        });
+    }
 
-//         //POST: Add category from model
-//         [HttpPost]
-//         public ActionResult Add(DanhMucSanPham obj)
-//         {
-//             try
-//             {
-//                 //B2: thực hiện truy vấn thêm dữ liệu
-//                 db.DanhMucSanPham.Add(obj);
-//                 db.SaveChanges();
-//                 ViewBag.Message = "Thêm mới thành công";
-//                 return RedirectToAction("DanhMucSanPham");
-//             }
-//             catch
-//             {
-//                 ViewBag.Message = "Thêm mới thất bại";
-//             }
-//             return View();
-//         }
-//         public ActionResult Delete(int id)
-//         {
-//             // lấy dữ liệu của Khachhang theo MaKH tương ứng
-//             DanhMucSanPham obj = db.DanhMucSanPham.Find(id);
-//             return View(obj);
-//         }
-//         public ActionResult DeleteByID(int id)
-//         {
-//             DanhMucSanPham obj = db.DanhMucSanPham.Find(id);
-//             db.DanhMucSanPham.Remove(obj);
-//             db.SaveChanges();
-//             return RedirectToAction("DanhMucSanPham");
-//         }
-//         public ActionResult Edit(int id)
-//         {
-//             // lấy dữ liệu của Khachhang theo MaKH tương ứng
-//             DanhMucSanPham ID = db.DanhMucSanPham.Find(id);
-//             return View(ID);
-//         }
-//         public ActionResult EditbyID(DanhMucSanPham DMSP)
-//         {
-//             // lấy dữ liệu của Khachhang theo MaKH tương ứng
-//             db.Entry(DMSP).State = EntityState.Modified;
-//             db.SaveChanges();
-//             return RedirectToAction("DanhMucSanPham");
-//         }
-//     }
-// }
+    update(req, res, next) {
+        DanhMucSanPhams.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/danhmucsanphams'))
+            .catch(next);
+    }
+
+    delete(req, res, next) {
+        DanhMucSanPhams.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    async store(req, res, next) {
+        const formData = req.body;
+        var loaiSanPhamNumber;
+        var loaiSanPham = await DanhMucSanPhams.findOne({}, null, { sort: { id_sp: -1 } });
+        loaiSanPhamNumber = parseInt(loaiSanPham.id_sp);
+        formData.id_sp = loaiSanPhamNumber + 1;
+        var loaiSanPhamString = "" + formData.id_sp;
+        formData.id_sp = loaiSanPhamString;
+        // console.log(formData);
+        var obj = {
+            name: formData.name,
+            id_sp: formData.id_sp
+        };
+        // console.log(randomInt(1, 10))
+        DanhMucSanPhams.create(obj)
+            .then(() => {
+                // res.json(req.body.images)
+                // res.send('success')
+                res.redirect('/danhmucsanphams')
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+}
+
+module.exports = new danhmucsanphamsController()

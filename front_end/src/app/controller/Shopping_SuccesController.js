@@ -1,13 +1,15 @@
-const { json } = require("express");
-const {mutipleMongooseToObject} = require('../../ulti/mongoose')
+const { json } = require('express');
+const { mutipleMongooseToObject } = require('../../ulti/mongoose');
 
 class shoppingSuccesController {
-    index(req, res,next) {
+    index(req, res, next) {
         Course.find({})
-            .then(courses =>{
-                res.render('Cart/Shopping_Succes',{ courses: mutipleMongooseToObject(courses) })
+            .then((courses) => {
+                res.render('Cart/Shopping_Succes', {
+                    courses: mutipleMongooseToObject(courses),
+                });
             })
-            .catch(next)
+            .catch(next);
     }
 
     search(req, res) {

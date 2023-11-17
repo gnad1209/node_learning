@@ -1,15 +1,20 @@
-const { json } = require("express");
-const SanPhams = require("../models/SanPhams");
-const {mutipleMongooseToObject, mongooseToObject} = require('../../ulti/mongoose')
+const { json } = require('express');
+const SanPhams = require('../models/SanPhams');
+const {
+    mutipleMongooseToObject,
+    mongooseToObject,
+} = require('../../ulti/mongoose');
 
 class productsController {
-    index(req, res,next) {
+    index(req, res, next) {
         SanPhams.find({})
-            .then(sanphams =>{
-                res.render('Home/Product',{ sanphams: mutipleMongooseToObject(sanphams) })
+            .then((sanphams) => {
+                res.render('Home/Product', {
+                    sanphams: mutipleMongooseToObject(sanphams),
+                });
                 // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
             })
-            .catch(next)  
+            .catch(next);
     }
 }
 
