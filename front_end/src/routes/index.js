@@ -7,8 +7,8 @@ const productsRouter = require('./products');
 
 function route(app) {
     app.use('/courses', coursesRouter);
-    app.use('/showtocart', bagcartRouter);
     app.use('/detail', detailRouter);
+    app.use('/bagcart', bagcartRouter);
     app.use('/products', productsRouter);
     // app.use('/courses', coursesRouter);
     // app.use('/courses', coursesRouter);

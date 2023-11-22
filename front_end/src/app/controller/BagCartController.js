@@ -20,6 +20,20 @@ class bagcartController {
             })
             .catch(next);
     }
+
+    cart(req,res,next){
+        var price = req.query.gia.replace(/[₫.]/g, '')
+        var price_number = parseInt(price, 10)
+        var arr = []
+        SanPhams.find({ name:  req.query.name })
+            .then((sanphams) => {
+                res.render('Cart/ShowToCart', {
+                    sanphams: mutipleMongooseToObject(sanphams),
+                });
+                // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+            })
+            .catch(next)
+    }
 }
 
 module.exports = new bagcartController();

@@ -18,6 +18,19 @@
 </head>
 
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function chooseFile(fileInput) {
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader()
+
+                reader.onload = function (e) {
+                    $('#images-input').attr('src', e.target.result)
+                }
+                reader.readAsDataURL(fileInput.files[0])
+            }
+        }
+    </script>
     {{> abc}}
 
     <div class="main-header" style="width: 80%;">
@@ -72,18 +85,15 @@
                 <div class="form-group">
                     <label for="fileImg" class="control-label col-md-2">Ảnh</label>
                     <div class="col-md-9">
-                        <input class="form-control" type="file" name="images" id="images" />
+                        <img id="images-input" style="width: 200px;" src="/{{sanpham.images}}" alt="">
+                        <input class="form-control" type="file" name="images" id="images" onchange="chooseFile(this)"
+                            value="" accept="image/gif, image/jpeg, image/png" />
                     </div>
                 </div>
                 {{!-- {{>images}} --}}
 
-<<<<<<< HEAD
-            <div class="form-group col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-default IP" value="Thêm"></input>
-=======
                 <div class="form-group col-md-offset-2 col-md-10">
                     <button type="submit" class="btn btn-default IP"> Thêm</button>
->>>>>>> 109ec224617debd46d000d7a24d15d915d1d03ad
                     <a class="btn btn-danger" href="/" style="float: right;">Quay lại</a>
                 </div>
         </form>

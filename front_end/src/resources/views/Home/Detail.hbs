@@ -1,72 +1,77 @@
-﻿{{> header}}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 
-<div style="width:100%;background-color:#fff">
+<style>
+    .styled-input {
+        font-size: 40px; /* Đặt kích thước chữ */
+        font-weight: bold; /* Đặt độ đậm */
+        border: none; /* Xóa đường viền */
+        outline: none; /* Xóa đường viền khi tập trung */
+        background-color: transparent; /* Xóa nền */
+        width: calc(100% - 40px);
+    }
+    .styled-input:active{
+        outline: none;
+        border: none;
+    }
+    .currency {
+        font-weight: 700;
+        position: absolute;
+        bottom: 0%;
+        right: 40%;
+        transform: translateY(-50%);
+}
+</style>
+<body>
+{{> header}}
+    <div style="width:100%;background-color:#fff">
 
     <div class="body_main">
-        <div class="Box_main">
-            <div class="Box_main_left">
-                <div class="left_top">
-                    <img class="SP_img" src="/{{sanphams.images}}" alt="">
+            <div class="Box_main">
+                <div class="Box_main_left">
+                    <div class="left_top">
+                        <img class="SP_img" src="/{{sanphams.images}}" alt="">
+
+                    </div>
+                </div>
+                <div class="Box_main_right">
+                    <div class="right_title">
+                        <a class="top-contentleft_text" href="/">TRANG CHỦ</a>
+                        <p> &nbsp; / &nbsp;&nbsp; </p>
+                        <a class="top-contentleft_text" href="http://localhost:3000/products/" style="color: black;"><b>CỬA HÀNG</b></a>
+                    </div>
+            
+                    <form action="/bagcart/cart" method="GET">
+                        <div>
+                            <input style="color: rgb(235, 169, 28);" class="styled-input" type="text" placeholder="không có sản phẩm" name="name" value="{{sanphams.name}}" readonly>
+                        </div>
+                        <div style="display: inline-flex; align-items: baseline; position: relative">
+                            <h2>Giá:</h2>
+                            <div>
+                                <input class="styled-input" type="text" placeholder="Chưa có giá" id="gia" name="gia" value="{{sanphams.gia}}" readonly>
+                            </div>
+                        </div>
+                        <div>
+                            <h2 style="margin-bottom:0px ;">
+                                Mô tả: 
+                            </h2>
+                            <textarea class="styled-input" style="font-size: 20px;" name="mota" id="" cols="60" rows="5" readonly>{{sanphams.mota}}</textarea>
+                        </div>
+                        <div>
+                            <input class="btn btn-outline-secondary" type="submit" value="Thêm vào giỏ">
+                        </div>
+                    </form>
 
                 </div>
             </div>
-            <div class="Box_main_right">
-                <div class="right_title">
-                    <a class="top-contentleft_text" href="/">TRANG CHỦ</a>
-                    <p> &nbsp; / &nbsp;&nbsp; </p>
-                    <a class="top-contentleft_text" href="Sanpham.html" style="color: black;"><b>CỬA HÀNG</b></a>
-                </div>
-                <div>
-                    <h1 style="color:crimson">
-                        {{sanphams.name}}
-                    </h1>
-                </div>
-                <div>
-                    <h2>
-                        {{sanphams.gia}}₫
-                    </h2>
-                </div>
-                <div>
-                    <h2 style="margin-bottom:0px ;">
-                        Mô tả: {{sanphams.mota}}
-                    </h2>
-                </div>
-                <div
-                    style="display: flex;justify-content: space-between;align-items: center; width: 120px;height: 50px;">
-                    <h4>Chất liệu: </h4>
-                    <p> </p>
-                </div>
-                <div
-                    style="display: flex;justify-content: space-between;align-items: center; width: 230px;height: 50px;">
-                    <h4>Hạn bảo hành: </h4>
-                    <p> </p>
-                </div>
-                <div
-                    style="display: flex;justify-content: space-between;align-items: center; width: 230px;height: 50px;">
-                    <h4>Loại bảo hành:</h4>
-                    <p> </p>
-                </div>
-                <div
-                    style="display: flex;justify-content: space-between;align-items: center; width: 120px;height: 50px;">
-                    <h4>Kho hàng:</h4>
-                    <p> </p>
-                </div>
-                <div
-                    style="display: flex;justify-content: space-between;align-items: center; width: 120px;height: 50px;">
-                    <h4>Gửi từ:</h4>
-                    <p> </p>
-                </div>
-                <div
-                    style="display: flex;justify-content: space-between;align-items:center; width: 300px;height: 50px;">
-                    {{!-- *<div>
-                        <input type="number" id="tentacles" name="tentacles" min="1" max="100" value="1">
-                    </div>* --}}
-                    <div>
-                        <a href="/showtocart/{{sanphams.slug}}" class="detail">Thêm vào giỏ</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
 
         <div class="mid">
             <div class="mid-main">
@@ -104,3 +109,18 @@
 
     </div>
 </div>
+<script>
+    const VND = new Intl.NumberFormat('vi-VN', {
+  style: 'currency',
+  currency: 'VND',
+});
+
+var price = document.getElementById('gia').value
+price = VND.format(price)
+document.getElementById('gia').value = price
+</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

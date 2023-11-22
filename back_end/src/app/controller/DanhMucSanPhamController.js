@@ -72,6 +72,10 @@ class danhmucsanphamsController {
                 console.log(error);
             })
     }
+    search(req,res,next){
+        var formData = req.body
+        res.render(formData)
+    }
 }
 
 module.exports = new danhmucsanphamsController()

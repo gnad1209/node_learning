@@ -1,44 +1,4 @@
 ﻿<!DOCTYPE html>
-<<<<<<< HEAD
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
- </head>
- <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <table class="table" style="margin-left: 14%; width: 86%;">
-        <thead>
-            <tr>
-            <th scope="col">Stt</th>
-            <th scope="col">name</th>
-            <th scope="col">gia</th>
-            <th scope="col">anh</th>
-            <th scope="col">thoi gian tao</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each sanpham}}
-            <tr>
-                <th scope="row">{{sum @index 1}}</th>
-                    <td>{{this.name}}</td>
-                    <td>{{this.gia}}</td>
-                    <td><img style="width: 100px;" src="data:image/jpeg;base64, {{this.images}}" alt=""></td>
-                    <td style="width: 12%;">{{this.createdAt}}</td>
-                    <td style="text-align:center;width: 8%;">
-                            <a class="btn btn-outline-primary" href="sanphams/{{this._id}}/edit">Edit</a> 
-                    </td>
-                    <td style="text-align:center; width: 8%;">
-                            <a class="btn btn-outline-success" href="sanphams/show/{{this.slug}}">Detail</a>
-                    </td>
-                    <td style="text-align:center; width: 8%;">
-                        <button type="button" class="btn btn-outline-danger" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-sanpham-modal">Xóa</button>
-                    </td>                 
-            </tr>
-            {{/each}}
-        </tbody>
-=======
 <html lang="en">
 
 <head>
@@ -65,11 +25,11 @@
         <tr>
           <th scope="row">{{sum @index 1}}</th>
           <td>{{this.name}}</td>
-          <td>{{this.gia}}</td>
+          <td id="gia{{this._id}}">{{this.gia}}</td>
           <td><img style="width: 100px;" src="/{{this.images}}" alt=""></td>
           <td style="width: 12%;">{{this.createdAt}}</td>
           <td style="text-align:center;width: 8%;">
-            <a class="btn btn-outline-primary" href="sanphams/{{this._id}}/edit">Edit</a>
+            <a class="btn btn-outline-primary" href="http://localhost:9000/sanphams/{{this._id}}/edit">Edit</a>
           </td>
           <td style="text-align:center; width: 8%;">
             <a class="btn btn-outline-success" href="sanphams/show/{{this.slug}}">Detail</a>
@@ -81,7 +41,6 @@
         </tr>
         {{/each}}
       </tbody>
->>>>>>> 109ec224617debd46d000d7a24d15d915d1d03ad
     </table>
 
 
@@ -113,6 +72,7 @@
 </html>
 
 <script>
+  //delete sản phẩm
   var exampleModal = document.getElementById('delete-sanpham-modal')
   var sanphamId
   var deleteForm = document.forms['delete-sanpham-form']
@@ -125,4 +85,24 @@
     deleteForm.action = '/sanphams/' + sanphamId + '?_method=DELETE'
     deleteForm.submit()
   }
+
+  //format giá
+   const VND = new Intl.NumberFormat('vi-VN', {
+  style: 'currency',
+  currency: 'VND',
+  });
+    var getId = document.querySelectorAll('table td')
+    getId.forEach(function(td) {
+      var cellId = td.id;
+      var price = document.getElementById(cellId)
+      if(price)
+      {
+      var gia = price.textContent
+      price.innerHTML = VND.format(gia)
+      }
+        
+    });
+    //var price = document.getElementById(getId).textContent
+    //price = VND.format(price)
+    //document.getElementById('gia').innerText = price
 </script>

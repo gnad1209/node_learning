@@ -8,12 +8,12 @@ class siteController {
     index(req, res, next) {
         SanPhams.find({})
             .then((sanpham) => {
-                const user = Users.find({})
-                if (user)
-                    res.render('SanPham/Index', {
-                        sanpham: mutipleMongooseToObject(sanpham),
-                    });
-                else
+                // const user = Users.find({})
+                // if (user)
+                //     res.render('SanPham/Index', {
+                //         sanpham: mutipleMongooseToObject(sanpham),
+                //     });
+                // else
                     res.render('Home/DangNhap', {
                         sanpham: mutipleMongooseToObject(sanpham),
                     });

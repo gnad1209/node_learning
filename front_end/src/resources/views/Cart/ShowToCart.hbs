@@ -1,8 +1,7 @@
-﻿<div style="height: 98px;width: 100%;background-color: #353535;"></div>
+﻿{{> header}}
 <div id="cart_frame" class="Cart_frame">
-    <div class="Cart_product">
+    {{!-- <div class="Cart_product">
         @if (Model != null)
-        {
         <table class="table" style=" border-bottom: 1px solid silver;margin:auto">
             <thead class="thead-dark" style="border-bottom: 1px solid color:">
                 <th style="text-align:center"></th>
@@ -102,9 +101,11 @@
                 </td>
             </div>
         </tr>
-        }
+    </div> --}}
 
-    </div>
+    <script src="public/js/cart.js"></script>
+
+
     <div id="test" class="testcart">
         <p style="text-align:center;font-size:18px;font-weight:600">THÔNG TIN KHÁCH HÀNG</p>
         <tr>

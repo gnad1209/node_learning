@@ -8,6 +8,7 @@ router.post('/store', danhmucsanphamsController.store);
 router.get('/:id/edit', danhmucsanphamsController.edit);
 router.put('/:id', danhmucsanphamsController.update);
 router.delete('/:id', danhmucsanphamsController.delete);
+router.get('/search', danhmucsanphamsController.search);
 router.get('/', danhmucsanphamsController.index);
 
 module.exports = router;

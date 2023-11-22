@@ -49,7 +49,21 @@ class usersController {
                 //check if password matches 
                 const result = req.body.password === users.password;
                 if (result) {
-                    res.render("SanPham/Index");
+                    // res.render("SanPham/Index");
+                    SanPhams.find({})
+                    .then((sanpham) => {
+                        // const user = Users.find({})
+                        // if (user)
+                        //     res.render('SanPham/Index', {
+                        //         sanpham: mutipleMongooseToObject(sanpham),
+                        //     });
+                        // else
+                            res.render('SanPham/Index', {
+                                sanpham: mutipleMongooseToObject(sanpham),
+                            });
+                        // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+                    })
+                    .catch(next);
                 } else {
                     res.render('Home/DangNhap', { error: "password doesn't match" });
 
