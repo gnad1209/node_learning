@@ -1,3 +1,11 @@
+const SanPhams = require('../../models/SanPhams');
+const {
+    mutipleMongooseToObject,
+    mongooseToObject,
+} = require('../../ulti/mongoose');
+
+let productsEle = mutipleMongooseToObject(SanPhams)
+
 function renderUI(arr) {
     productsEle.innerHTML = '';
 
@@ -23,7 +31,7 @@ function renderUI(arr) {
                 <div class="col left">
                     <div class="thumbnail">
                         <a href="#">
-                            <img src="${p.image}" alt="${p.name}">
+                            <img src="W" alt="${p.name}">
                         </a>
                     </div>
                     <div class="detail">

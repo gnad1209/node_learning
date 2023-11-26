@@ -25,7 +25,8 @@ class bagcartController {
         var price = req.query.gia.replace(/[₫.]/g, '')
         var price_number = parseInt(price, 10)
         var arr = []
-        SanPhams.find({ name:  req.query.name })
+        // console.log(req.query.slug)
+        SanPhams.find({ slug: req.params.slug })
             .then((sanphams) => {
                 res.render('Cart/ShowToCart', {
                     sanphams: mutipleMongooseToObject(sanphams),

@@ -1,10 +1,14 @@
 const { json } = require('express');
 const SanPhams = require('../models/SanPhams');
 const Courses = require('../models/Courses');
-const { mutipleMongooseToObject } = require('../../ulti/mongoose');
+const { mutipleMongooseToObject,mongooseToObject } = require('../../ulti/mongoose');
+const Users = require('../models/Users');
 
 class siteController {
     index(req, res, next) {
+        const user =  Users.findOne({
+            active: 1,
+        });
         SanPhams.find({})
             .then((sanphams) => {
                 res.render('Home/Index', {

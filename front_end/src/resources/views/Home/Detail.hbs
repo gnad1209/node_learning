@@ -48,6 +48,9 @@
                     </div>
             
                     <form action="/bagcart/cart" method="GET">
+                        <div style="display: none;">
+                            <input style="color: rgb(235, 169, 28);" class="styled-input" type="text" placeholder="không có sản phẩm" name="slug" value="{{sanphams.slug}}" readonly>
+                        </div>
                         <div>
                             <input style="color: rgb(235, 169, 28);" class="styled-input" type="text" placeholder="không có sản phẩm" name="name" value="{{sanphams.name}}" readonly>
                         </div>

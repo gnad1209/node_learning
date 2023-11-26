@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 var port = 9000;
 const handlebars = require('express-handlebars');
 const app = express();
@@ -9,6 +10,8 @@ const route = require('./routes/');
 const { execPath } = require('process');
 const methodOverride = require('method-override');
 const db = require('./config/db');
+const User = require('./app/models/Users')
+const cookieParser = require("cookie-parser")
 
 //conect db
 db.connect();
@@ -38,7 +41,12 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
+app.use(cookieParser());
+
 route(app);
+
+//json web token
+
 
 app.listen(port, () => {
     console.log(`app listening at http://localhost:${port}`);

@@ -1,7 +1,6 @@
 ﻿{{> header}}
-<div id="cart_frame" class="Cart_frame">
+<div id="cart_frame" class="Cart_frame" style="margin-top: 300px;">
     {{!-- <div class="Cart_product">
-        @if (Model != null)
         <table class="table" style=" border-bottom: 1px solid silver;margin:auto">
             <thead class="thead-dark" style="border-bottom: 1px solid color:">
                 <th style="text-align:center"></th>
@@ -10,12 +9,7 @@
                 <th style="text-align:center">Giá</th>
                 <th style="text-align:center">Số Lượng</th>
                 <th style="text-align:center">Tổng</th>
-
-
             </thead>
-            @foreach (var item in Model.Items)
-            {
-            double total = Convert.ToDouble(item._shopping_Product.Gia.Value * item._shopping_Quantity);
             <tr>
                 <td>
                     <div style="margin-right: 10px;">
@@ -25,7 +19,7 @@
                 </td>
                 <td>
                     <div>
-                        <img src="~/images/@Url.Content(item._shopping_Product.images)" alt="sanpham"
+                        <img src="/{{sanpham.images}}" alt="sanpham"
                             style="width:70px ;height:70px ;">
                     </div>
                 </td>
@@ -33,14 +27,14 @@
                     <div style="width:200px">
                         <h3
                             style="font-size: 30px; font-weight: 100; font-family: Roboto, sans-serif; color: #334862; margin-left: 20px; ">
-                            @Html.DisplayFor(model => item._shopping_Product.Name) </h3>
+                            {{sanphams.name}}</h3>
                     </div>
                 </td>
                 <td>
                     <div style="width:140px">
                         <h3
                             style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; text-align: center; ">
-                            @string.Format("{0:#,0}", item._shopping_Product.Gia)₫ </h3>
+                           {{sanphams.gia}}₫ </h3>
                     </div>
                 </td>
                 <td>
@@ -64,13 +58,12 @@
                     <div style="width:150px">
                         <h3
                             style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; text-align: center; ">
-                            @string.Format("{0:#,0}", total)₫
+                            tổng tiền₫
                         </h3>
                     </div>
                 </td>
 
             </tr>
-            }
         </table>
         <tr>
             <div
@@ -96,15 +89,64 @@
                         <h3 style="font-size: 20px; font-weight: 700; color: #a8741a">Tổng tiền:</h3>
                         <p
                             style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px">
-                            @string.Format("{0:#,0}", Model.Total())₫</p>
+                            Tổng tiền tất cả₫</p>
                     </div>
                 </td>
             </div>
         </tr>
     </div> --}}
 
-    <script src="public/js/cart.js"></script>
-
+<div class="card col-10 m-auto">
+    <div class="card-header">
+        Sản phẩm bạn chọn
+    </div>
+    {{!-- {{#each sanpham}} --}}
+    <div class="p-0">
+        <div class="d-flex">
+            <div class="p-2 border">stt{{!-- {{sum @index 1}} --}}</div>
+            <div class="p-2 border col-4"> tên sp</div>
+            <div class="p-2 border col-3 border text-center">
+                <div style="width:150px">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <div>
+                            <input type="hidden" value="@item._shopping_Product.Id" name="Id" />
+                            <input style="width:20px" type="number" id="tentacles" name="quantity" min="1" value="@item._shopping_Quantity">
+                        </div>
+                        <div>
+                            <input type="submit" value="update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 border col-2 text-end">Tiền</div>
+            <div class="p-2 border flex-grow-1 text-end">Bỏ</div>
+        </div>
+    </div>
+    {{!-- {{/each}} --}}
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 85%; margin: auto; padding: 20px;">
+        <div style="display:flex;justify-content:space-between;width:365px">
+            <td>
+                <a href="/TrangChu/Index" style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;">
+                    <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiếp tục xem sản phẩm</h4>
+                </a>
+            </td>
+            <td>
+                <a onclick="ShowCart()" style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;cursor:pointer">
+                    <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiến hành đặt hàng</h4>
+                </a>
+            </td>
+        </div>
+            <td colspan="6">
+                <div style="display: flex;align-items: center;text-align: center;">
+                    <h3 style="font-size: 20px; font-weight: 700; color: #a8741a">Tổng tiền:</h3>
+                    <p style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px">Tổng tiền tất cả₫</p>
+                </div>
+            </td>
+    </div>        
+</div>
 
     <div id="test" class="testcart">
         <p style="text-align:center;font-size:18px;font-weight:600">THÔNG TIN KHÁCH HÀNG</p>
