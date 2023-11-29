@@ -101,27 +101,38 @@
         Sản phẩm bạn chọn
     </div>
     {{!-- {{#each sanpham}} --}}
-    <div class="p-0">
-        <div class="d-flex">
-            <div class="p-2 border">stt{{!-- {{sum @index 1}} --}}</div>
-            <div class="p-2 border col-4"> tên sp</div>
-            <div class="p-2 border col-3 border text-center">
-                <div style="width:150px">
-                    <div style="display: flex; justify-content: center; align-items: center;">
-                        <div>
-                            <input type="hidden" value="@item._shopping_Product.Id" name="Id" />
-                            <input style="width:20px" type="number" id="tentacles" name="quantity" min="1" value="@item._shopping_Quantity">
-                        </div>
-                        <div>
-                            <input type="submit" value="update" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-2 border col-2 text-end">Tiền</div>
-            <div class="p-2 border flex-grow-1 text-end">Bỏ</div>
-        </div>
-    </div>
+    <table class="table main-header" style="width: 80%">
+      <thead>
+        <tr>
+          <th scope="col">Stt</th>
+          <th scope="col">anh</th>
+          <th scope="col">name</th>
+          <th scope="col">gia</th>
+          <th scope="col">thoi gian tao</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each giohangs}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td><img style="width: 100px;" src="/{{this.images}}" alt=""></td>
+          <td>{{this.name}}</td>
+          <td id="gia{{this._id}}">{{this.gia}}</td>
+          <td style="width: 12%;">{{this.createdAt}}</td>
+          <form action="/bagcart/updateQuanlity" method="post">
+
+          </form>
+          <td style="text-align:center; width: 8%;">
+            <a class="btn btn-outline-success" href="https://localhost:3000/detail/{{this.slug}}">Detail</a>
+          </td>
+          <td style="text-align:center; width: 8%;">
+            <button type="button" class="btn btn-outline-danger" data-id="{{this._id}}" data-bs-toggle="modal"
+              data-bs-target="#delete-sanpham-modal">Xóa</button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
     {{!-- {{/each}} --}}
         <div class="card-footer text-muted">
             2 days ago
@@ -204,3 +215,42 @@
     </div>
 
 </div>
+
+{{!-- modal xóa --}}
+ <div class="modal fade" id="delete-sanpham-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="btn-delete-sanpham">Xóa</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form name="delete-sanpham-form" method="POST" action="" enctype="multipart/form-data">
+
+
+
+<script>
+    var exampleModal = document.getElementById('delete-sanpham-modal')
+  var sanphamId
+  var deleteForm = document.forms['delete-sanpham-form']
+  var btnDeleteSanpham = document.getElementById('btn-delete-sanpham')
+  exampleModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    sanphamId = button.getAttribute('data-id')
+  })
+  btnDeleteSanpham.onclick = function () {
+    deleteForm.action = '/bagcart/' + sanphamId + '?_method=DELETE'
+    deleteForm.submit()
+  }
+</script>

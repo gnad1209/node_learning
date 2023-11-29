@@ -12,7 +12,8 @@ const methodOverride = require('method-override');
 const db = require('./config/db');
 const User = require('./app/models/Users')
 const cookieParser = require("cookie-parser")
-
+// const Provider = require('react-redux')
+// const store = require('./redux/store')
 //conect db
 db.connect();
 
@@ -24,7 +25,7 @@ app.use(
     }),
 );
 app.use(express.json());
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method')); 
 //http logger
 // app.use(morgan("combined"))
 

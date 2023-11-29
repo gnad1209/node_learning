@@ -13,7 +13,7 @@
                     <li><a class="dropdown-item" href="http://localhost:9000/sanphams/create">Thêm sản phẩm</a></li>
                     <li><a class="dropdown-item" href="http://localhost:9000/danhmucsanphams/create">Thêm danh mục</a>
                     </li>
-                    <li><a class="dropdown-item" href="#">Thêm account</a></li>
+                    <li><a class="dropdown-item" href="http://localhost:9000/users/signup">Thêm account</a></li>
                 </ul>
             </div>
         </li>
@@ -156,8 +156,9 @@
             <div class="info">
                 <a href="#" class="d-block">{{users.name}}</a>
             </div>
-            <div class="info">
-                <a href="http://localhost:9000/users/logout" class="d-block">Đăng xuất</a>
+            <div class="info"><form action="http://localhost:9000/users/logout" method="post">
+                <button type="submit">Đăng xuất</button>
+            </form>
             </div>
         </div>
 
@@ -189,13 +190,19 @@
                                 id="change-page" href="">Giao Diện người Dùng </button></li>
                     </ul>
                 </li>
-
-
+                 <li class="active">
+                    <ul class="nav nav-second-level" style="display:flex; padding: 10px; margin-left: 10px">
+                        <li class="nav-item" style="color:#fff; padding-right: 10px"> <i style="font-size: 18px"
+                                class="nav-icon fa fa-user"></i></li>
+                        <li class="active"><a href="http://localhost:9000/users/getAllUser">Quản lý người dùng</a></li>
+                        {{!-- @Html.ActionLink("Danh Mục Sản Phẩm", "DanhMucSanPham", "DanhMucSanPham") --}}
+                    </ul>
+                </li>
                 <li class="active">
                     <ul class="nav nav-second-level" style="display:flex; padding: 10px; margin-left: 10px">
                         <li class="nav-item" style="color:#fff; padding-right: 10px"> <i style="font-size: 18px"
                                 class="nav-icon fas fa-edit"></i></li>
-                        <li class="active"><a href="/sanphams">Quản lý sản phẩm</a></li>
+                        <li class="active"><a href="http://localhost:9000/sanphams">Quản lý sản phẩm</a></li>
                         {{!-- @Html.ActionLink("Quản lý sản phẩm", "Index", "SanPham")--}}
                     </ul>
                 </li>

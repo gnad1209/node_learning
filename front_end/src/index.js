@@ -7,6 +7,7 @@ const app = express();
 const route = require('./routes/');
 const { execPath } = require('process');
 const db = require('./config/db');
+const methodOverride = require('method-override');
 
 //conect db
 db.connect();
@@ -19,6 +20,7 @@ app.use(
     }),
 );
 app.use(express.json());
+app.use(methodOverride('_method'));
 
 //http logger
 // app.use(morgan("combined"))
@@ -27,6 +29,9 @@ app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b,
+        },
     }),
 );
 

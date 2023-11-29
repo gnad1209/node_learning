@@ -33,11 +33,14 @@
     <div style="width:100%;background-color:#fff">
 
     <div class="body_main">
+        <form action="/bagcart/create" method="POST">
             <div class="Box_main">
                 <div class="Box_main_left">
                     <div class="left_top">
-                        <img class="SP_img" src="/{{sanphams.images}}" alt="">
-
+                        <img class="SP_img" name="images" id="images" src="/{{sanphams.images}}" alt="">
+                        <div style="display: none;">
+                            <input type="text" placeholder="không có sản phẩm" name="images" value="{{sanphams.images}}" readonly>
+                        </div>
                     </div>
                 </div>
                 <div class="Box_main_right">
@@ -47,9 +50,11 @@
                         <a class="top-contentleft_text" href="http://localhost:3000/products/" style="color: black;"><b>CỬA HÀNG</b></a>
                     </div>
             
-                    <form action="/bagcart/cart" method="GET">
                         <div style="display: none;">
                             <input style="color: rgb(235, 169, 28);" class="styled-input" type="text" placeholder="không có sản phẩm" name="slug" value="{{sanphams.slug}}" readonly>
+                        </div>
+                        <div style="display: none;">
+                            <input style="color: rgb(235, 169, 28);" class="styled-input" type="text" placeholder="không có sản phẩm" name="id_sp" value="{{sanphams.id_sp}}" readonly>
                         </div>
                         <div>
                             <input style="color: rgb(235, 169, 28);" class="styled-input" type="text" placeholder="không có sản phẩm" name="name" value="{{sanphams.name}}" readonly>
@@ -69,10 +74,10 @@
                         <div>
                             <input class="btn btn-outline-secondary" type="submit" value="Thêm vào giỏ">
                         </div>
-                    </form>
 
                 </div>
             </div>
+        </form>
 
 
 

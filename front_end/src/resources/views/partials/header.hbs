@@ -8,7 +8,9 @@
         <p style="color: white;font-size: 14px;">Miễn phí vận chuyển với mã “Watches2023”</p>
         <i href="" class="fa fa-user" style="color: white;" id="change-page"></i>
         <i href="" class="" style="color: white;" id=""><a href="/users">Đăng nhập</a></i>
-        <i href="" class="" style="color: white;" id=""><a href="http://localhost:3000/users/logout">Đăng xuất</a></i>
+        <form action="http://localhost:3000/users/logout" method="post">
+            <button type="submit">Đăng xuất</button>
+        </form>
         <!-- </div> -->
     </div>
     <header>
@@ -19,7 +21,7 @@
             <a href="/">
                 <img src="/images/logo.png" alt="">
             </a>
-            <a href="/bagcart/{{this.slug}}" style="text-decoration: none;">
+            <a href="http://localhost:3000/bagcart/cart" style="text-decoration: none;">
                 <div style="display:flex;justify-content:center;align-items:center">
                     <i class="fa fa-shopping-cart bars"></i>
                     <p style="position: absolute; top: 18px; right: 116px;"></p>

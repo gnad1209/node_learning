@@ -11,6 +11,8 @@ const Users = new Schema({
     email:{type: String,required: true,unique: true},
     password: { type: String },
     admin: { type: Boolean,default: false },
+    number:{type: String,required: true,unique: true},
+    address:{type: String,required: true,unique: true},
     shortid: { type: String, unique: true, default: shortid.generate },
     slug: { type: String, slug: ['name', 'shortid'] },
 },

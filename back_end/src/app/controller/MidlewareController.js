@@ -3,23 +3,28 @@ const SanPhams = require('../models/SanPhams');
 const { mongooseToObject, mutipleMongooseToObject } = require('../../ulti/mongoose');
 const Users = require('../models/Users');
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const usersController = require('../controller/UsersController');
+
+let actk = null
 
 const midlewareController = {
 
     verifyToken: (req,res,next) => {
-        const token = req.headers.token
+        // console.log(req.headers)
+        let token = midlewareController.getToken()
+        req.headers.token = token
         if(token){
-            const accessToken = token.split(" ")[1]
+            const accessToken = token
             jwt.verify(accessToken, "secretkey",(err,user)=>{
                 if(err){
-                    return res.status(403).json("token hết hạn")
+                    res.render('Home/DangNhap', { error: "Phiên đăng nhập hết hạn" })
                 }
                 req.user = user
                 next()
             })
         }else{
-            return res.status(401).json("chưa xác thực")
+            res.render('Home/DangNhap', { error: "Đăng nhập lại" })
         }
     },
 
@@ -29,9 +34,17 @@ const midlewareController = {
             {
                 next();
             }else{
-                return res.status(403).json("ban ko the xoa")
+                res.render('SanPham/Index', { error: "Không thể xóa" })
             }
         })
+    },
+
+    setToken:(accessToken) =>{
+        actk = accessToken
+    },
+
+    getToken:() =>{
+        return actk
     }
 }
 

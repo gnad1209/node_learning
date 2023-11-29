@@ -1,5 +1,6 @@
 ﻿const { json } = require('express');
 const SanPhams = require('../models/SanPhams');
+const Users = require('../models/Users');
 const path = require('path');
 const DanhMucSanPhams = require('../models/DanhMucSanPhams');
 const {

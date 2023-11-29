@@ -2,8 +2,37 @@ const { json } = require('express');
 const SanPhams = require('../models/SanPhams');
 const { mongooseToObject, mutipleMongooseToObject } = require('../../ulti/mongoose');
 const Users = require('../models/Users');
-const jwt = require('jsonwebtoken');
 const passport = require("passport")
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const cookie = require('cookie')
+const axios = require('axios');
+const { model } = require('mongoose');
+const midlewareController = require('./MidlewareController');
+
+let refreshTokens = [];
+class Token {
+    generateAccessToken(user){
+        return jwt.sign({
+            id: user.id,
+            admin: user.admin
+        },
+        "secretkey",
+        {expiresIn: "30d"}
+        )
+    }
+
+    generateRefreshToken(user){
+        return jwt.sign({
+            id: user.id,
+            admin: user.admin
+        },
+        "secretkey2",
+        {expiresIn: "365d"}
+        )
+    }
+}
+const cltoken = new Token()
 
 class usersController {
     index(req, res, next) {
@@ -18,58 +47,43 @@ class usersController {
             .catch(next);
     }
 
-    secret(req, res) {
-        res.render('Home/Index');
-    }
-
     signup(req, res, next) {
         res.render('Login/Register')
     }
 
-
     async register(req, res, next) {
-        if(req.get('host') == 'localhost:3000')
-        var formData = req.body
-        formData.pq = 2
-        console.log(formData)
-        const users = await Users.findOne({ username: req.body.username});
-        try{
-            if(!users){
-                if ((formData.username) !== ""){
-                    if((formData.address) !== ""){
-                        if((formData.number) !== ""){
-                            const confirmPassword = formData.confirmPassword
-                            if(confirmPassword === formData.password)
-                            {
-                                await Users.create(formData)
-                                    .then(() => {
-                                        res.redirect('/')
-                                    })
-                                    .catch(next)
-                            }
-                            else{
-                                res.render('Login/Register', { error: 'xác nhận mật khẩu không khớp.' });
-                            }
-                        }else{
-                            res.render('Login/Register', { error: 'Nhập số điện thoại' });
-                        }
-                    }else{
-                        res.render('Login/Register', { error: 'Nhập địa chỉ' });
-                    }
-                }
-                else{
-                    res.render('Login/Register', { error: 'Nhập tên user.' });
-                }
+        try {
+            const salt = await bcrypt.genSalt(10)
+            const hashed = await bcrypt.hash(req.body.password, salt)
+
+            //tạo mới
+            // const newUser = await new Users({
+            //     username: req.body.username,
+            //     email: req.body.email,
+            //     password: hashed,
+            // })
+            const newUser = {
+                username: req.body.username,
+                email: req.body.email,
+                address: req.body.address,
+                number: req.body.number,
+                password: hashed,
             }
-            else{
-                res.render('Login/Register', { error: 'Tài khoản đã tồn tại' });
-            }
-        }
-        catch(error){
-            res.render('Login/Register', { error: error.message });
+            
+
+            //lưu
+            await Users.create(newUser)
+                .then(()=>{
+                    res.redirect('/')
+                })
+                .catch(next)
+            // const user = await newUser.save()
+
+            return res.status(200).json(Users)
+        } catch (error) {
+            return res.render('Login/Register', { error: "đki thất bại" })
         }
     }
-
 
     async login(req, res, next) {
         res.render('Login/DangNhap')
@@ -79,48 +93,83 @@ class usersController {
 
     async actionLogin(req, res, next) {
         try {
-            // check if the users exists 
-            const users = await Users.findOne({ username: req.body.username,pq: 2 });
-            if (users) {
-                //check if password matches 
-                const result = req.body.password === users.password;
-                if (result) {
-                    console.log(users.active)
-                    // const token = jwt.sign({ _id: users._id }, 'your_secret_key');
-                    // res.json({ token });
-                    
-                    users.updateOne({ active: 1 })
-                        .then(() => res.redirect('/'))
-                        .catch(next);
-                } else {
-                    res.render('Login/DangNhap', { error: "Sai mật khẩu" });
-                }
-            } else {
-                res.render('Login/DangNhap', { error: "Tài khoản không tồn tại" });
+            const user = await Users.findOne({username: req.body.username})
+            if(!user){
+                res.render('Login/DangNhap', { error: "sai tài khoản" })
+            }
+            const validPassword = await bcrypt.compare(
+                req.body.password,
+                user.password
+            )
+            if(!validPassword){
+                res.render('Login/DangNhap', { error: "Sai mật khẩu" })
+                // return res.status(404).json("Sai mật khẩu")
+            }
+            if(user && validPassword){
+                const accessToken = cltoken.generateAccessToken(user)
+                const refreshToken = cltoken.generateRefreshToken(user)
+                refreshTokens.push(refreshToken)
+                midlewareController.setUserId(user._id)
+                midlewareController.setToken(accessToken)
+                res.cookie('refreshToken',refreshToken,{
+                    httpOnly:true,
+                    secure:false,
+                    path:'/',
+                    sameSite:'strict',
+                })
+                const {password, ...others} = user._doc
+                res.redirect('/')
+                // res.status(200).json({...others,accessToken})
             }
         } catch (error) {
-            // res.status(400).json({ error });
-            res.render('Login/DangNhap', { error: error.message });
+            // res.status(500).json(error)
+            res.render('Login/DangNhap', { error: "Sai mật khẩu" })
         }
+    }
+    
+    async delete(req,res,next){
+        try {
+            const user = await Users.deleteOne({_id: req.params.id})
+            Users.find({})
+            .then((user) => {
+                res.render('User/User',{user: mutipleMongooseToObject(user)})
+            })
+            .catch(next)
+        } catch (error) {
+            return res.status(500).json(error)
+        }
+    }
+    
+    requestRefreshToken(req,res){
+        const refreshToken = req.cookies.refreshToken
+        if(!refreshToken) return res.status(401).json('u r not authenticated')
+        if(!refreshTokens.includes(refreshToken)){
+            return res.status(401).json('refresh token is not valid')
+        }
+        jwt.verify(refreshToken,'secretkey2',(err,user)=>{
+            if(err){
+                return console.log(err)
+            }
+            refreshTokens = refreshTokens.filter((token)=>token!==refreshToken)
+            const newAccessToken = cltoken.generateAccessToken(user)
+            const newRefreshToken = cltoken.generateRefreshToken(user)
+            refreshTokens.push(newRefreshToken)
+            res.cookie('refreshToken',newRefreshToken,{
+                httpOnly:true,
+                secure:false,
+                path:'/',
+                sameSite:'strict',
+            })
+            return res.status(200).json({accessToken: newAccessToken})
+        })
+        // console.log(refreshToken)
     }
 
     logout(req, res, next) {
-        req.logout() 
-        const users = Users.findOne({ username: req.body.username,pq: 2,active: 1 });
-        if(users)
-        {
-            users.updateOne({ active: 0 })
-            .then(() => res.redirect('/users'))
-            .catch(next);
-        }
+        res.clearCookie('refreshToken')
+        req.headers.token = ''
+        refreshTokens = refreshTokens.filter(token => token !== req.cookies.refreshToken)
+        res.redirect('/users')
     }
 }
-// const token = req.header('Authorization');
-//                         if (!token) return res.sendStatus(401);
-
-//                         jwt.verify(token, 'your_secret_key', (err, user) => {
-//                             if (err) return res.sendStatus(403);
-//                             req.user = user;
-//                             next();
-//                         });
 module.exports = new usersController();

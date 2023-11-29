@@ -10,17 +10,20 @@
 <body>
     <h1> Sign up form </h1>
 
-    <form action="/users/register" method="POST">
+    <form action="http://localhost:9000/users/register" method="POST">
         <input type="text" name="username" placeholder="username">
+        <input type="text" name="email" placeholder="email">
+        <input type="text" name="address" placeholder="address">
+        <input type="text" name="number" placeholder="number">
         <input type="password" name="password" placeholder="password">
-        <button>Submit</button>
+        <input type="submit" value="đăng kí">
     </form>
 
     <h1>This is home page</h1>
 
-    <li><a href="/register">Sign up!!</a></li>
-    <li><a href="users/login">Login</a></li>
-    <li><a href="/logout">Logout</a></li>
+    <li><a href="http://localhost:9000/register">Sign up!!</a></li>
+    <li><a href="http://localhost:9000/users/login">Login</a></li>
+    <li><a href="http://localhost:9000/logout">Logout</a></li>
 </body>
 
 </html>

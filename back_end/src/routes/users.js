@@ -8,6 +8,7 @@ const User = require('../app/models/Users')
 const session = require('express-session');
 const midlewareController = require('../app/controller/MidlewareController')
 // const LocalStrategy = require('passport-local').Strategy;
+const axios = require('axios');
 const cookieParser = require("cookie-parser")
 
 router.use(cookieParser());
@@ -20,7 +21,7 @@ router.use(cookieParser());
 // passport.deserializeUser(User.deserializeUser());
 
 
-router.get('/getAllUser',midlewareController.verifyToken,usersController.getAllUser);
+router.get('/getAllUser', midlewareController.verifyToken,usersController.getAllUser);
 router.get('/signup', usersController.signup);
 router.post('/register', usersController.register);
 router.get('/login', usersController.login);

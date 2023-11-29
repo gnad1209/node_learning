@@ -6,9 +6,12 @@ const passport = require("passport")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookie = require('cookie')
-
+const axios = require('axios');
+const { model } = require('mongoose');
+const midlewareController = require('./MidlewareController');
 
 let refreshTokens = [];
+const apiUrl = '/users/getAllUser';
 class Token {
     generateAccessToken(user){
         return jwt.sign({
@@ -16,7 +19,7 @@ class Token {
             admin: user.admin
         },
         "secretkey",
-        {expiresIn: "30s"}
+        {expiresIn: "30d"}
         )
     }
 
@@ -33,7 +36,6 @@ class Token {
 const cltoken = new Token()
 
 class usersController {
-    
     index(req, res, next) {
         Users.find({})
             .then((users) => {
@@ -60,35 +62,32 @@ class usersController {
             const hashed = await bcrypt.hash(req.body.password, salt)
 
             //tạo mới
-            const newUser = await new Users({
+            // const newUser = await new Users({
+            //     username: req.body.username,
+            //     email: req.body.email,
+            //     password: hashed,
+            // })
+            const newUser = {
                 username: req.body.username,
                 email: req.body.email,
+                address: req.body.address,
+                number: req.body.number,
                 password: hashed,
-            })
+            }
+            
 
             //lưu
-            const user = await newUser.save()
-            return res.status(200).json(user)
+            await Users.create(newUser)
+                .then(()=>{
+                    res.redirect('/sanphams')
+                })
+                .catch(next)
+            // const user = await newUser.save()
+
+            return res.status(200).json(Users)
         } catch (error) {
-            
+            return res.render('Home/Register', { error: "đki thất bại" })
         }
-
-
-
-
-
-
-
-
-        // var formData = req.body
-        // if(req.get('host') == 'localhost:9000')
-        // var formData = req.body
-        // formData.pq = 1
-        // await Users.create(formData)
-        //     .then(() => {
-        //         res.redirect('/sanphams')
-        //     })
-        //     .catch(next)
     }
 
     async login(req, res, next) {
@@ -101,19 +100,21 @@ class usersController {
         try {
             const user = await Users.findOne({username: req.body.username})
             if(!user){
-                return res.status(404).json(user)
+                res.render('Home/DangNhap', { error: "sai tài khoản" })
             }
             const validPassword = await bcrypt.compare(
                 req.body.password,
                 user.password
             )
             if(!validPassword){
-                return res.status(404).json("Sai mật khẩu")
+                res.render('Home/DangNhap', { error: "Sai mật khẩu" })
+                // return res.status(404).json("Sai mật khẩu")
             }
             if(user && validPassword){
                 const accessToken = cltoken.generateAccessToken(user)
                 const refreshToken = cltoken.generateRefreshToken(user)
                 refreshTokens.push(refreshToken)
+                midlewareController.setToken(accessToken)
                 res.cookie('refreshToken',refreshToken,{
                     httpOnly:true,
                     secure:false,
@@ -121,52 +122,24 @@ class usersController {
                     sameSite:'strict',
                 })
                 const {password, ...others} = user._doc
-                res.status(200).json({...others,accessToken})
+                res.redirect('/sanphams')
+                // res.status(200).json({...others,accessToken})
             }
         } catch (error) {
-            res.status(500).json(error)
+            // res.status(500).json(error)
+            res.render('Home/DangNhap', { error: "Sai mật khẩu" })
         }
-
-
-
-
-
-
-
-
-
-        // try {
-        //     // check if the users exists 
-        //     const users = await Users.findOne({ username: req.body.username, pq: 1 });
-        //     if (users) {
-        //         //check if password matches 
-        //         const result = req.body.password === users.password;
-        //         if (result) {
-        //             SanPhams.find({})
-        //             .then((sanpham) => {
-        //                     res.render('SanPham/Index', {
-        //                         sanpham: mutipleMongooseToObject(sanpham),
-        //                     });
-        //             })
-        //             .catch(next);
-        //         } else {
-        //             res.render('Home/DangNhap', { error: "password doesn't match" });
-
-        //         }
-        //     } else {
-        //         res.render('Home/DangNhap', { error: "Users doesn't exist" });
-        //     }
-        // } catch (error) {
-        //     // res.status(400).json({ error });
-        //     res.render('Home/DangNhap', { error: error.message });
-        // }
     }
-
     
     async getAllUser(req,res,next){
         try {
-            const user = await Users.find({})
-            return res.status(200).json(user)
+            // console.log(req.headers.token.split(" ")[1])
+            // req.header.token = 'Bearer ' + actk
+            Users.find({})
+                .then((user) => {
+                    res.render('User/User',{user: mutipleMongooseToObject(user)})
+                })
+                .catch(next)
         } catch (error) {
             return res.status(500).json(error)
         }
@@ -174,8 +147,12 @@ class usersController {
 
     async delete(req,res,next){
         try {
-            const user = await Users.findOne({_id: req.params.id})
-            return res.status(200).json('xóa thành công')
+            const user = await Users.deleteOne({_id: req.params.id})
+            Users.find({})
+            .then((user) => {
+                res.render('User/User',{user: mutipleMongooseToObject(user)})
+            })
+            .catch(next)
         } catch (error) {
             return res.status(500).json(error)
         }
@@ -208,9 +185,9 @@ class usersController {
 
     logout(req, res, next) {
         res.clearCookie('refreshToken')
+        req.headers.token = ''
         refreshTokens = refreshTokens.filter(token => token !== req.cookies.refreshToken)
-        return res.status(200).json('logout')
+        res.redirect('/')
     }
 }
-
 module.exports = new usersController();
