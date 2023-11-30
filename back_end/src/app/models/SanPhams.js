@@ -12,7 +12,7 @@ const SanPhams = new Schema(
         id_sp: { type: String },
         mota: { type: String, maxLenght: 255 },
         TB: { type: String },
-        images: { type: String },
+        images: { data: Buffer, contentType: String },
         shortid: { type: String, unique: true, default: shortid.generate },
         slug: { type: String, slug: ['name', 'shortid'] },
     },

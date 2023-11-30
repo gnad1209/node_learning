@@ -35,7 +35,7 @@
 
     <div class="main-header" style="width: 80%;">
 
-        <form method="POST" action="/sanphams/store" enctype="multipart/form-data">
+        <form method="POST" action="http://localhost:9000/sanphams/store" enctype="multipart/form-data">
             <div class="form-horizontal">
                 <h4>Tạo mới Sản phẩm</h4>
                 <hr />
@@ -84,7 +84,7 @@
 
                 <div class="form-group">
                     <label for="fileImg" class="control-label col-md-2">Ảnh</label>
-                    <div class="col-md-9">
+                   <div class="col-md-9">
                         <img id="images-input" style="width: 200px;" src="/{{sanpham.images}}" alt="">
                         <input class="form-control" type="file" name="images" id="images" onchange="chooseFile(this)"
                             value="" accept="image/gif, image/jpeg, image/png" />

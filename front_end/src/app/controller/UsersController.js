@@ -74,7 +74,7 @@ class usersController {
             //lưu
             await Users.create(newUser)
                 .then(()=>{
-                    res.redirect('/')
+                    res.redirect('https://localhost:3000/users')
                 })
                 .catch(next)
             // const user = await newUser.save()
@@ -108,6 +108,7 @@ class usersController {
             if(user && validPassword){
                 const accessToken = cltoken.generateAccessToken(user)
                 const refreshToken = cltoken.generateRefreshToken(user)
+                user.active = 1
                 refreshTokens.push(refreshToken)
                 midlewareController.setUserId(user._id)
                 midlewareController.setToken(accessToken)
@@ -166,10 +167,16 @@ class usersController {
     }
 
     logout(req, res, next) {
-        res.clearCookie('refreshToken')
-        req.headers.token = ''
-        refreshTokens = refreshTokens.filter(token => token !== req.cookies.refreshToken)
-        res.redirect('/users')
+        const user = Users.findById({_id: req.params.id})
+        if(user)
+        {
+            user.active = 0
+            res.clearCookie('refreshToken')
+            req.headers.token = ''
+            refreshTokens = refreshTokens.filter(token => token !== req.cookies.refreshToken)
+            res.redirect('/users')
+        }
+       
     }
 }
 module.exports = new usersController();

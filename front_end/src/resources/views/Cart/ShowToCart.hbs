@@ -106,24 +106,25 @@
         <tr>
           <th scope="col">Stt</th>
           <th scope="col">anh</th>
-          <th scope="col">name</th>
-          <th scope="col">gia</th>
-          <th scope="col">thoi gian tao</th>
+          <th scope="col">Tên</th>
+          <th scope="col">Giá</th>
+          <th scope="col">Số lượng</th>
         </tr>
       </thead>
       <tbody>
         {{#each giohangs}}
         <tr>
-          <th scope="row">{{sum @index 1}}</th>
+          <th scope="row" >{{sum @index 1}}</th>
           <td><img style="width: 100px;" src="/{{this.images}}" alt=""></td>
           <td>{{this.name}}</td>
-          <td id="gia{{this._id}}">{{this.gia}}</td>
-          <td style="width: 12%;">{{this.createdAt}}</td>
-          <form action="/bagcart/updateQuanlity" method="post">
-
+          <td id="gia{{this._id}}"><h6>{{this.total_price}}</h6></td>
+          <td>
+            <form action="/bagcart/updateQuantity/{{this._id}}?_method=PUT" method="post">
+                <input style="display: none" type="text" name="_id" value="{{this._id}}">
+                <input style="display: none" type="text" name="gia" value="{{this.gia}}">
+                <input type="text" name="quantity" value="{{this.soluong}}">
+                <input type="submit" value="update">
           </form>
-          <td style="text-align:center; width: 8%;">
-            <a class="btn btn-outline-success" href="https://localhost:3000/detail/{{this.slug}}">Detail</a>
           </td>
           <td style="text-align:center; width: 8%;">
             <button type="button" class="btn btn-outline-danger" data-id="{{this._id}}" data-bs-toggle="modal"
@@ -140,7 +141,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; width: 85%; margin: auto; padding: 20px;">
         <div style="display:flex;justify-content:space-between;width:365px">
             <td>
-                <a href="/TrangChu/Index" style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;">
+                <a href="/" style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;">
                     <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiếp tục xem sản phẩm</h4>
                 </a>
             </td>
@@ -153,7 +154,9 @@
             <td colspan="6">
                 <div style="display: flex;align-items: center;text-align: center;">
                     <h3 style="font-size: 20px; font-weight: 700; color: #a8741a">Tổng tiền:</h3>
-                    <p style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px">Tổng tiền tất cả₫</p>
+                    {{#each giohangs}}
+                    <p id="total" style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px">{{total 0 this.total_price}}</p>
+                    {{/each}}
                 </div>
             </td>
     </div>        
@@ -242,15 +245,19 @@
 
 <script>
     var exampleModal = document.getElementById('delete-sanpham-modal')
-  var sanphamId
-  var deleteForm = document.forms['delete-sanpham-form']
-  var btnDeleteSanpham = document.getElementById('btn-delete-sanpham')
-  exampleModal.addEventListener('show.bs.modal', function (event) {
+    var sanphamId
+    var deleteForm = document.forms['delete-sanpham-form']
+    var btnDeleteSanpham = document.getElementById('btn-delete-sanpham')
+    exampleModal.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget
-    sanphamId = button.getAttribute('data-id')
-  })
-  btnDeleteSanpham.onclick = function () {
-    deleteForm.action = '/bagcart/' + sanphamId + '?_method=DELETE'
-    deleteForm.submit()
-  }
+        sanphamId = button.getAttribute('data-id')
+    })
+    btnDeleteSanpham.onclick = function () {
+        deleteForm.action = '/bagcart/' + sanphamId + '?_method=DELETE'
+        deleteForm.submit()
+    }
+
+    var total = document.getElementById('total')
+
+    console.log(total.innerText)
 </script>

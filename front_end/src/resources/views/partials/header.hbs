@@ -6,11 +6,14 @@
             <i class="fab fa-twitter" style="color: white"></i>
         </div>
         <p style="color: white;font-size: 14px;">Miễn phí vận chuyển với mã “Watches2023”</p>
-        <i href="" class="fa fa-user" style="color: white;" id="change-page"></i>
-        <i href="" class="" style="color: white;" id=""><a href="/users">Đăng nhập</a></i>
+        {{!-- <i href="" class="fa fa-user" style="color: white;" id="change-page"></i> --}}
+        {{#if (eq users.active 0)}}
+        {{!-- <i href="" class="" style="color: white;" id="login"><a href="http://localhost:3000/users">Đăng nhập</a></i> --}}
+        {{else}}
         <form action="http://localhost:3000/users/logout" method="post">
-            <button type="submit">Đăng xuất</button>
+            <button id="logout" type="submit">Đăng xuất</button>
         </form>
+        {{/if}}
         <!-- </div> -->
     </div>
     <header>
@@ -40,4 +43,5 @@
         // Chuyển đến localhost:3000
         window.location.href = 'http://localhost:9000';
     });
+
 </script>

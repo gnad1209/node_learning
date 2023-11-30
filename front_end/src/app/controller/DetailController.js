@@ -20,24 +20,6 @@ class detailController {
             )
             .catch(next);
     }
-
-    create(req, res, next) {
-        res.render('Home/create');
-    }
-
-    store(req, res, next) {
-        const sanphams = new Course(req.body);
-        sanphams
-            .save()
-            .then(() => res.redirect('/'))
-            .catch((error) => {});
-    }
-
-    showcart(req, res, next) {
-        SanPhams.findOne({ slug: req.params.slug })
-            .then(() => res.redirect('Cart/ShowToCart'))
-            .catch((error) => {});
-    }
 }
 
 module.exports = new detailController();

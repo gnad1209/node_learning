@@ -5,13 +5,15 @@ const Schema = mongoose.Schema;
 
 mongoose.plugin(slug);
 
-const GioHang = new Schema(
+const GioHangs = new Schema(
     {
         name: { type: String, maxLenght: 255, require: true },
-        gia: { type: String, require: true },
+        gia: { type: Number, require: true },
+        total_price: { type: Number},
         id_sp: { type: String },
         TB: { type: String },
         id_user:{type:String},
+        soluong:{type:Number},
         images: { type: String },
         shortid: { type: String, unique: true, default: shortid.generate },
         slug: { type: String, },
@@ -21,4 +23,4 @@ const GioHang = new Schema(
     },
 );
 
-module.exports = mongoose.model('GioHang', GioHang);
+module.exports = mongoose.model('GioHangs', GioHangs);

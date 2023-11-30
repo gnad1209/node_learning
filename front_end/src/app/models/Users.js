@@ -12,7 +12,7 @@ const Users = new Schema({
     pq: { type: String },
     number: { type: String },
     address: { type: String },
-    active:{type: String},
+    active:{type: String,default: 0},
     shortid: { type: String, unique: true, default: shortid.generate },
     slug: { type: String, slug: ['name', 'shortid'] },
 },

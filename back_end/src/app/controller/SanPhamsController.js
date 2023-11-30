@@ -31,8 +31,8 @@ class sanphamsController {
             .catch(next);
     }
 
-    create(req, res, next) {
-        DanhMucSanPhams.find({})
+    async create(req, res, next) {
+        await DanhMucSanPhams.find({})
             .then((danhmucsanphams) => {
                 res.render('SanPham/Create', {
                     danhmucsanphams: mutipleMongooseToObject(danhmucsanphams),
@@ -42,25 +42,24 @@ class sanphamsController {
             .catch(next);
     }
 
-    store(req, res, next) {
+    async store(req, res, next) {
         var formData = req.body
         var obj = {
-            name: formData.name.charAt(0).toUpperCase(),
+            name: formData.name.charAt(0).toUpperCase() + formData.name.slice(1),
             gia: formData.gia,
             id_sp: formData.id_sp,
             mota: formData.mota,
             images: req.file.filename
         }
-        console.log(obj.images);
-        SanPhams.create(obj)
+        // const sanpham = new SanPhams(obj)
+        // await sanpham.save()
+        // console.log(obj.images);
+        await SanPhams.create(obj)
             .then(() => {
-                // res.json(req.body.images)
                 // res.send('success')
                 res.redirect('/sanphams/')
             })
-            .catch(error => {
-                console.log(error);
-            })
+            .catch(next)
     }
 
 
@@ -80,7 +79,7 @@ class sanphamsController {
     }
 
     update(req, res, next) {
-        SanPhams.updateOne({ _id: req.params.id }, { images: req.file.filename },{name:req.body.name.charAt(0).toUpperCase()}, req.body)
+        SanPhams.updateOne({ _id: req.params.id }, { images: req.file.filename },{name:req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1)}, req.body)
             .then(() => res.redirect('/sanphams/'))
             .catch(next);
     }
