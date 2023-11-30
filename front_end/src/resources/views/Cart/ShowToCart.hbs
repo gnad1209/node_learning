@@ -1,5 +1,24 @@
-﻿{{> header}}
-<div id="cart_frame" class="Cart_frame" style="margin-top: 300px;">
+﻿<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .styled-input {
+        font-size: 40px; /* Đặt kích thước chữ */
+        font-weight: bold; /* Đặt độ đậm */
+        border: none; /* Xóa đường viền */
+        outline: none; /* Xóa đường viền khi tập trung */
+        background-color: transparent; /* Xóa nền */
+        width: calc(100% - 40px);
+    }
+    .styled-input:active{
+        outline: none;
+        border: none;
+    }
+    .currency {
+        color: rgb(235, 169, 28);
+        font-weight: 700;
+}
+</style>
+{{> header}}
+<div id="cart_frame" class="Cart_frame" style="margin-top: 8%;">
     {{!-- <div class="Cart_product">
         <table class="table" style=" border-bottom: 1px solid silver;margin:auto">
             <thead class="thead-dark" style="border-bottom: 1px solid color:">
@@ -154,9 +173,15 @@
             <td colspan="6">
                 <div style="display: flex;align-items: center;text-align: center;">
                     <h3 style="font-size: 20px; font-weight: 700; color: #a8741a">Tổng tiền:</h3>
+                    <div  id="parent_total">
                     {{#each giohangs}}
-                    <p id="total" style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px">{{total 0 this.total_price}}</p>
+                    <p id="{{sum @index 1}}" style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px; display:none">{{total 0 this.total_price}}</p>
                     {{/each}}
+                    </div>
+                    <p  style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px;"></p>
+                    <div>
+                            <input id="total_thanh_toan" class="styled-input currency" type="text" placeholder="không có sản phẩm" name="total_thanh_toan" value="" readonly>
+                        </div>
                 </div>
             </td>
     </div>        
@@ -257,7 +282,22 @@
         deleteForm.submit()
     }
 
-    var total = document.getElementById('total')
 
-    console.log(total.innerText)
+    function tong_tien(){
+        var parent_total = document.getElementById('parent_total');
+        var children_total = parent_total.children;
+        var value_child = Array.from(children_total).map(function(child) {
+                return child.innerHTML;
+            });
+        let i = 0
+        let totalvcl = 0
+        for(i;i<value_child.length;i++)
+        {
+            totalvcl += parseInt(value_child[i]) 
+        }
+        console.log(totalvcl)
+        let total_thanh_toan = document.getElementById('total_thanh_toan')
+        total_thanh_toan.value = totalvcl
+    }
+    tong_tien()
 </script>

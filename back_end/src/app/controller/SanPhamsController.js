@@ -49,7 +49,7 @@ class sanphamsController {
             gia: formData.gia,
             id_sp: formData.id_sp,
             mota: formData.mota,
-            images: req.file.filename
+            images: req.file.filename,
         }
         // const sanpham = new SanPhams(obj)
         // await sanpham.save()
@@ -78,10 +78,18 @@ class sanphamsController {
         });
     }
 
-    update(req, res, next) {
-        SanPhams.updateOne({ _id: req.params.id }, { images: req.file.filename },{name:req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1)}, req.body)
+    async update(req, res, next) {
+        try {
+        const sanpham = await SanPhams.findById({_id: req.params.id})
+        SanPhams.updateOne({ _id: req.params.id }, { images: req.file.filename,name:req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1) }, req.body)
             .then(() => res.redirect('/sanphams/'))
             .catch(next);
+        } catch (error) {
+            res.redirect('/sanphams/')
+        }
+        
+            
+
     }
 
     delete(req, res, next) {
