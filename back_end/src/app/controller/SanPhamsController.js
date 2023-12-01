@@ -53,7 +53,7 @@ class sanphamsController {
         }
         // const sanpham = new SanPhams(obj)
         // await sanpham.save()
-        // console.log(obj.images);
+        console.log(obj.images);
         await SanPhams.create(obj)
             .then(() => {
                 // res.send('success')
