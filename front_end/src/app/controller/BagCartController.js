@@ -14,12 +14,12 @@ class bagcartController {
         res.send('abc');
     }
 
-    show(req, res, next) {
-        SanPhams.findOne({ slug: req.params.slug })
+    Showtocart(req, res, next) {
+        SanPhams.find({  })
             .then((sanpham) => {
                 // res.redirect('/')
                 res.render('Cart/ShowToCart', {
-                    sanpham: mongooseToObject(sanpham),
+                    sanpham: mutipleMongooseToObject(sanpham),
                 });
             })
             .catch(next);
