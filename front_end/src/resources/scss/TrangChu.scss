@@ -546,11 +546,13 @@ li {
 
 .frames {
     width: 90%;
-    height: 450px;
+   // height: 450px;
+    flex-wrap: wrap;
     margin: auto;
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
     align-items: center;
+    padding-left: 2.6%;
 }
 
 .frames_box {
@@ -559,7 +561,7 @@ li {
 }
 
 .frames_box_img {
-    width: 287px;
+    width: 310px;
     height: 290px;
     transform: scale(1);
     transition: all 0.5s;

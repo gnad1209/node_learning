@@ -18,6 +18,7 @@ var storage = multer.diskStorage({
 
 // router.get('/:slug', bagcartController.show);
 router.get('/cart',midlewareController.verifyToken, bagcartController.cart);
+router.get('/Showtocart', bagcartController.Showtocart);
 router.post('/create',midlewareController.verifyToken, bagcartController.create);
 router.delete('/:id',midlewareController.verifyToken, bagcartController.delete);
 router.put('/updateQuantity/:id',midlewareController.verifyToken, bagcartController.updateQuantity);
