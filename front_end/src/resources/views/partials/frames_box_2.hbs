@@ -1,4 +1,5 @@
 {{#each sanphams}}
+{{#if (eq id_sp 2)}}
 <div class="frames_box ">
     <div class="box_img">
         <a href="http://localhost:3000/detail/{{this.slug}}">
@@ -15,4 +16,5 @@
         <a href="/Cart/AddToCart/@item.Id" class="frames_button_buy">THÊM VÀO GIỎ</a>
     </div>
 </div>
+{{/if}}
 {{/each}}
