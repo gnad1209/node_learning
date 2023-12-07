@@ -1,21 +1,28 @@
 ﻿<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
     .styled-input {
-        font-size: 40px; /* Đặt kích thước chữ */
-        font-weight: bold; /* Đặt độ đậm */
-        border: none; /* Xóa đường viền */
-        outline: none; /* Xóa đường viền khi tập trung */
-        background-color: transparent; /* Xóa nền */
+        font-size: 40px;
+        /* Đặt kích thước chữ */
+        font-weight: bold;
+        /* Đặt độ đậm */
+        border: none;
+        /* Xóa đường viền */
+        outline: none;
+        /* Xóa đường viền khi tập trung */
+        background-color: transparent;
+        /* Xóa nền */
         width: calc(100% - 40px);
     }
-    .styled-input:active{
+
+    .styled-input:active {
         outline: none;
         border: none;
     }
+
     .currency {
         color: rgb(235, 169, 28);
         font-weight: 700;
-}
+    }
 </style>
 {{> header}}
 <div id="cart_frame" class="Cart_frame" style="margin-top: 8%;">
@@ -38,8 +45,7 @@
                 </td>
                 <td>
                     <div>
-                        <img src="/{{sanpham.images}}" alt="sanpham"
-                            style="width:70px ;height:70px ;">
+                        <img src="/{{sanpham.images}}" alt="sanpham" style="width:70px ;height:70px ;">
                     </div>
                 </td>
                 <td>
@@ -53,7 +59,7 @@
                     <div style="width:140px">
                         <h3
                             style="font-size: 16px;font-family:Roboto, sans-serif; color: black; font-weight: bold; text-align: center; ">
-                           {{sanphams.gia}}₫ </h3>
+                            {{sanphams.gia}}₫ </h3>
                     </div>
                 </td>
                 <td>
@@ -115,86 +121,99 @@
         </tr>
     </div> --}}
 
-<div class="card col-10 m-auto">
-    <div class="card-header">
-        Sản phẩm bạn chọn
-    </div>
-    {{!-- {{#each sanpham}} --}}
-    <table class="table main-header" style="width: 80%">
-      <thead>
-        <tr>
-          <th scope="col">Stt</th>
-          <th scope="col">anh</th>
-          <th scope="col">Tên</th>
-          <th scope="col">Giá</th>
-          <th scope="col">Số lượng</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each giohangs}}
-        <tr>
-          <th scope="row" >{{sum @index 1}}</th>
-          <td><img style="width: 100px;" src="/{{this.images}}" alt=""></td>
-          <td>{{this.name}}</td>
-          <td id="gia{{this._id}}"><h6>{{this.total_price}}</h6></td>
-          <td>
-            <form action="/bagcart/updateQuantity/{{this._id}}?_method=PUT" method="post">
-                <input style="display: none" type="text" name="_id" value="{{this._id}}">
-                <input style="display: none" type="text" name="gia" value="{{this.gia}}">
-                <input type="text" name="quantity" value="{{this.soluong}}">
-                <input type="submit" value="update">
-          </form>
-          </td>
-          <td style="text-align:center; width: 8%;">
-            <button type="button" class="btn btn-outline-danger" data-id="{{this._id}}" data-bs-toggle="modal"
-              data-bs-target="#delete-sanpham-modal">Xóa</button>
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-    {{!-- {{/each}} --}}
+    <div class="card col-10 m-auto">
+        <div class="card-header">
+            Sản phẩm bạn chọn
+        </div>
+        {{!-- {{#each sanpham}} --}}
+        <table class="table main-header" style="width: 80%">
+            <thead>
+                <tr>
+                    <th scope="col">Stt</th>
+                    <th scope="col">anh</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Số lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each giohangs}}
+                <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td><img style="width: 100px;" src="/{{this.images}}" alt=""></td>
+                    <td>{{this.name}}</td>
+                    <td id="gia{{this._id}}">
+                        <h6>{{this.total_price}}</h6>
+                    </td>
+                    <td>
+                        <form action="/bagcart/updateQuantity/{{this._id}}?_method=PUT" method="post">
+                            <input style="display: none" type="text" name="_id" value="{{this._id}}">
+                            <input style="display: none" type="text" name="gia" value="{{this.gia}}">
+                            <input type="text" name="quantity" value="{{this.soluong}}">
+                            <input type="submit" value="update">
+                        </form>
+                    </td>
+                    <td style="text-align:center; width: 8%;">
+                        <button type="button" class="btn btn-outline-danger" data-id="{{this._id}}"
+                            data-bs-toggle="modal" data-bs-target="#delete-sanpham-modal">Xóa</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{!-- {{/each}} --}}
         <div class="card-footer text-muted">
             2 days ago
         </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; width: 85%; margin: auto; padding: 20px;">
-        <div style="display:flex;justify-content:space-between;width:365px">
-            <td>
-                <a href="/" style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;">
-                    <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiếp tục xem sản phẩm</h4>
-                </a>
-            </td>
-            <td>
-                <a onclick="ShowCart()" style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;cursor:pointer">
-                    <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiến hành đặt hàng</h4>
-                </a>
-            </td>
-        </div>
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin: auto; padding: 20px;">
+            <div style="display:flex;justify-content:space-between;width:37%">
+                <td>
+                    <a href="/" style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;">
+                        <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiếp tục xem sản phẩm
+                        </h4>
+                    </a>
+                </td>
+                <td>
+                    <a onclick="ShowCart()"
+                        style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;cursor:pointer">
+                        <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Tiến hành đặt hàng
+                        </h4>
+                    </a>
+                </td>
+            </div>
             <td colspan="6">
-                <div style="display: flex;align-items: center;text-align: center;">
-                    <h3 style="font-size: 20px; font-weight: 700; color: #a8741a">Tổng tiền:</h3>
-                    <div  id="parent_total">
-                    {{#each giohangs}}
-                    <p id="{{sum @index 1}}" style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px; display:none">{{total 0 this.total_price}}</p>
-                    {{/each}}
+                <div style="display: flex;align-items: center;text-align: center;width: 25%;">
+                    <h3 style="font-size: 20px; font-weight: 700; color: #a8741a;width: 120%;">Tổng tiền:</h3>
+                    <div id="parent_total">
+                        {{#each giohangs}}
+                        <p id="{{sum @index 1}}"
+                            style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px; display:none">
+                            {{total 0 this.total_price}}</p>
+                        {{/each}}
                     </div>
-                    <p  style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px;"></p>
+                    <p
+                        style="font-family: Roboto, sans-serif; color: black; font-weight: bold;; color: black; margin-left: 10px;">
+                    </p>
                     <div>
-                            <input id="total_thanh_toan" class="styled-input currency" type="text" placeholder="không có sản phẩm" name="total_thanh_toan" value="" readonly>
-                        </div>
+                        <input id="total_thanh_toan" class="styled-input currency" type="text"
+                            placeholder="không có sản phẩm" name="total_thanh_toan" value="" readonly>
+                    </div>
                 </div>
             </td>
-    </div>        
-</div>
+        </div>
+    </div>
 
     <div id="test" class="testcart">
-        <p style="text-align:center;font-size:18px;font-weight:600">THÔNG TIN KHÁCH HÀNG</p>
+        <div style=" display: flex;justify-content: space-between;align-items: center;">
+            <p style="text-align:center;font-size:24px;font-weight:600;padding-left: 35%;">THÔNG TIN KHÁCH HÀNG</p>
+            <a style="padding-right: 2%;" onclick="CloseCart()"> <img src="images/close.png" alt="close" style="width:100px"></a>
+        </div>
         <tr>
             <td colspan="6">
-                @using (Html.BeginForm("CheckOut", "cart"))
-                {
-                <div
-                    style="width: 90%; height: 300px; display:flex;justify-content:center;align-items:center ;margin:auto ; ">
+                {{!-- @using (Html.BeginForm("CheckOut", "cart"))
+                { --}}
+                <div style="width: 90%; height: 300px; display:flex;justify-content:center;margin:auto ; ">
                     <table>
                         <tr style="height: 50px;">
                             <td
@@ -238,66 +257,64 @@
             </td>
         </tr>
 
-        }
+        {{!-- } --}}
         </tr>
     </div>
 
 </div>
 
 {{!-- modal xóa --}}
- <div class="modal fade" id="delete-sanpham-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog">
+<div class="modal fade" id="delete-sanpham-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="btn-delete-sanpham">Xóa</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btn-delete-sanpham">Xóa</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <form name="delete-sanpham-form" method="POST" action="" enctype="multipart/form-data">
-
-
-
-<script>
-    var exampleModal = document.getElementById('delete-sanpham-modal')
-    var sanphamId
-    var deleteForm = document.forms['delete-sanpham-form']
-    var btnDeleteSanpham = document.getElementById('btn-delete-sanpham')
-    exampleModal.addEventListener('show.bs.modal', function (event) {
-    var button = event.relatedTarget
-        sanphamId = button.getAttribute('data-id')
-    })
-    btnDeleteSanpham.onclick = function () {
-        deleteForm.action = '/bagcart/' + sanphamId + '?_method=DELETE'
-        deleteForm.submit()
-    }
+<form name="delete-sanpham-form" method="POST" action="" enctype="multipart/form-data">
 
 
-    function tong_tien(){
-        var parent_total = document.getElementById('parent_total');
-        var children_total = parent_total.children;
-        var value_child = Array.from(children_total).map(function(child) {
+
+    <script>
+        var exampleModal = document.getElementById('delete-sanpham-modal')
+        var sanphamId
+        var deleteForm = document.forms['delete-sanpham-form']
+        var btnDeleteSanpham = document.getElementById('btn-delete-sanpham')
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            sanphamId = button.getAttribute('data-id')
+        })
+        btnDeleteSanpham.onclick = function () {
+            deleteForm.action = '/bagcart/' + sanphamId + '?_method=DELETE'
+            deleteForm.submit()
+        }
+
+
+        function tong_tien() {
+            var parent_total = document.getElementById('parent_total');
+            var children_total = parent_total.children;
+            var value_child = Array.from(children_total).map(function (child) {
                 return child.innerHTML;
             });
-        let i = 0
-        let totalvcl = 0
-        for(i;i<value_child.length;i++)
-        {
-            totalvcl += parseInt(value_child[i]) 
+            let i = 0
+            let totalvcl = 0
+            for (i; i < value_child.length; i++) {
+                totalvcl += parseInt(value_child[i])
+            }
+            console.log(totalvcl)
+            let total_thanh_toan = document.getElementById('total_thanh_toan')
+            total_thanh_toan.value = totalvcl
         }
-        console.log(totalvcl)
-        let total_thanh_toan = document.getElementById('total_thanh_toan')
-        total_thanh_toan.value = totalvcl
-    }
-    tong_tien()
-</script>
+        tong_tien()
+    </script>
