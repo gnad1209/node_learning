@@ -25,6 +25,20 @@ class bagcartController {
             .catch(next);
     }
 
+    cart(req,res,next){
+        const verify_id_user = midlewareController.getUserId()
+        // res.json(verify_id_user)
+        // console.log(req.query.slug)
+        GioHangs.find({ id_user:  verify_id_user})
+            .then((giohangs) => {
+                res.render('Cart/ShowToCart', {
+                    giohangs: mutipleMongooseToObject(giohangs),
+                });
+                // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
+            })
+            .catch(next)
+    }
+    
     async create(req,res,next){
         var formData = req.body
         const id_user = midlewareController.getUserId()
@@ -62,19 +76,6 @@ class bagcartController {
         }
     }
 
-    cart(req,res,next){
-        const verify_id_user = midlewareController.getUserId()
-        // res.json(verify_id_user)
-        // console.log(req.query.slug)
-        GioHangs.find({ id_user:  verify_id_user})
-            .then((giohangs) => {
-                res.render('Cart/ShowToCart', {
-                    giohangs: mutipleMongooseToObject(giohangs),
-                });
-                // res.render('demo',{ courses: mutipleMongooseToObject(courses) })
-            })
-            .catch(next)
-    }
 
     delete(req, res, next) {
         GioHangs.deleteOne({ _id: req.params.id })
@@ -98,6 +99,44 @@ class bagcartController {
             .catch(next);
         }
     }
+
+    async updatedathang(req,res,next){
+        var formData = req.body
+        const id_user = midlewareController.getUserId()
+        const giohang = await GioHangs.findOne({id_user: id_user,slug: formData.slug})
+        if(giohang){
+            let quantity = giohang.soluong
+            let total_price = giohang.total_price
+            quantity +=1
+            await GioHangs.updateOne({ slug: formData.slug }, {total_price: total_price + parseInt(formData.gia),soluong: quantity}, formData)
+            .then(() => res.redirect('http://localhost:3000/bagcart/cart'))
+            .catch(next);
+        }
+        else{
+            var obj = {
+                id_user: midlewareController.getUserId(),
+                name: formData.name,
+                gia: formData.gia,
+                total_price: formData.gia,
+                soluong: 1,
+                id_sp: formData.id_sp,
+                slug: formData.slug,
+                images: formData.images
+            }
+            // res.json(obj);
+            await GioHangs.create(obj)
+                .then(() => {
+                    // res.json(req.body.images)
+                    // res.send('success')
+                    res.redirect('http://localhost:3000/bagcart/cart')
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            await TotalPrices.create(obj.total_price)
+        }
+    }
+
 
     // async updateTotal_price(req,res,next){
     //     await GioHangs.find({})
