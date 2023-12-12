@@ -4,16 +4,16 @@ const shortid = require('shortid');
 const Schema = mongoose.Schema
 
 mongoose.plugin(slug)
-const passportLocalMongoose = require('passport-local-mongoose');
 
-const DatHang = new Schema({
+const DatHangs = new Schema({
     name: { type: String},
     number: { type: String },
     address: { type: String },
     id_sp: { type: String },
+    sp: { type: Object },
     id_kh: { type: String },
     soluong: { type: String },
-    active: { type: String},
+    active: { type: String, default: 0},
     shortid: { type: String, unique: true, default: shortid.generate },
     slug: { type: String, slug: ['name', 'id_sp','shortid'] },
 },
@@ -21,6 +21,5 @@ const DatHang = new Schema({
         timestamps: true,
     },
 )
-Users.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('DatHang', DatHang)
+module.exports = mongoose.model('DatHangs', DatHangs)

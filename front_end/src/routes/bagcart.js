@@ -22,7 +22,6 @@ router.get('/Showtocart', bagcartController.Showtocart);
 router.post('/create',midlewareController.verifyToken, bagcartController.create);
 router.delete('/:id',midlewareController.verifyToken, bagcartController.delete);
 router.put('/updateQuantity/:id',midlewareController.verifyToken, bagcartController.updateQuantity);
-router.put('/updatedathang/:id',midlewareController.verifyToken, bagcartController.updatedathang);
 router.get('/', bagcartController.index);
 
 module.exports = router;

@@ -87,8 +87,6 @@ class usersController {
 
     async login(req, res, next) {
         res.render('Login/DangNhap')
-        // const users = await Users.findOne({ username: 'haidang' });
-        // console.log(users)
     }
 
     async actionLogin(req, res, next) {
@@ -111,6 +109,8 @@ class usersController {
                 user.active = 1
                 refreshTokens.push(refreshToken)
                 midlewareController.setUserId(user._id)
+                midlewareController.setUserAddress(user.number)
+                midlewareController.setUserNumber(user.address)
                 midlewareController.setToken(accessToken)
                 res.cookie('refreshToken',refreshToken,{
                     httpOnly:true,
@@ -176,7 +176,6 @@ class usersController {
             refreshTokens = refreshTokens.filter(token => token !== req.cookies.refreshToken)
             res.redirect('/users')
         }
-       
     }
 }
 module.exports = new usersController();

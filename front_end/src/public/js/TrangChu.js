@@ -43,7 +43,10 @@ ShowCart = function () {
     cart_frame.classList.add('Cart_frame1');
     cart.classList.add('testcart1');
 };
-
+CloseCart = function () {
+    cart_frame.classList.remove('Cart_frame1');
+    cart.classList.remove('testcart1');
+};
 //function Cart({ }) {
 //    const main = document.getElementById("menu");
 //    if (main) {

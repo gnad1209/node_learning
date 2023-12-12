@@ -55,14 +55,15 @@ class bagcartController {
             var obj = {
                 id_user: midlewareController.getUserId(),
                 name: formData.name,
-                gia: formData.gia,
-                total_price: formData.gia,
+                gia: parseInt(formData.gia),
+                total_price: parseInt(formData.gia),
                 soluong: 1,
                 id_sp: formData.id_sp,
                 slug: formData.slug,
                 images: formData.images
             }
             // res.json(obj);
+            console.log(obj)
             await GioHangs.create(obj)
                 .then(() => {
                     // res.json(req.body.images)
@@ -72,7 +73,6 @@ class bagcartController {
                 .catch(error => {
                     console.log(error);
                 })
-            await TotalPrices.create(obj.total_price)
         }
     }
 
@@ -85,7 +85,7 @@ class bagcartController {
 
     async updateQuantity(req,res,next){
         let new_total_price = req.body.gia * req.body.quantity
-        if(req.body.quantity == 0)
+        if(req.body.quantity == 0 || req.body.quantity < 0 )
         {
             await GioHangs.deleteOne({_id: req.body._id})
                 .then(() => res.redirect('http://localhost:3000/bagcart/cart'))
@@ -99,44 +99,6 @@ class bagcartController {
             .catch(next);
         }
     }
-
-    async updatedathang(req,res,next){
-        var formData = req.body
-        const id_user = midlewareController.getUserId()
-        const giohang = await GioHangs.findOne({id_user: id_user,slug: formData.slug})
-        if(giohang){
-            let quantity = giohang.soluong
-            let total_price = giohang.total_price
-            quantity +=1
-            await GioHangs.updateOne({ slug: formData.slug }, {total_price: total_price + parseInt(formData.gia),soluong: quantity}, formData)
-            .then(() => res.redirect('http://localhost:3000/bagcart/cart'))
-            .catch(next);
-        }
-        else{
-            var obj = {
-                id_user: midlewareController.getUserId(),
-                name: formData.name,
-                gia: formData.gia,
-                total_price: formData.gia,
-                soluong: 1,
-                id_sp: formData.id_sp,
-                slug: formData.slug,
-                images: formData.images
-            }
-            // res.json(obj);
-            await GioHangs.create(obj)
-                .then(() => {
-                    // res.json(req.body.images)
-                    // res.send('success')
-                    res.redirect('http://localhost:3000/bagcart/cart')
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-            await TotalPrices.create(obj.total_price)
-        }
-    }
-
 
     // async updateTotal_price(req,res,next){
     //     await GioHangs.find({})
