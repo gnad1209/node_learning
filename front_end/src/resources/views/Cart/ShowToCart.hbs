@@ -193,6 +193,12 @@
                     </a>
                 </td>
                 <td>
+                    <a href="http://localhost:3000/bagcart/donhang"
+                        style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;">
+                        <h4 style="margin: 0; font-size: 17px; font-weight: bold; color: #a8741a;">Theo dõi đơn hàng</h4>
+                    </a>
+                </td>
+                <td>
                     <a onclick="ShowCart()"
                         style=" padding: 15px 10px; background-color: #fff; border: 2px solid #a8741a;cursor:pointer">
                         <h4
@@ -236,21 +242,15 @@
         <div style="padding: 2%;">
             <form action='/vnpay/create', method='POST'>
                 <label for="tongtienn">Tổng tiền</label>
-                <input class="form-control" type="text"
-                    id="tongtienn" name="tongtienn" readonly>
+                <input class="form-control" type="text" id="tongtienn" name="tongtienn" readonly>
                 <b>Chọn phương thức thanh toán:</b>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio"
-                        , name="bankCode" ,
-                        id="defaultPaymentMethod" ,
-                        value="1">
+                    <input class="form-check-input" type="radio" name="bankCode" id="defaultPaymentMethod" value="1">
                     <label class="form-check-label"
                         for="defaultPaymentMethod">Cổng thanh toán VNPAYQR</label>
                 </div>
-                <div class="form-check"><input class="form-check-input"
-                        type="radio" ,
-                        name="bankCode" ,
-                        id="tienmat" , value="3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bankCode" id="tienmat"  value="3">
                     <label for="tienmat">Tiền mặt</label></div>
                 <b>Chọn ngôn ngữ:</b>
                 <div class="form-check">

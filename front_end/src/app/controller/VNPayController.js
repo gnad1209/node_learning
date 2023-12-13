@@ -16,7 +16,6 @@ class vnpayController {
         const user_number = midlewareController.getUserNumber()
         const user_address = midlewareController.getUserAddress()
         const giohang = await GioHangs.find({id_user: id_user})
-        const name_user = await Users.findOne({_id: id_user})
         if(req.body.bankCode == 3){
             var obj = {
                 id_sp_abc: formData.id,
@@ -24,20 +23,30 @@ class vnpayController {
                 number: user_number,
                 address: user_address,
                 id_kh: id_user,
-                active: 0,
+                total_price: formData.tongtienn,
+                active: false,
             }
-            console.log(obj.id_sp_abc)
+            const sp_id = midlewareController.setSP_id(obj.sp.map(abc => abc.slug))
+            console.log( obj.id_sp_abc.length)
+            console.log( obj.id_sp_abc)
             // console.log(obj.sp.map(abc => [abc.soluong,abc.id_sp]))
                 await DatHangs.create(obj)
-                next();
-                for(let i=0; i < obj.id_sp_abc.length; i++){
-                    await GioHangs.deleteOne({_id: obj.id_sp_abc[i]})
+                // next()
+                if(obj.id_sp_abc.length == 1)
+                {
+                    await GioHangs.deleteOne({_id: obj.id_sp_abc})
                 }
-                res.json('success')
+                else{
+                    for(let i=0; i < obj.id_sp_abc.length; i++){
+                        await GioHangs.deleteOne({_id: obj.id_sp_abc[i]})
+                    }
+                }
+                res.redirect('http://localhost:3000/bagcart/donhang')
         }
         else{
             console.log('akjfhgj')
          }
+        
     }
 
     // async updatedathang(req,res,next){

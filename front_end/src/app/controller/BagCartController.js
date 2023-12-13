@@ -1,12 +1,13 @@
 const { json } = require('express');
 const SanPhams = require('../models/SanPhams');
 const GioHangs = require('../models/GioHangs')
+const DatHangs = require('../models/DatHangs')
+const Users = require('../models/Users');
 const TotalPrices = require('../models/TotalPrices')
 const {
     mutipleMongooseToObject,
     mongooseToObject,
 } = require('../../ulti/mongoose');
-const Users = require('../models/Users');
 const midlewareController = require('./MidlewareController')
 
 class bagcartController {
@@ -98,6 +99,15 @@ class bagcartController {
             
             .catch(next);
         }
+    }
+
+    donhang(req,res,next){
+        const id_user = midlewareController.getUserId()
+        const sp_id = midlewareController.getSP_id()
+        // const sanpham = SanPhams.find({_id: sp_id})
+        const dathangsss = DatHangs.find({id_kh: id_user})
+            .then((dathangs) => res.render('Cart/DonHang',{ dathangs: mutipleMongooseToObject(dathangs),success: dathangsss && dathangsss.active === 0}))
+            .catch(next)
     }
 
     // async updateTotal_price(req,res,next){

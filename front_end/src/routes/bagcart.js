@@ -21,6 +21,7 @@ router.get('/cart',midlewareController.verifyToken, bagcartController.cart);
 router.get('/Showtocart', bagcartController.Showtocart);
 router.post('/create',midlewareController.verifyToken, bagcartController.create);
 router.delete('/:id',midlewareController.verifyToken, bagcartController.delete);
+router.get('/donhang',midlewareController.verifyToken, bagcartController.donhang);
 router.put('/updateQuantity/:id',midlewareController.verifyToken, bagcartController.updateQuantity);
 router.get('/', bagcartController.index);
 

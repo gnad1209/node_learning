@@ -9,6 +9,7 @@ let actk = null
 let id_user = null
 let user_number = null
 let user_address = null
+let sp_id = null
 let cart = null
 const midlewareController = {
 
@@ -83,6 +84,12 @@ const midlewareController = {
         user_address =  new_user_address
     },
     getCart:() =>{
+        return user_address
+    },
+    setSP_id:(new_sp_id)=>{
+        sp_id =  new_sp_id
+    },
+    getSP_id:() =>{
         return user_address
     }
 }

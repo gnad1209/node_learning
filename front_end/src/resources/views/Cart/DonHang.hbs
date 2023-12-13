@@ -1,0 +1,32 @@
+ <table class="table main-header" style="width: 80%">
+    <thead>
+        <tr>
+            <th scope="col">Stt</th>
+            <th scope="col">name</th>
+            <th scope="col">anh</th>
+            <th scope="col">số điện thoại</th>
+            <th scope="col">địa chỉ</th>
+            <th scope="col">giá</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dathangs}}
+        <tr style="background-color: aquamarine; display: ;">
+            <th scope="row">{{sum @index 1}}</th>
+            {{#each sp}}
+            <th>{{name}}</th>
+            <th><img style="width: 100px;" src="/{{images}}" alt></th>
+            {{/each}}
+            <td>{{this.address}}</td>
+            <td>{{this.number}}</td>
+            {{#if active}}
+            <td>Đang giao hàng</td>
+            {{else}}
+            <td>Đéo giao</td>
+            {{/if}}
+            <td id="gia{{this._id}}">{{this.gia}}</td>
+            <td style="width: 12%;">{{this.createdAt}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
