@@ -13,12 +13,14 @@ class vnpayController {
     async create(req,res,next){
         var formData = req.body
         const id_user = midlewareController.getUserId()
+        const name_user = midlewareController.getName_User()
         const user_number = midlewareController.getUserNumber()
         const user_address = midlewareController.getUserAddress()
         const giohang = await GioHangs.find({id_user: id_user})
         if(req.body.bankCode == 3){
             var obj = {
                 id_sp_abc: formData.id,
+                name: name_user,
                 sp: giohang,
                 number: user_number,
                 address: user_address,
@@ -27,8 +29,8 @@ class vnpayController {
                 active: false,
             }
             const sp_id = midlewareController.setSP_id(obj.sp.map(abc => abc.slug))
-            console.log( obj.id_sp_abc.length)
-            console.log( obj.id_sp_abc)
+            // console.log( obj.id_sp_abc.length)
+            // console.log( obj.id_sp_abc)
             // console.log(obj.sp.map(abc => [abc.soluong,abc.id_sp]))
                 await DatHangs.create(obj)
                 // next()

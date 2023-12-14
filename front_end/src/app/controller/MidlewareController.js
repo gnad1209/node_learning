@@ -10,6 +10,7 @@ let id_user = null
 let user_number = null
 let user_address = null
 let sp_id = null
+let name_user = null
 let cart = null
 const midlewareController = {
 
@@ -80,18 +81,24 @@ const midlewareController = {
     getUserAddress:() =>{
         return user_address
     },
-    setCart:(new_user_address)=>{
-        user_address =  new_user_address
-    },
-    getCart:() =>{
-        return user_address
-    },
+    // setCart:(new_user_address)=>{
+    //     user_address =  new_user_address
+    // },
+    // getCart:() =>{
+    //     return user_address
+    // },
     setSP_id:(new_sp_id)=>{
         sp_id =  new_sp_id
     },
     getSP_id:() =>{
-        return user_address
-    }
+        return sp_id
+    },
+    setName_User:(new_name_user)=>{
+        name_user =  new_name_user
+    },
+    getName_User:() =>{
+        return name_user
+    },
 }
 
 module.exports = midlewareController

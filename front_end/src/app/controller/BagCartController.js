@@ -3,7 +3,6 @@ const SanPhams = require('../models/SanPhams');
 const GioHangs = require('../models/GioHangs')
 const DatHangs = require('../models/DatHangs')
 const Users = require('../models/Users');
-const TotalPrices = require('../models/TotalPrices')
 const {
     mutipleMongooseToObject,
     mongooseToObject,
@@ -64,7 +63,7 @@ class bagcartController {
                 images: formData.images
             }
             // res.json(obj);
-            console.log(obj)
+            // console.log(obj)
             await GioHangs.create(obj)
                 .then(() => {
                     // res.json(req.body.images)

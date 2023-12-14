@@ -80,16 +80,14 @@ class sanphamsController {
 
     async update(req, res, next) {
         try {
-        const sanpham = await SanPhams.findById({_id: req.params.id})
-        SanPhams.updateOne({ _id: req.params.id }, { images: req.file.filename,name:req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1) }, req.body)
-            .then(() => res.redirect('/sanphams/'))
-            .catch(next);
-        } catch (error) {
-            res.redirect('/sanphams/')
-        }
-        
-            
-
+            // const sanpham = await SanPhams.findById({_id: req.params.id})
+            console.log(req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1))
+            await SanPhams.updateOne({ _id: req.params.id },{name: req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1),images: req.file.filename,id_sp: req.body.id_sp,gia: req.body.gia,mota: req.body.mota})
+                .then(() => res.redirect('/sanphams/'))
+                .catch(next);
+            } catch (error) {
+                res.redirect('/sanphams/')
+            }
     }
 
     delete(req, res, next) {

@@ -7,7 +7,6 @@ function route(app) {
     app.use('/sanphams', sanphamsRouter);
     app.use('/danhmucsanphams', danhmucsanphamsRouter);
     app.use('/quanlidonhang', quanlidonhangRouter);
-    // app.use('/courses', coursesRouter);
     app.use('/users', usersRouter);
 
     app.use('/', usersRouter);

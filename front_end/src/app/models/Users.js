@@ -9,8 +9,8 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const Users = new Schema({
     username: { type: String},
     password: { type: String },
-    pq: { type: String },
     number: { type: String },
+    admin: { type: Boolean,default: false },
     address: { type: String },
     active:{type: String,default: 0},
     shortid: { type: String, unique: true, default: shortid.generate },

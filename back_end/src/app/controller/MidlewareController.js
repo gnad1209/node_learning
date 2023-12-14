@@ -7,7 +7,10 @@ const jwt = require('jsonwebtoken');
 const usersController = require('../controller/UsersController');
 
 let actk = null
-
+let id_user = null
+let user_number = null
+let user_address = null
+let sp_id = null
 const midlewareController = {
 
     verifyToken: (req,res,next) => {
@@ -45,6 +48,36 @@ const midlewareController = {
 
     getToken:() =>{
         return actk
+    },
+    setUserId:(new_id_user)=>{
+        id_user =  new_id_user
+    },
+    getUserId:() =>{
+        return id_user
+    },
+    setUserNumber:(new_user_number)=>{
+        user_number =  new_user_number
+    },
+    getUserNumber:() =>{
+        return user_number
+    },
+    setUserAddress:(new_user_address)=>{
+        user_address =  new_user_address
+    },
+    getUserAddress:() =>{
+        return user_address
+    },
+    setCart:(new_user_address)=>{
+        user_address =  new_user_address
+    },
+    getCart:() =>{
+        return user_address
+    },
+    setSP_id:(new_sp_id)=>{
+        sp_id =  new_sp_id
+    },
+    getSP_id:() =>{
+        return user_address
     }
 }
 

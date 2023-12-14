@@ -110,6 +110,7 @@ class usersController {
                 refreshTokens.push(refreshToken)
                 midlewareController.setUserId(user._id)
                 midlewareController.setUserAddress(user.number)
+                midlewareController.setName_User(user.username)
                 midlewareController.setUserNumber(user.address)
                 midlewareController.setToken(accessToken)
                 res.cookie('refreshToken',refreshToken,{

@@ -32,7 +32,7 @@
             <a class="btn btn-outline-primary" href="http://localhost:9000/sanphams/{{this._id}}/edit">Edit</a>
           </td>
           <td style="text-align:center; width: 8%;">
-            <a class="btn btn-outline-success" href="sanphams/show/{{this.slug}}">Detail</a>
+            <a class="btn btn-outline-success" href="http://localhost:9000/sanphams/show/{{this.slug}}">Detail</a>
           </td>
           <td style="text-align:center; width: 8%;">
             <button type="button" class="btn btn-outline-danger" data-id="{{this._id}}" data-bs-toggle="modal"
@@ -87,21 +87,21 @@
   }
 
   //format giá
-   const VND = new Intl.NumberFormat('vi-VN', {
-  style: 'currency',
-  currency: 'VND',
-  });
-    var getId = document.querySelectorAll('table td')
-    getId.forEach(function(td) {
-      var cellId = td.id;
-      var price = document.getElementById(cellId)
-      if(price)
-      {
-      var gia = price.textContent
-      price.innerHTML = VND.format(gia)
-      }
-        
+    const VND = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
     });
+      var getId = document.querySelectorAll('table td')
+      getId.forEach(function(td) {
+        var cellId = td.id;
+        var price = document.getElementById(cellId)
+        if(price)
+        {
+        var gia = price.textContent
+        price.innerHTML = VND.format(gia)
+        }
+          
+      });
     //var price = document.getElementById(getId).textContent
     //price = VND.format(price)
     //document.getElementById('gia').innerText = price

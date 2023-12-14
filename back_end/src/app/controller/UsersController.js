@@ -184,6 +184,9 @@ class usersController {
     }
 
     logout(req, res, next) {
+        // const user = Users.findById({_id: req.params.id})
+        //     user.active = false
+
         res.clearCookie('refreshToken')
         req.headers.token = ''
         refreshTokens = refreshTokens.filter(token => token !== req.cookies.refreshToken)

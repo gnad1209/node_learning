@@ -36,6 +36,7 @@
                     </div>
                 </div>
 
+                
                 <div class="form-group">
                     <label class="control-label col-md-2">Loại</label>
                     <div class="col-md-10 form-group">
@@ -47,15 +48,14 @@
                             <ul class="dropdown-menu" style="width: 100%; text-align: center;"
                                 aria-labelledby="dropdownMenuButton1">
                                 {{#each danhmucsanphams}}
-                                <li class="btn form-control" onclick="myFunction()" id="{{this.idsanpham}}">
-                                    {{this.name}}</li>
+                                <li class="btn form-control" onclick="myFunction()" id="{{this.id_sp}}">{{this.name}}
+                                </li>
                                 {{/each}}
                             </ul>
                         </div>
                         <div style="">
-                            <input id="ten_sp" class="form-control" type="text" value="{{danhmucsanpham.name}}"
-                                readonly>
-                            <input id="id_sp" type="text" style="display: none" value="{{sanpham.id_sp}}" name="id_sp">
+                            <input id="ten_sp" class="form-control" type="text" value="" readonly>
+                            <input id="id_sp" type="text" style="display: none" value="" name="id_sp">
                         </div>
                     </div>
                 </div>
@@ -103,6 +103,6 @@
         var id_sp = document.getElementById("id_sp");
         var giaTri = e.textContent;
         ten_sp.value = giaTri
-        id_sp.value = getIdy
+        id_sp.value = getId
     }
 </script>

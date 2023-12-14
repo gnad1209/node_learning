@@ -1,4 +1,6 @@
- <table class="table main-header" style="width: 80%">
+{{> header}}
+<div style="margin-top: 8%;">
+     <table class="table main-header"   >
     <thead>
         <tr>
             <th scope="col">Stt</th>
@@ -6,17 +8,35 @@
             <th scope="col">anh</th>
             <th scope="col">số điện thoại</th>
             <th scope="col">địa chỉ</th>
+            <th scope="col">Trạng thái</th>
             <th scope="col">giá</th>
+            <th scope="col">thời gian</th>
         </tr>
     </thead>
     <tbody>
         {{#each dathangs}}
         <tr style="background-color: aquamarine; display: ;">
             <th scope="row">{{sum @index 1}}</th>
-            {{#each sp}}
-            <th>{{name}}</th>
-            <th><img style="width: 100px;" src="/{{images}}" alt></th>
-            {{/each}}
+            {{!-- {{#each sp}} --}}
+            
+            <td>
+                {{#each sp}}
+                {{name}}
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                {{/each}}
+                </td>
+                <td>
+                    {{#each sp}}
+                    <img style="width: 100px;" src="/{{images}}" alt>
+                    <br>
+                    <br>
+                    {{/each}}
+                </td>
+            {{!-- {{/each}} --}}
             <td>{{this.address}}</td>
             <td>{{this.number}}</td>
             {{#if active}}
@@ -24,9 +44,10 @@
             {{else}}
             <td>Đéo giao</td>
             {{/if}}
-            <td id="gia{{this._id}}">{{this.gia}}</td>
+            <td id="gia{{this._id}}">{{this.total_price}}</td>
             <td style="width: 12%;">{{this.createdAt}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+</div>
