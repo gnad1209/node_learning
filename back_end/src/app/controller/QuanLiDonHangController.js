@@ -14,6 +14,7 @@ class quanlidonhangController {
     index(req, res) {
         res.render('ThongKe/Index')
     }
+
     donhang(req,res,next){
         const id_user = midlewareController.getUserId()
         const sp_id = midlewareController.getSP_id()
@@ -25,29 +26,33 @@ class quanlidonhangController {
 
 
     async edit(req, res, next) {
-        const dathangsss = DatHangs.find({})
-            .then((dathangs) => res.render('ThongKe/Edit',{ dathangs: mutipleMongooseToObject(dathangs),success: dathangsss && dathangsss.active === 0}))
+        DatHangs.findOne({ _id: req.params.id})
+            .then((dathangs) => res.render('ThongKe/Edit',{ dathangs: mongooseToObject(dathangs)}))
             .catch(next)
     }
 
     async update(req, res, next) {
         try {
             if(req.body.trang_thai === 'Đã thanh toán'){
-                obj = {
+                const obj = {
                     active: true
                 }
+                await DatHangs.updateOne({ _id: req.params.id }, {active: obj.active})
+                .then(() => res.redirect('/quanlidonhang/'))
+                .catch(next);
             }
             else{
-                obj = {
+                const obj = {
                     active: false
                 }
-            }
-            const dathang = await DatHangs.findById({_id: req.params.id})
-            await DatHangs.updateOne({ _id: req.params.id }, {active: obj.active})
-                .then(() => res.redirect('/donhang/'))
+                await DatHangs.updateOne({ _id: req.params.id }, {active: obj.active})
+                .then(() => res.redirect('/quanlidonhang/'))
                 .catch(next);
+            }
+            
+            
             } catch (error) {
-                res.redirect('/donhang/')
+                res.redirect('/quanlidonhang/')
             }
     }
 
