@@ -1,3 +1,4 @@
+{{!--
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +17,7 @@
         <input type="text" id="myNumber" name="number" placeholder="số điện thoại">
         <input type="password" id="password" name="password" placeholder="password">
         <input style="display: none;" type="text" id="" name="active" placeholder="password" value="0">
-        <input type="password"  id="confirmPassword" name="confirmPassword" placeholder="password2">
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="password2">
         <input type="submit" value="Submit">
     </form>
 
@@ -27,6 +28,100 @@
 
 </html>
 <script>
-        
-        
-</script>
+
+
+</script> --}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link href="/plugins1/fontawesome-free/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            background: url(images/img2-bottom-mirora1.jpg) no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0px;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        li {
+            padding: 20px 10px;
+            margin: 0px 5px;
+            border-bottom: 0.1px solid white;
+            position: relative;
+        }
+
+        .title {
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        .register {
+            margin: auto;
+            display: grid;
+            width: 90%;
+        }
+
+        input {
+            margin-top: 10px;
+        }
+
+        .boxregister {
+            margin: auto;
+            margin-top: 5%;
+            padding-bottom: 1%;
+            width: 30%;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="boxregister">
+        <h1 class="title"> Đăng Ký </h1>
+
+        <form class="register" action="/users/register" method="POST">
+
+            <input id="username" type="text" name="username" placeholder="username">
+            <input type="text" name="email" placeholder="email">
+            <input type="text" name="address" placeholder="địa chỉ">
+            <input type="text" id="myNumber" name="number" placeholder="số điện thoại">
+            <input type="password" id="password" name="password" placeholder="password">
+            <input style="display: none;" type="text" id="" name="active" placeholder="password" value="0">
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="password2">
+            <input style="width: 70%; margin-left: 16%;" type="submit" value="Submit">
+
+            {{!-- <input type="text" name="username" placeholder="username">
+            <input type="text" name="email" placeholder="email">
+            <input type="text" name="address" placeholder="address">
+            <input type="text" name="number" placeholder="number">
+            <input type="password" name="password" placeholder="password">
+            <input style="width: 70%; margin-left: 16%;" type="submit" value="đăng kí"> --}}
+        </form>
+        <ul>
+            <li><a href="http://localhost:3000/register">Sign up!!</a></li>
+            <li><a href="http://localhost:3000/users/login">Login</a></li>
+            <li><a href="http://localhost:3000/logout">Logout</a></li>
+        </ul>
+    </div>
+    {{!-- <h1 class="title">This is home page</h1> --}}
+
+</body>
+
+</html>
