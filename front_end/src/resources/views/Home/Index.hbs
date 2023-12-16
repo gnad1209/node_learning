@@ -153,7 +153,7 @@
 
                 {{> frames_box_1}}
             </div>
-            <div  class="slideSP " style="justify-content: space-between;">
+            <div class="slideSP " style="justify-content: space-between;">
                 {{> frames_box_1}}
             </div>
         </div>
@@ -171,10 +171,16 @@
     </div>
     <div style="margin-top: 00px;">
         <div>
-            <i onclick="slider_left()" class="slide_btn_left icon icon_color fa-solid fa-chevron-left"> phong </i>
+            <i onclick="slider_left()" class="slide_btn_left" style="color: #fff;">
+                < </i>
         </div>
         <div>
-            <i onclick="slider_right()" class="slide_btn_right icon icon_color fa-solid fa-chevron-right"> phong1 </i>
+            <i  onclick="slider_right()" class="slide_btn_right" style="color: #fff;">
+                >
+
+            </i>
+            {{!-- <i onclick="slider_right()" class="slide_btn_right icon icon_color fa-solid fa-chevron-right"> > </i>
+            --}}
         </div>
     </div>
 </div>

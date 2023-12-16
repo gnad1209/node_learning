@@ -23,7 +23,7 @@
         body {
             padding: 0px;
             margin: 0px;
-            background: url(images/banner_footer1.jpg) no-repeat center center fixed;
+            background: url(/images/banner_footer1.jpg) no-repeat center center fixed;
             background-size: cover;
         }
         .boxlogin {
@@ -62,11 +62,11 @@
      margin-top: 8%;" class="middle-box text-center loginscreen animated fadeInDown">
         <div class="boxlogin">
             <div>
-                <img src="images/logo.png" alt="logo" style="width:250px">
+                <img src="~/images/logo.png" alt="logo" style="width:250px">
             </div>
             {{!-- <h3><a href="/">DAWEB WATCH</a></h3> --}}
             <p class="font">Login in. To see it in action.</p>
-            <form class="m-t" role="form" action="http://localhost:3000/users/actionLogin" method="post">
+            <form class="m-t" role="form" action="http://localhost:9000/users/actionLogin" method="post">
                 <div class="form-group input">
                     <input name="username" class="form-control" placeholder="Username" required="">
                 </div>
