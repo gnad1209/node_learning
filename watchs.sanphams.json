@@ -1,0 +1,133 @@
+[{
+  "_id": {
+    "$oid": "65253d41a5d81abc4611a1c1"
+  },
+  "name": "Đăng",
+  "mota": "abc",
+  "Tb": "1",
+  "images": "202303221147035735.jpg-1701259591905",
+  "slug": "rolex_1",
+  "gia": "40000",
+  "id_sp": "",
+  "updatedAt": {
+    "$date": "2023-12-14T11:10:43.131Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "65253df6a5d81abc4611a1c5"
+  },
+  "name": "rolex",
+  "mota": "đồng hồ xinh vcl",
+  "Tb": "1",
+  "images": "202303151550200344.jpg",
+  "slug": "rolex_2",
+  "gia": "20000",
+  "id_sp": "3"
+},
+{
+  "_id": {
+    "$oid": "65253e00a5d81abc4611a1c6"
+  },
+  "name": "rolex",
+  "mota": "đồng hồ xinh vcl",
+  "Tb": "1",
+  "images": "202303241817210802.jpg-1701259598123",
+  "slug": "rolex_3",
+  "gia": "30000",
+  "id_sp": "1",
+  "updatedAt": {
+    "$date": "2023-11-29T12:06:38.131Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "65253e05a5d81abc4611a1c7"
+  },
+  "name": "rolex",
+  "mota": "đồng hồ xinh vcl",
+  "Tb": "1",
+  "images": "202303161842368165.jpg-1701259608014",
+  "slug": "rolex_4",
+  "gia": "40000",
+  "id_sp": "1",
+  "updatedAt": {
+    "$date": "2023-11-29T12:06:48.027Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "65672a0cba491d171273995e"
+  },
+  "name": "Nguyễn hải đăng",
+  "gia": "10000",
+  "id_sp": "2",
+  "mota": "",
+  "shortid": "gD7-Ee0gk",
+  "createdAt": {
+    "$date": "2023-11-29T12:09:48.730Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-29T12:11:21.509Z"
+  },
+  "slug": "nguyen-hai-dang-gd7-ee0gk",
+  "__v": 0,
+  "images": "sp1-nam-300x300.jpg-1701259881504"
+},
+{
+  "_id": {
+    "$oid": "65672b7e857c092b10c90b0c"
+  },
+  "name": "Nguyễn hải đăngg",
+  "gia": "123123",
+  "id_sp": "2",
+  "mota": "123123",
+  "shortid": "dKXkswAB9",
+  "createdAt": {
+    "$date": "2023-11-29T12:15:58.973Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-30T08:47:02.148Z"
+  },
+  "slug": "nguyen-hai-dangg-dkxkswab9",
+  "__v": 0,
+  "images": "202303231827503911.jpg-1701334022143"
+},
+{
+  "_id": {
+    "$oid": "65684d77e8215314f515eb17"
+  },
+  "name": "Casio",
+  "gia": "100009",
+  "id_sp": "2",
+  "mota": "sgsgsg",
+  "shortid": "m-3L_gfdB",
+  "createdAt": {
+    "$date": "2023-11-30T08:53:11.217Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-14T11:52:53.228Z"
+  },
+  "slug": "casiofgaf-m-3l_gfdb",
+  "__v": 0,
+  "images": "202303151550490033.jpg-1702554773223"
+},
+{
+  "_id": {
+    "$oid": "657add9fd93d92136e02daec"
+  },
+  "name": "Đăngsss",
+  "gia": "40000",
+  "id_sp": "3",
+  "mota": "abc",
+  "shortid": "EKbUJhIEX",
+  "createdAt": {
+    "$date": "2023-12-14T10:49:03.598Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-14T11:50:31.135Z"
+  },
+  "slug": "dang-ekbujhiex",
+  "__v": 0,
+  "images": "202303151550347883.jpg-1702554631130"
+}]

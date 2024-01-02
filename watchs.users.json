@@ -1,0 +1,110 @@
+[{
+  "_id": {
+    "$oid": "656287350f8f21443748857d"
+  },
+  "username": "test",
+  "email": "ikyuss@gmail.com",
+  "password": "$2b$10$KZOoC/zt/LxIfr/DWnI23ukKggW8rPQPwxTgd0qZdBTCcFnqGmi3y",
+  "admin": false,
+  "shortid": "3hu6V9ERp",
+  "createdAt": {
+    "$date": "2023-11-25T23:45:57.919Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-25T23:45:57.919Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6562aef4846b0bbf2e0776e0"
+  },
+  "username": "test2",
+  "email": "ikyus12s@gmail.com",
+  "password": "$2b$10$Td7GN3pBiIwkI3nMuPssw.ZhPP8km5P4WOSo5Qcb/mywY70Wax2QG",
+  "admin": false,
+  "shortid": "9vUB1AuPd",
+  "createdAt": {
+    "$date": "2023-11-26T02:35:32.415Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-26T02:35:32.415Z"
+  },
+  "__v": 0,
+  "active": "0"
+},
+{
+  "_id": {
+    "$oid": "6562c49fd402798559075d7c"
+  },
+  "username": "myadmin",
+  "email": "admin@gmail.com",
+  "password": "$2b$10$3b8PSpepqkkpDlzLQbAo7eHg1BkU7.ynMmmaX56sfdllGrkhzGoUu",
+  "admin": true,
+  "shortid": "kN4ZBHIQ9",
+  "createdAt": {
+    "$date": "2023-11-26T04:07:59.477Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-26T04:07:59.477Z"
+  },
+  "__v": 0,
+  "active": "0"
+},
+{
+  "_id": {
+    "$oid": "656443b022a5fa13ed6066fc"
+  },
+  "username": "usertest",
+  "email": "danga120902@gmail.com",
+  "password": "$2b$10$wXVG.q/nYCQwCeWW666NzuJvtYCI/Lfy.3trpJAbvGiaAZB.oWRbe",
+  "admin": false,
+  "number": "0969636702",
+  "address": "Hà Nội",
+  "shortid": "Z4cEHO031",
+  "createdAt": {
+    "$date": "2023-11-27T07:22:24.292Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-27T07:22:24.292Z"
+  },
+  "__v": 0,
+  "active": "0"
+},
+{
+  "_id": {
+    "$oid": "6566e70b47541fea33f97b58"
+  },
+  "username": "test3",
+  "password": "$2b$10$xTIjl2VZQ9c4B.dWNYRzfuGJ.vDPc92DvDrzePHLFRcvFOU82FCoq",
+  "number": "09696367021",
+  "address": "Hà Nội",
+  "shortid": "ECVOE7etZ",
+  "createdAt": {
+    "$date": "2023-11-29T07:23:55.749Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-29T07:23:55.749Z"
+  },
+  "__v": 0,
+  "active": "0"
+},
+{
+  "_id": {
+    "$oid": "6579a150209f5742c6506525"
+  },
+  "username": "test4",
+  "email": "danga1209022@gmail.com",
+  "password": "$2b$10$hT0n/.4U4qdo.woDsZh.seZHOvO4jUNtlz4FydsMyjyEiO80G16aO",
+  "admin": false,
+  "number": "09696367022",
+  "address": "Hà Nội",
+  "shortid": "79A_t3GUT",
+  "createdAt": {
+    "$date": "2023-12-13T12:19:28.433Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T12:19:28.433Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "65212baf1b45e75295509935"
+  },
+  "name": "Sản Phảm Mới",
+  "slug": "SanPhamMoi",
+  "xeploai": "1"
+},
+{
+  "_id": {
+    "$oid": "6569a05a16162e634b892376"
+  },
+  "name": "Bán chạy",
+  "slug": "BanChay",
+  "xeploai": "2"
+},
+{
+  "_id": {
+    "$oid": "6569a07016162e634b892377"
+  },
+  "name": "Khuyễn Mãi",
+  "slug": "KhuyenMai",
+  "xeploai": "3"
+}]

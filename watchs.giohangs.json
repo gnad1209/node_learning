@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "65672d02bec01c440722952b"
+  },
+  "name": "rolex",
+  "gia": 30000,
+  "id_sp": "1",
+  "id_user": "656443b022a5fa13ed6066fc",
+  "soluong": 2,
+  "images": "202303241817210802.jpg-1701259598123",
+  "slug": "rolex_3",
+  "shortid": "1n2tndDmH",
+  "createdAt": {
+    "$date": "2023-11-29T12:22:26.525Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-13T13:37:19.668Z"
+  },
+  "__v": 0,
+  "total_price": 60000
+}]
